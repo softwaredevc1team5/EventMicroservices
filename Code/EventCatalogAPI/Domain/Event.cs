@@ -13,7 +13,10 @@ namespace EventCatalogAPI.Domain
         public Decimal Price { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-
-        
+        public int EventTypeID { get; set; }
+        public int EventCategoryId { get; set; }
+        public virtual EventType EventType { get; set; }     
+        public virtual EventCategory EventCategory { get; set; }
+       
     }
 }
