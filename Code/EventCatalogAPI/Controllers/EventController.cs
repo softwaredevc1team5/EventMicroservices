@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventCatalogAPI.Controllers
 {
+    //chitra
     [Produces("application/json")]
     [Route("api/Event")]
     public class EventController : Controller
