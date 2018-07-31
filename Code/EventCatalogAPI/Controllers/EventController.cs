@@ -81,13 +81,63 @@ namespace EventCatalogAPI.Controllers
                 .SingleOrDefaultAsync(c => c.Id == id);
             if (item != null)
             {
-                //item.PictureUrl = item.PictureUrl
-                // .Replace("http://externalcatalogbaseurltobereplaced",
-                //_settings.Value.ExternalCatalogBaseUrl);
+                item.ImageUrl = item.ImageUrl
+                 .Replace("http://externalcatalogbaseurltobereplaced",
+                _settings.Value.ExternalCatalogBaseUrl);
                 return Ok(item);
             }
-           
             return NotFound();
+        }
+
+        //GET api/Events/withTitle/Burger Fest?pageSize=2&pageIndex=0
+        [HttpGet]
+        [Route("[action]/withtitle/{title:minlength(1)}")]
+        public async Task<IActionResult> Events(string title,
+            [FromQuery] int pageSize = 6,
+            [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .Where(c => c.Title.StartsWith(title))
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .Where(c => c.Title.StartsWith(title))
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+
+        //GET api/Events/type/1/category/null[?pageSize=4&pageIndex=0]
+        [HttpGet]
+        [Route("[action]/type/{eventTypeId}/brand/{eventCategoryId}")]
+
+        public async Task<IActionResult> Items(int? eventTypeId, int? eventCategoryId, [FromQuery] int pageSize = 6,
+                                                                                       [FromQuery] int pageIndex = 0)
+        {
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+            if (eventTypeId.HasValue)
+            {
+                root = root.Where(c => c.EventTypeId == eventTypeId);
+            }
+            if (eventCategoryId.HasValue)
+            {
+                root = root.Where(c => c.EventCategoryId == eventCategoryId);
+            }
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
+            return Ok(model);
         }
 
         [HttpPost]
