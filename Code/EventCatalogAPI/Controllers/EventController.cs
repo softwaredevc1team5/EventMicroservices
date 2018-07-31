@@ -2,6 +2,9 @@
 using EventCatalogAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EventCatalogAPI.Controllers
@@ -12,10 +15,11 @@ namespace EventCatalogAPI.Controllers
     public class EventController : Controller
     {
         private readonly EventCatalogContext _eventCatalogContext;
-
-        public EventController(EventCatalogContext eventCatalogContext)
+        private readonly IOptionsSnapshot<EventSettings> _settings;
+        public EventController(EventCatalogContext eventCatalogContext, IOptionsSnapshot<EventSettings> settings)
         {
             _eventCatalogContext = eventCatalogContext;
+            _settings = settings;
         }
 
         [HttpGet]
@@ -32,6 +36,37 @@ namespace EventCatalogAPI.Controllers
             var items = await _eventCatalogContext.EventCategories.ToListAsync();
             return Ok(items);
         }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> Events([FromQuery] int pageSize =6,
+                                                [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                        .OrderBy(c => c.Title)
+                                        .Skip(pageSize * pageIndex)
+                                        .Take(pageSize)
+                                        .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                   (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+
+        private List<Event> ChangeUrlPlaceHolder(List<Event> items)
+        {
+            items.ForEach(
+                x => x.ImageUrl =
+                x.ImageUrl
+                .Replace("http://externalcatalogbaseurltobereplaced",
+                _settings.Value.ExternalCatalogBaseUrl));
+
+            return items;
+        }
+
 
 
         [HttpGet]
