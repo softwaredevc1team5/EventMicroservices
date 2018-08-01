@@ -91,7 +91,7 @@ namespace EventCatalogAPI.Data
             return new List<Event>()
             {
 
-                new Event() {EventTypeId=1,EventCategoryId=3, Title = "A Night with Katy Perry",  Price = 49.5M, StartDate = new DateTime(2018, 8, 10, 7, 10, 0), EndDate = new DateTime(2018, 18, 10, 9, 15, 0), ImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1" },
+                new Event() {EventTypeId=1,EventCategoryId=3, Title = "A Night with Katy Perry",  Price = 49.5M, StartDate = new DateTime(2018, 8, 10, 7, 10, 0), EndDate = new DateTime(2018, 8, 10, 9, 15, 0), ImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/1" },
                 new Event() {EventTypeId=6,EventCategoryId=5, Title = "Feed the Children Gala",  Price = 500.0M, StartDate = new DateTime(2018, 4, 16, 20, 30, 0), EndDate = new DateTime(2018, 4, 16, 23, 0, 0), ImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/2" },
                 new Event() {EventTypeId=7,EventCategoryId=1, Title = "Learn Python for Free",  Price = 0.0M, StartDate = new DateTime(2018, 3, 6, 12, 0, 0), EndDate = new DateTime(2018, 3, 8, 12, 0, 0), ImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/3" },
                 new Event() {EventTypeId=3,EventCategoryId=4, Title = "Burger Fest",  Price = 0.0M, StartDate = new DateTime(2018, 9, 27, 9, 0, 0), EndDate = new DateTime(2018, 9, 27, 17, 30, 0), ImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/4" },
