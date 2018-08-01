@@ -149,6 +149,11 @@ namespace EventCatalogAPI.Controllers
             {
                 EventCategoryId = newEvent.EventCategoryId,
                 EventTypeId = newEvent.EventTypeId,
+                Title =  newEvent.Title,
+                Address = newEvent.Address,
+                City = newEvent.City,
+                State = newEvent.State,
+                Zipcode = newEvent.Zipcode,
                 StartDate = newEvent.StartDate,
                 EndDate = newEvent.EndDate,
                 Price = newEvent.Price,
