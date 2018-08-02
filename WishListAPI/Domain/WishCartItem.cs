@@ -8,6 +8,7 @@ namespace WishListAPI.Domain
     public class WishCartItem
     {
         public int Id { get; set; }
+        public int BuyerId { get; set; }
         public int EventId { get; set; }
         public string EventTitle { get; set; }
         public decimal TicketPrice { get; set; }

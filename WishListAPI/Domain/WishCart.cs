@@ -7,8 +7,14 @@ namespace WishListAPI.Domain
 {
     public class WishCart
     {
-        List<WishCartItem> WishCartList;
+        List<WishCartItem> Tickets;
         public int BuyerId { get; set; }
+
+        public WishCart(int userId)
+        {
+            BuyerId = userId;
+            Tickets = new List<WishCartItem>();
+        }
 
     }
 }
