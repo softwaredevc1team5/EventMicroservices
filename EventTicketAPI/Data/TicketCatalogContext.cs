@@ -20,6 +20,7 @@ namespace EventTicketAPI.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             builder.Entity<TicketType>(ConfigureTicketType);
             builder.Entity<Ticket>(ConfigureTicket);
         }
@@ -31,7 +32,7 @@ namespace EventTicketAPI.Data
             builder.Property(c => c.TypeId)
                 .ForSqlServerUseSequenceHiLo("ticket_type_hilo")
                 .IsRequired();
-            builder.Property(c => c.TypeName)
+           builder.Property(c => c.TypeName)
                 .IsRequired()
                 .HasMaxLength(100);
         }
