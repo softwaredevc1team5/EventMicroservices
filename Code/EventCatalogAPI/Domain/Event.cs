@@ -22,5 +22,6 @@ namespace EventCatalogAPI.Domain
         public virtual EventType EventType { get; set; }     
         public virtual EventCategory EventCategory { get; set; }
         public int OrganizerId { get; internal set; }
+        public string OrganizerName { get; set; }
     }
 }
