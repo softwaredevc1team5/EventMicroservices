@@ -27,7 +27,7 @@ namespace EventTicketAPI.Data
         {
             return new List<TicketType>()
             {
-                new TicketType(){ TypeName = "Free Ticket"},
+                new TicketType(){TypeName = "Free Ticket"},
                 new TicketType(){TypeName = "Paid Ticket"},
                 new TicketType(){TypeName = "Donation Ticket"}
             };
@@ -35,7 +35,7 @@ namespace EventTicketAPI.Data
         static IEnumerable<Ticket> GetPreConfiguredTickets()
         {
             return new List<Ticket>() {
-                     new Ticket() {TicketTypeId = 1,EventId = 3,EventTitle = "Feed the Children Gala",AvailableQty = 100,TicketPrice = (decimal)10.0,MinTktsPerOrder = 1,MaxTktsPerOrder = 10,SalesStartDate = new DateTime(2018,10,7,18,0,0),SalesEndDate = new DateTime(2018,10,8,23,59,0)},
+                     new Ticket() {TicketTypeId = 1,EventId = 3,EventTitle = "Feed the Children Gala",AvailableQty = 100,TicketPrice = (decimal)0.0,MinTktsPerOrder = 1,MaxTktsPerOrder = 10,SalesStartDate = new DateTime(2018,10,7,18,0,0),SalesEndDate = new DateTime(2018,10,8,23,59,0)},
                      new Ticket() {TicketTypeId = 2,EventId = 2,EventTitle = "Learn Python for Free",AvailableQty = 100,TicketPrice = (decimal)10.0,MinTktsPerOrder = 1,MaxTktsPerOrder = 10,SalesStartDate = new DateTime(2018,10,7,18,0,0),SalesEndDate = new DateTime(2018,10,8,23,59,0)},
                      new Ticket() {TicketTypeId = 2,EventId = 1,EventTitle = "Disney on Ice",AvailableQty = 50,TicketPrice = (decimal)10.0,MinTktsPerOrder = 1,MaxTktsPerOrder = 10,SalesStartDate = new DateTime(2018,10,7,18,0,0),SalesEndDate = new DateTime(2018,10,8,23,59,0)},
                      new Ticket() {TicketTypeId = 1,EventId = 3,EventTitle = "Feed the Children Gala",AvailableQty = 100,TicketPrice = (decimal)10.0,MinTktsPerOrder = 1,MaxTktsPerOrder = 10,SalesStartDate = new DateTime(2018,10,7,18,0,0),SalesEndDate = new DateTime(2018,10,8,23,59,0)},
