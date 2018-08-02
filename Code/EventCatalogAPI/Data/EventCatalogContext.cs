@@ -1,6 +1,7 @@
-﻿using EventCatalogAPI.Domain;
+﻿
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using EventCatalogAPI.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +14,9 @@ namespace EventCatalogAPI.Data
         public EventCatalogContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<EventCategory> EventCategories { get; set; }
+        
         public DbSet<EventType> EventTypes { get; set; }
+        public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<Event> Events { get; set; }
         
         protected override void OnModelCreating
@@ -27,9 +29,9 @@ namespace EventCatalogAPI.Data
         private void ConfigureEvent(EntityTypeBuilder<Event> builder)
         {
             //throw new NotImplementedException();
-            builder.ToTable("Catalog");
+            builder.ToTable("Event");
             builder.Property(c => c.Id)
-                .ForSqlServerUseSequenceHiLo("catalog_hilo")
+                .ForSqlServerUseSequenceHiLo("event_hilo")
                 .IsRequired();
             builder.Property(c => c.Title)
                 .IsRequired()
