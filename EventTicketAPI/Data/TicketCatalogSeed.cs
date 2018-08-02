@@ -15,7 +15,7 @@ namespace EventTicketAPI.Data
             if (!context.TicketTypes.Any())
             {
                 context.TicketTypes.AddRange(GetPreConfiguredTicketTypes());
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             if (!context.Tickets.Any())
             {
