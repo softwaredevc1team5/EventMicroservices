@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: EventCatalogAPI/Dockerfile
+
+  wishlistapi:
+    image: ${DOCKER_REGISTRY}wishlistapi
+    build:
+      context: .
+      dockerfile: ../WishListAPI/Dockerfile
+
