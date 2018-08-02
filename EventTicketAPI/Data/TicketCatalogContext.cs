@@ -29,7 +29,7 @@ namespace EventTicketAPI.Data
         {
             // throw new NotImplementedException();
             builder.ToTable("TicketType");
-            builder.Property(c => c.TypeId)
+            builder.Property(c => c.Id)
                 .ForSqlServerUseSequenceHiLo("ticket_type_hilo")
                 .IsRequired();
            builder.Property(c => c.TypeName)

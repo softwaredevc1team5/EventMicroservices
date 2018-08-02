@@ -7,7 +7,7 @@ namespace EventTicketAPI.Domain
 {
     public class TicketType
     {
-        public int TypeId;
-        public string TypeName;
+        public int Id { get; set; }
+        public string TypeName { get; set; }
     }
 }

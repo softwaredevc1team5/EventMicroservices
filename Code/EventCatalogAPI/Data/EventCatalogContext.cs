@@ -29,9 +29,9 @@ namespace EventCatalogAPI.Data
         private void ConfigureEvent(EntityTypeBuilder<Event> builder)
         {
             //throw new NotImplementedException();
-            builder.ToTable("Event");
+            builder.ToTable("Catalog");
             builder.Property(c => c.Id)
-                .ForSqlServerUseSequenceHiLo("event_hilo")
+                .ForSqlServerUseSequenceHiLo("catalog_hilo")
                 .IsRequired();
             builder.Property(c => c.Title)
                 .IsRequired()
