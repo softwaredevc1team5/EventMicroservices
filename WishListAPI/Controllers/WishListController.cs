@@ -236,10 +236,16 @@ namespace WishListAPI.Controllers
                 return NotFound(new { Message = $"Event with id {wishListEventToUpdate.Id} not found." });
             }
 
-            wishListItem = wishListEventToUpdate;
 
+             wishListItem.BuyerId = wishListEventToUpdate.BuyerId;
+             wishListItem.EventId = wishListEventToUpdate.EventId;
+             wishListItem.EventTitle = wishListEventToUpdate.EventTitle;
+             wishListItem.TicketPrice = wishListEventToUpdate.TicketPrice;
+             wishListItem.NumOfTickets = wishListEventToUpdate.NumOfTickets;
+             wishListItem.TicketType = wishListEventToUpdate.TicketType;
+          
             _wishListContext.WishCartItems.Update(wishListItem);
-
+            
             await _wishListContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetWishListCartItemById), new { id = wishListEventToUpdate.Id });
@@ -274,7 +280,14 @@ namespace WishListAPI.Controllers
         public async Task<IActionResult> EmptyWishCartItem(int buyerid)
         {
 
-            var wishcartitems = await _wishListContext.WishCartItems.Where(c => c.BuyerId == buyerid).ToListAsync();
+            var wishcartitems = await _wishListContext.WishCartItems
+                .Where(c => c.BuyerId == buyerid).ToListAsync();
+
+
+            if (wishcartitems == null)
+            {
+                return NotFound(new { Message = $"WishList with buyerid {buyerid} not found." });
+            }
 
             _wishListContext.WishCartItems.RemoveRange(wishcartitems);
 
