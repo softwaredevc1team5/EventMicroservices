@@ -103,7 +103,7 @@ namespace EventCatalogAPI.Controllers
                                     .Where(c => c.Title.StartsWith(title))
                                     .OrderBy(c => c.Title)
                                     .Skip(pageSize * pageIndex)
-                                    .Take(pageSize)
+                                    .Take(pageSize) 
                                     .ToListAsync();
             itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
             var model = new PaginatedEventViewModel<Event>
@@ -150,6 +150,7 @@ namespace EventCatalogAPI.Controllers
                 EventCategoryId = newEvent.EventCategoryId,
                 EventTypeId = newEvent.EventTypeId,
                 Title =  newEvent.Title,
+                OrganizerId = newEvent.OrganizerId,
                 Address = newEvent.Address,
                 City = newEvent.City,
                 State = newEvent.State,

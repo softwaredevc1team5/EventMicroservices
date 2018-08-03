@@ -13,9 +13,9 @@ namespace WishListAPI.Data
         {
             context.Database.Migrate();
           
-            if (!context.WishCartItem.Any())
+            if (!context.WishCartItems.Any())
             {
-                context.WishCartItem.AddRange
+                context.WishCartItems.AddRange
                     (GetPreconfiguredWishListItems());
 
                 await context.SaveChangesAsync();

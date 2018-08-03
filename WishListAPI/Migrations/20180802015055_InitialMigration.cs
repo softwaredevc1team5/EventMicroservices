@@ -13,7 +13,7 @@ namespace WishListAPI.Migrations
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
-                name: "WishCartItem",
+                name: "WishCartItems",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false),
@@ -33,7 +33,7 @@ namespace WishListAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "WishCartItem");
+                name: "WishCartItems");
 
             migrationBuilder.DropSequence(
                 name: "WishCartItem_hilo");

@@ -14,19 +14,19 @@ namespace WishListAPI.Data
         {
         }
 
-        public DbSet<WishCartItem> WishCartItem { get; set; }
+        public DbSet<WishCartItem> WishCartItems { get; set; }
         //  public DbSet<WishCart> WishCart { get; set; }
         protected override void OnModelCreating
             (ModelBuilder builder)
         {
-            builder.Entity<WishCartItem>(ConfigureWishCartItem);
+            builder.Entity<WishCartItem>(ConfigureWishCartItems);
             // builder.Entity<WishCart>(ConfigureWishCart);
 
         }
-        private void ConfigureWishCartItem(EntityTypeBuilder<WishCartItem> builder)
+        private void ConfigureWishCartItems(EntityTypeBuilder<WishCartItem> builder)
         {
 
-            builder.ToTable("WishCartItem");
+            builder.ToTable("WishCartItems");
             builder.Property(c => c.Id)
                 .ForSqlServerUseSequenceHiLo("WishCartItem_hilo")
                 .IsRequired();
