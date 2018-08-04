@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:55399/",
+      "applicationUrl": "http://localhost:51428/",
       "sslPort": 0
     }
   },
@@ -16,14 +16,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "EventCatalogAPI": {
+    "EventTicketAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/events",
+      "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:55399/"
+      "applicationUrl": "http://localhost:51429/"
     }
   }
 }
