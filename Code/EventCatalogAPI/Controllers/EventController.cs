@@ -147,17 +147,22 @@ namespace EventCatalogAPI.Controllers
 
             var item = new Event
             {
-                EventCategoryId = newEvent.EventCategoryId,
-                EventTypeId = newEvent.EventTypeId,
+                
                 Title =  newEvent.Title,
                 Address = newEvent.Address,
                 City = newEvent.City,
                 State = newEvent.State,
                 Zipcode = newEvent.Zipcode,
+                ImageUrl = newEvent.ImageUrl,
+                Price=newEvent.Price,
                 StartDate = newEvent.StartDate,
                 EndDate = newEvent.EndDate,
-                Price = newEvent.Price,
-                ImageUrl = newEvent.ImageUrl
+                EventCategoryId = newEvent.EventCategoryId,
+                EventTypeId = newEvent.EventTypeId,
+                OrganizerId=newEvent.OrganizerId,
+                OrganizerName=newEvent.OrganizerName
+                
+                
                 
             };
             _eventCatalogContext.Events.Add(item);
