@@ -160,7 +160,6 @@ namespace EventCatalogAPI.Controllers
                 EndDate = newEvent.EndDate,
                 EventCategoryId = newEvent.EventCategoryId,
                 EventTypeId = newEvent.EventTypeId,
-                OrganizerId=newEvent.OrganizerId,
                 OrganizerName=newEvent.OrganizerName
                 
                 
