@@ -205,8 +205,7 @@ namespace EventTicketAPI.Controllers
             {
                 return NotFound(new { Message = $"Item with id {ticketToUpdate.Id} not found." });
             }
-
-
+            
             TicketItem.EventId = ticketToUpdate.EventId;
             TicketItem.EventTitle = ticketToUpdate.EventTitle;
             TicketItem.TicketPrice = ticketToUpdate.TicketPrice;
@@ -216,10 +215,7 @@ namespace EventTicketAPI.Controllers
             TicketItem.MaxTktsPerOrder = ticketToUpdate.MaxTktsPerOrder;
             TicketItem.SalesStartDate = ticketToUpdate.SalesStartDate;
             TicketItem.SalesEndDate = ticketToUpdate.SalesEndDate;
-
-
-
-            _ticketCatalogContext.Tickets.Add(TicketItem);
+            _ticketCatalogContext.Tickets.Update(TicketItem);
             await _ticketCatalogContext.SaveChangesAsync();
             var result = GetTicketById(ticketToUpdate.Id);
             return Ok(result);
