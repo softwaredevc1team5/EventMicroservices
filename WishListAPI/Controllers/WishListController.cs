@@ -217,8 +217,9 @@ namespace WishListAPI.Controllers
 
             await _wishListContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetWishListCartItemById), new { id = item.Id });
-
+            var result = GetWishListCartItemById(item.Id);
+           // return CreatedAtAction(nameof(GetWishListCartItemById), new { id = item.Id });
+            return Ok(result);
         }
 
         [HttpPut]
@@ -248,7 +249,10 @@ namespace WishListAPI.Controllers
             
             await _wishListContext.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetWishListCartItemById), new { id = wishListEventToUpdate.Id });
+            var result = GetWishListCartItemById(wishListEventToUpdate.Id);
+            return Ok(result);
+
+          //  return CreatedAtRoute(nameof(GetWishListCartItemById), new { id = wishListEventToUpdate.Id });
         }
 
 
