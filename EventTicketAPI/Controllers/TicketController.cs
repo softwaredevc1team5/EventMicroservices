@@ -189,7 +189,9 @@ namespace EventTicketAPI.Controllers
             };
             _ticketCatalogContext.Tickets.Add(item);
             await _ticketCatalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTicketById), new { id = item.Id });
+            var result = GetTicketById(item.Id);
+            return Ok(result);
+           // return CreatedAtAction(nameof(GetTicketById), new { id = item.Id });
         }
         [HttpPut]
 
@@ -219,7 +221,9 @@ namespace EventTicketAPI.Controllers
 
             _ticketCatalogContext.Tickets.Add(TicketItem);
             await _ticketCatalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetTicketById), new { id = ticketToUpdate.Id });
+            var result = GetTicketById(ticketToUpdate.Id);
+            return Ok(result);
+            //return CreatedAtAction(nameof(GetTicketById), new { id = ticketToUpdate.Id });
         }
 
 

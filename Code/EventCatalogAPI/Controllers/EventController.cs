@@ -186,7 +186,9 @@ namespace EventCatalogAPI.Controllers
             };
             _eventCatalogContext.Events.Add(item);
             await _eventCatalogContext.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetEventById), new { id = item.Id });
+            var result = GetEventById(item.Id);
+            return Ok(result);
+           // return CreatedAtAction(nameof(GetEventById), new { id = item.Id });
         }
 
 
@@ -205,8 +207,10 @@ namespace EventCatalogAPI.Controllers
             catalogEvent = eventToUpdate;
             _eventCatalogContext.Events.Update(catalogEvent);
             await _eventCatalogContext.SaveChangesAsync();
+            var result = GetEventById(eventToUpdate.Id);
+            return Ok(result);
 
-            return CreatedAtAction(nameof(GetEventById), new { id = eventToUpdate.Id });
+            // return CreatedAtAction(nameof(GetEventById), new { id = eventToUpdate.Id });
         }
 
 
