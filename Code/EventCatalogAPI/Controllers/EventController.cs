@@ -67,10 +67,8 @@ namespace EventCatalogAPI.Controllers
             return items;
         }
 
-
-
         [HttpGet]
-        [Route("events/{id:int}")]
+        [Route("Events/{id:int}")]
         public async Task<IActionResult> GetEventById(int id)
         {
             if (id <= 0)
@@ -111,13 +109,34 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
+        [HttpGet]
+        [Route("Events/withcity/{city:minlength(1)}")]
+        public async Task<IActionResult> EventsWithCity(string city,
+          [FromQuery] int pageSize = 6,
+          [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .Where(c => c.City.StartsWith(city))
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .Where(c => c.City.StartsWith(city))
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
 
         //GET api/Events/type/1/category/null[?pageSize=4&pageIndex=0]
         [HttpGet]
         [Route("[action]/type/{eventTypeId}/brand/{eventCategoryId}")]
 
-        public async Task<IActionResult> Items(int? eventTypeId, int? eventCategoryId, [FromQuery] int pageSize = 6,
-                                                                                       [FromQuery] int pageIndex = 0)
+        public async Task<IActionResult> Events(int? eventTypeId, int? eventCategoryId, [FromQuery] int pageSize = 6,
+                                                                              [FromQuery] int pageIndex = 0)
         {
             var root = (IQueryable<Event>)_eventCatalogContext.Events;
             if (eventTypeId.HasValue)
