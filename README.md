@@ -1,3 +1,3 @@
 # EventMicroservices
 
-Video: https://www.youtube.com/watch?v=eRAcJDrHrF0&feature=youtu.be
+Video: https://youtu.be/AVkO3VDDAhI 
