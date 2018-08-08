@@ -1,29 +1,37 @@
-version: '3.4'
+version: "3.2"
+
+networks:
+   frontend:
+   backend:
 
 services:
-  eventcatalogapi:
-    image: ${DOCKER_REGISTRY}eventcatalogapi
-    build:
-      context: .
-      dockerfile: EventCatalogAPI/Dockerfile
+   catalog:
+      build:
+         context: .\EventCatalogAPI
+         dockerfile: Dockerfile
+      image: event/eventapi
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=eventCatalogdb
+         - DatabaseUser=sa
+         - DatabaseUserPassword=ProductApi(!)
+      container_name: eventcatalogapi
+      ports:
+         - "55399:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
 
-  wishlistapi:
-    image: ${DOCKER_REGISTRY}wishlistapi
-    build:
-      context: .
-      dockerfile: ../WishListAPI/Dockerfile
+   mssqlserver:
+      image: "microsoft/mssql-server-linux:latest"
+      ports:
+         - "1445:1433"
 
-
-  eventticketapi:
-    image: ${DOCKER_REGISTRY}eventticketapi
-    build:
-      context: .
-      dockerfile: ../EventTicketAPI/Dockerfile
-
-
-  webmvc:
-    image: ${DOCKER_REGISTRY}webmvc
-    build:
-      context: .
-      dockerfile: ../WebMvc/Dockerfile
-
+      container_name: mssqlcontainer
+      environment:
+         - ACCEPT_EULA=Y
+         - SA_PASSWORD=ProductApi(!)
+      networks:
+         - backend
