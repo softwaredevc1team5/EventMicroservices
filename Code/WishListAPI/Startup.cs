@@ -27,7 +27,17 @@ namespace WishListAPI
         {
 
             services.AddMvc();
-            services.AddDbContext<WishListContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+
+            //For Docker
+            var server = Configuration["DatabaseServer"];
+            var database = Configuration["DatabaseName"];
+            var user = Configuration["DatabaseUser"];
+            var password = Configuration["DatabaseUserPassword"];
+            var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
+            services.AddDbContext<WishListContext>(
+                options => options.UseSqlServer(connectionString));
+            //For IIS
+           // services.AddDbContext<WishListContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddSwaggerGen(options =>
             {

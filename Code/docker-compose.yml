@@ -23,12 +23,12 @@ services:
          - backend
          - frontend
       depends_on:
-         - mssqlserver
+         - mssqlserverevent
 
-   mssqlserver:
-      image: "microsoft/mssql-server-linux:latest"
+   mssqlserverevent:
+      image: "mssqlserverevent-template"
       ports:
-         - "1446:1433"
+         - "1445:1433"
 
       container_name: mssqleventcatalog
       environment:
