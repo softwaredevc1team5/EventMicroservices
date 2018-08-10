@@ -1,19 +1,10 @@
-FROM microsoft/aspnetcore:2.0 AS base
-WORKDIR /app
-EXPOSE 80
-
-FROM microsoft/aspnetcore-build:2.0 AS build
-WORKDIR /src
-COPY ../WishListAPI/WishListAPI.csproj ../WishListAPI/
-RUN dotnet restore ../WishListAPI/WishListAPI.csproj
+FROM microsoft/aspnetcore-build:2.0.0 AS build
+WORKDIR /code
 COPY . .
-WORKDIR /src/../WishListAPI
-RUN dotnet build WishListAPI.csproj -c Release -o /app
+RUN dotnet restore
+RUN dotnet publish --output /out/ --configuration Release
 
-FROM build AS publish
-RUN dotnet publish WishListAPI.csproj -c Release -o /app
-
-FROM base AS final
+FROM microsoft/aspnetcore:2.0.0
+COPY --from=build /out /app/
 WORKDIR /app
-COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "WishListAPI.dll"]

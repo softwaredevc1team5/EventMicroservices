@@ -24,12 +24,44 @@ services:
       depends_on:
          - mssqlserver
 
+   wishlist:
+      build:
+         context: .\WishListAPI
+         dockerfile: Dockerfile
+      image: event/wishlistapi
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=wishlistdb
+         - DatabaseUser=sa
+         - DatabaseUserPassword=ProductApi(!)
+      container_name: wishlistapi
+      ports:
+         - "55401:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+
+
    mssqlserver:
       image: "microsoft/mssql-server-linux:latest"
       ports:
          - "1445:1433"
 
       container_name: mssqlcontainer
+      environment:
+         - ACCEPT_EULA=Y
+         - SA_PASSWORD=ProductApi(!)
+      networks:
+         - backend
+
+   mssqlserver:
+      image: "microsoft/mssql-server-linux:latest"
+      ports:
+         - "1447:1433"
+
+      container_name: wishmssqlcontainer
       environment:
          - ACCEPT_EULA=Y
          - SA_PASSWORD=ProductApi(!)
