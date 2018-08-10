@@ -18,7 +18,7 @@ services:
          DatabaseUserPassword: ProductApi(!)
       container_name: eventcatalogapi
       ports:
-         - "5040:80"
+         - "5000:80"
       networks:
          - backend
          - frontend
