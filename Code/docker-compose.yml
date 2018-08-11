@@ -5,7 +5,7 @@ networks:
    backend:
 
 services:
-
+  
    eventcatalog:
       build:
          context: .\EventCatalogAPI
@@ -16,21 +16,75 @@ services:
          DatabaseName: eventCatalogdb
          DatabaseUser: sa
          DatabaseUserPassword: ProductApi(!)
-      container_name: eventapi
+      container_name: eventcatalogapi
       ports:
-         - "5000:80"
+         - "55399:80"
       networks:
          - backend
          - frontend
       depends_on:
-         - mssqlserverevent
+         - mssqlserver
 
-   mssqlserverevent:
-      image: "mssqlserverevent-template"
+   webmvc:
+      build: 
+         context: .\WebMvc
+         dockerfile: Dockerfile
+      environment: 
+         ASPNETCORE_ENVIRONMENT: Development 
+         CatalogUrl: http://catalog
+         IdentityUrl: http://localhost:5020
+      container_name: webevents
+      ports:
+         - "5200:80"
+      networks:
+         - frontend 
+      depends_on:
+         - eventcatalog
+ 
+   wishlist:
+      build:
+         context: .\WishListAPI
+         dockerfile: Dockerfile
+      image: event/wishlistapi
+      environment:
+         DatabaseServer: mssqlserver
+         DatabaseName: wishlistdb
+         DatabaseUser: sa
+         DatabaseUserPassword: ProductApi(!)
+      container_name: wishlistapi
+      ports:
+         - "55400:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+       
+   eventticket:
+      build:
+         context: .\EventTicketAPI
+         dockerfile: Dockerfile
+      image: event/ticketapi
+      environment:
+         DatabaseServer: mssqlserver
+         DatabaseName: ticketdb
+         DatabaseUser: sa
+         DatabaseUserPassword: ProductApi(!)
+      container_name: eventticketapi
+      ports:
+         - "55401:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+
+   mssqlserver:
+      image: "microsoft/mssql-server-linux:latest"
       ports:
          - "1445:1433"
 
-      container_name: mssqleventcatalog
+      container_name: mssqlcontainer
       environment:
          ACCEPT_EULA: Y
          SA_PASSWORD: ProductApi(!)

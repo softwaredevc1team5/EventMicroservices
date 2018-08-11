@@ -26,8 +26,21 @@ namespace EventTicketAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+
+
+            //For Docker
+            var server = Configuration["DatabaseServer"];
+            var database = Configuration["DatabaseName"];
+            var user = Configuration["DatabaseUser"];
+            var password = Configuration["DatabaseUserPassword"];
+            var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
             services.AddDbContext<TicketCatalogContext>(
-                options => options.UseSqlServer(Configuration["ConnectionString"]));
+                options => options.UseSqlServer(connectionString));
+        //For IIS
+            //services.AddDbContext<TicketCatalogContext>(
+            //    options => options.UseSqlServer(Configuration["ConnectionString"]));
+
             services.AddSwaggerGen(options =>
             {
                 options.DescribeAllEnumsAsStrings();
