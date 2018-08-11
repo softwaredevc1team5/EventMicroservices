@@ -5,22 +5,7 @@ networks:
    backend:
 
 services:
-   webmvc:
-      build: 
-         context: .\WebMvc
-         dockerfile: Dockerfile
-      environment: 
-         ASPNETCORE_ENVIRONMENT: Development 
-         CatalogUrl: http://catalog
-         IdentityUrl: http://localhost:5020
-      container_name: webevents
-      ports:
-         - "5200:80"
-      networks:
-         - frontend 
-      depends_on:
-         - eventcatalog
-      
+  
    eventcatalog:
       build:
          context: .\EventCatalogAPI
@@ -40,6 +25,22 @@ services:
       depends_on:
          - mssqlserver
 
+   webmvc:
+      build: 
+         context: .\WebMvc
+         dockerfile: Dockerfile
+      environment: 
+         ASPNETCORE_ENVIRONMENT: Development 
+         CatalogUrl: http://catalog
+         IdentityUrl: http://localhost:5020
+      container_name: webevents
+      ports:
+         - "5200:80"
+      networks:
+         - frontend 
+      depends_on:
+         - eventcatalog
+ 
    wishlist:
       build:
          context: .\WishListAPI
