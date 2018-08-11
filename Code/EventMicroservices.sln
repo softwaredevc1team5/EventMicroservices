@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventTicketAPI", "EventTick
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WishListAPI", "WishListAPI\WishListAPI.csproj", "{F8474882-FB79-47CB-93C8-AA1C3486503C}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C9BEFCD9-206F-4C6C-A24C-7136EE43B51C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F8474882-FB79-47CB-93C8-AA1C3486503C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8474882-FB79-47CB-93C8-AA1C3486503C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8474882-FB79-47CB-93C8-AA1C3486503C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9BEFCD9-206F-4C6C-A24C-7136EE43B51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9BEFCD9-206F-4C6C-A24C-7136EE43B51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9BEFCD9-206F-4C6C-A24C-7136EE43B51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9BEFCD9-206F-4C6C-A24C-7136EE43B51C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
