@@ -5,6 +5,27 @@ networks:
    backend:
 
 services:
+   all:
+      build:
+         context: .\EventCatalogAPI
+         dockerfile: Dockerfile
+      image: event/eventapi
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=eventCatalogdb
+         - DatabaseUser=sa
+         - DatabaseUserPassword=ProductApi(!)
+      container_name: eventcatalogapi
+      ports:
+         - "55399:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+         - wishlist
+         - eventticket
+
    catalog:
       build:
          context: .\EventCatalogAPI
@@ -25,11 +46,61 @@ services:
          - mssqlserver
 
    mssqlserver:
-      image: "wendyscarlet/mssqlserverevent_template2:ver1.0"
+      image: "microsoft/mssql-server-linux:latest"
       ports:
          - "1445:1433"
 
       container_name: mssqlcontainer
+      environment:
+         - ACCEPT_EULA=Y
+         - SA_PASSWORD=ProductApi(!)
+      networks:
+         - backend
+
+   wishlist:
+      build:
+         context: .\WishListAPI
+         dockerfile: Dockerfile
+      image: event/wishlistapi
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=wishlistdb
+         - DatabaseUser=sa
+         - DatabaseUserPassword=ProductApi(!)
+      container_name: wishlistapi
+      ports:
+         - "55400:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+
+   eventticket:
+      build:
+         context: .\EventTicketAPI
+         dockerfile: Dockerfile
+      image: event/eventticketapi
+      environment:
+         - DatabaseServer=mssqlserver
+         - DatabaseName=ticketdb
+         - DatabaseUser=sa
+         - DatabaseUserPassword=ProductApi(!)
+      container_name: eventticketapi
+      ports:
+         - "55401:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
+
+   mssqlserverwishlist:
+      image: "microsoft/mssql-server-linux:latest"
+      ports:
+         - "1447:1433"
+
+      container_name: mssqlwishlist
       environment:
          - ACCEPT_EULA=Y
          - SA_PASSWORD=ProductApi(!)

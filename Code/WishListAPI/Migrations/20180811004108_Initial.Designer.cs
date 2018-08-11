@@ -11,8 +11,8 @@ using WishListAPI.Data;
 namespace WishListAPI.Migrations
 {
     [DbContext(typeof(WishListContext))]
-    [Migration("20180802015055_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20180811004108_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,7 +47,7 @@ namespace WishListAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WishCartItem");
+                    b.ToTable("WishCartItems");
                 });
 #pragma warning restore 612, 618
         }
