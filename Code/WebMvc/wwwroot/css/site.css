@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    height: 100%;
 }
 
 /* Wrapping element */
@@ -32,4 +33,30 @@
     .carousel-caption {
         display: none;
     }
+}
+
+/* for centering text on the screen */
+.centered-text {
+    text-align: center
+}
+
+/*buffer between rows*/
+.top-buffer {
+    margin-top: 20px;
+}
+
+.bg-light {
+    background-color: #f6f6f6;
+}
+/* Row with equal height columns */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.eventImg {
+    
+    object-fit: cover;
 }
