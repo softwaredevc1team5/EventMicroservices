@@ -90,3 +90,9 @@ services:
          SA_PASSWORD: ProductApi(!)
       networks:
          - backend
+  tokenserviceapi:
+    image: ${DOCKER_REGISTRY}tokenserviceapi
+    build:
+      context: .
+      dockerfile: TokenServiceApi/Dockerfile
+
