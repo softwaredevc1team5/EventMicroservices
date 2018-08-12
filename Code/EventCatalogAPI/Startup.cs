@@ -35,7 +35,7 @@ namespace EventCatalogAPI
             var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
             services.AddDbContext<EventCatalogContext>(
                 options => options.UseSqlServer(connectionString));
-            //For IIS
+            ////For IIS
             //services.AddDbContext<EventCatalogContext>(
             //    options => options.UseSqlServer(Configuration["ConnectionString"]));
 

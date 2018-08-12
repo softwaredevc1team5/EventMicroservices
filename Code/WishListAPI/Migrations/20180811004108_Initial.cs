@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace WishListAPI.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,7 @@ namespace WishListAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_WishCartItem", x => x.Id);
+                    table.PrimaryKey("PK_WishCartItems", x => x.Id);
                 });
         }
 
