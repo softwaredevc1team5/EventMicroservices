@@ -27,9 +27,9 @@ services:
    mssqlserver:
       image: "microsoft/mssql-server-linux:latest"
       ports:
-         - "1445:1433"
+         - "1450:1433"
 
-      container_name: mssqlcontainer
+      container_name: mssqlcontainer2
       environment:
          - ACCEPT_EULA=Y
          - SA_PASSWORD=ProductApi(!)
