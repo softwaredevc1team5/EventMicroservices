@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebMvc.Infrastructure;
+using WebMvc.Services;
 
 namespace WebMvc
 {
@@ -21,6 +23,9 @@ namespace WebMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(Configuration);
+            services.AddSingleton<IHttpClient, CustomHttpClient>();
+            services.AddTransient<IEventCatalogService, EventCatalogService>();
             services.AddMvc();
         }
 
@@ -43,7 +48,7 @@ namespace WebMvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=EventCatalog}/{action=Index}/{id?}");
             });
         }
     }
