@@ -31,13 +31,9 @@ namespace WebMvc.Services
 
             _apiClient = httpClient;
 
-            _remoteServiceBaseUrl = $"{_settings.Value.EventCatalogUrl}/api/event/";
-
-
-
+               _remoteServiceBaseUrl = $"{_settings.Value.EventCatalogUrl}/api/event/";
+       
         }
-
-
 
         public async Task<IEnumerable<SelectListItem>> GetEventCategories()
         {
