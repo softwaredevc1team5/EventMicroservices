@@ -11,6 +11,8 @@ namespace WebMvc.ViewModels
     {
         public IEnumerable<Event> Events { get; set; }
 
+        public IEnumerable<SelectListItem> EventStartDates { get; set; }
+
         public IEnumerable<SelectListItem> EventCategories { get; set; }
 
         public IEnumerable<SelectListItem> EventTypes { get; set; }

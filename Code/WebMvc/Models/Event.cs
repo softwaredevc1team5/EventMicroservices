@@ -18,9 +18,9 @@ namespace WebMvc.Models
         public string State { get; set; }
         public string Zipcode { get; set; }
         public string ImageUrl { get; set; }
-        public Decimal Price { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public decimal Price { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public int EventTypeId { get; set; }
         public int EventCategoryId { get; set; }
         public string EventType { get; set; }
