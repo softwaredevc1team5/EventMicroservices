@@ -30,7 +30,7 @@
 
                 <p>
 
-                    Learn how to build ASP.NET apps that can run anywhere.
+                    <h2>Go to  concerts and festivals.</h2>
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
 
@@ -52,11 +52,11 @@
 
                 <p>
 
-                    There are powerful new features in Visual Studio for building modern web apps.
+                    <h2>There are interesting network events going on in your city.</h2> 
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
 
-                        Learn More
+                        Learn More 
 
                     </a>
 
@@ -74,7 +74,7 @@
 
                 <p>
 
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
+                    <h2>Find your next experience</h2>
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
 
@@ -109,8 +109,19 @@
     </a>
 
 </div>
+<section class="search-section">
+    <div class="container">
+        <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
+            <p>
+                Title: <input type="text" name="SearchEventTitle" value="Search events by title">
+                City: <input type="text" name="SearchCity" value="Redmond">
+                <input type="submit" value="Submit" />
 
 
+            </p>
+        </form>
+    </div>
+</section>
 
 <section class="esh-catalog-filters">
 

@@ -77,6 +77,13 @@ namespace WebMvc.Controllers
             return View(vm);
 
         }
-       
+
+        public IActionResult Search(string SearchEventTitle, string SearchEventCity)
+        {
+            ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
+
+            return View();
+        }
+
     }
 }

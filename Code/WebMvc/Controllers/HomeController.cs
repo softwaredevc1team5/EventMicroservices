@@ -15,9 +15,9 @@ namespace WebMvc.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult About(string SearchEventTitle, string SearchEventCity)
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
 
             return View();
         }
