@@ -35,7 +35,7 @@ namespace WebMvc.Infrastructure
 
 
                 return $"{baseUri}events";
-                // return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
+               // return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
 
             }
 

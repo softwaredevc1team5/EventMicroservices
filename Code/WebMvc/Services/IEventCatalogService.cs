@@ -4,20 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
-using static WebMvc.Infrastructure.ApiPaths;
 
 namespace WebMvc.Services
 {
     public interface IEventCatalogService
 
     {
+       
+       Task<EventCatalog> GetEvents(int page, int take, int? brand, int? type);
 
-        //Task<EventCatalog> GetEvents(int page, int take, int? brand, int? type);
-
-        Task<IEnumerable<SelectListItem>> GetEventCategories();
+       Task<IEnumerable<SelectListItem>> GetEventCategories();
 
         Task<IEnumerable<SelectListItem>> GetEventTypes();
-
-        Task<EventCatalog> GetEventDetail(int id);
     }
 }

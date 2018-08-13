@@ -72,7 +72,7 @@ namespace WebMvc.Infrastructure
 
             // raise exception if HttpResponseCode 500 
             // needed for circuit breaker to track fails
-
+            
             if (response.StatusCode == HttpStatusCode.InternalServerError)
             {
                 throw new HttpRequestException();
