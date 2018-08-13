@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <DockerComposeProjectPath>..\Code\docker-compose.dcproj</DockerComposeProjectPath>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+    <UserSecretsId>da16510c-4ccc-426a-8182-1f73fac4baa6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
