@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMvc.Models;
 
 namespace WebMvc.ViewModels
 {
@@ -23,5 +24,6 @@ namespace WebMvc.ViewModels
         public string EventCategory { get; set; }
         public int OrganizerId { get; internal set; }
         public string OrganizerName { get; set; }
+
     }
 }

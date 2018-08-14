@@ -45,9 +45,7 @@ namespace WebMvc.Infrastructure
 
             {
 
-
-
-                return $"{baseUri}/events/{id}";
+                return $"{baseUri}events/{id}";
 
             }
 

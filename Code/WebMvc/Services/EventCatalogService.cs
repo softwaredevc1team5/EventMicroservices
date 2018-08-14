@@ -98,7 +98,16 @@ namespace WebMvc.Services
 
         }
 
+        public async Task<Event> GetEventItem(int EventId)
+        {
+            var getEventDetailUri = ApiPaths.EventCatalog.GetEvent(_remoteServiceBaseUrl, EventId);
 
+            var dataString = await _apiClient.GetStringAsync(getEventDetailUri);
+
+            var item = JsonConvert.DeserializeObject<Event>(dataString);
+
+            return item;
+        }
 
         public async Task<IEnumerable<SelectListItem>> GetEventTypes()
 

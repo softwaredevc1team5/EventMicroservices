@@ -16,5 +16,7 @@ namespace WebMvc.Services
        Task<IEnumerable<SelectListItem>> GetEventCategories();
 
         Task<IEnumerable<SelectListItem>> GetEventTypes();
+
+        Task<Event> GetEventItem(int EventId);
     }
 }

@@ -68,8 +68,7 @@ namespace WebMvc.Controllers
 
             };
 
-
-
+            
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
 
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
@@ -77,5 +76,6 @@ namespace WebMvc.Controllers
             return View(vm);
 
         }
+       
     }
 }
