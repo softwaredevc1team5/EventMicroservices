@@ -20,7 +20,7 @@ namespace WebMvc.Controllers
 
         public async Task<IActionResult> EventDetail(int id)
         {
-            //id = 1;
+            id = 2;
            
                 var eventDetail = await _ecatalogSvc.GetEventItem(id);
 
@@ -35,8 +35,8 @@ namespace WebMvc.Controllers
                     Zipcode = eventDetail.Zipcode,
                     ImageUrl = eventDetail.ImageUrl,
                     Price = eventDetail.Price,
-                    StartDate = eventDetail.StartDate,
-                    EndDate = eventDetail.EndDate,
+                    StartDate = eventDetail.StartDate.ToString("f"),
+                    EndDate = eventDetail.EndDate.ToString("f"),
                     EventTypeId = eventDetail.EventTypeId,
                     EventCategoryId = eventDetail.EventCategoryId,
                     EventType = eventDetail.EventType,

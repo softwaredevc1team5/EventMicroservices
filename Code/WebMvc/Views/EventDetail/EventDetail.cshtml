@@ -6,20 +6,24 @@
 
 <body>
     <div class="row top-buffer row-eq-height">
-        <div class="col-sm-8">
+        <div class="col-sm-7">
 
             <img src="@Model.ImageUrl" alt="Event Picture" class="eventImg">
         </div>
-        <div class="col-sm-2 bg-light">
-                <ul>
-                    <li>Date</li>
-                    <li>Title</li>
-                    <li>Organizer</li>
-                    <li>Cost</li>
-                </ul>
+        <div class="col-sm-4 bg-light">
+            <div>
+                <span>@Model.StartDate</span>
             </div>
+            <div>
+                <span>@Model.Title</span>
+            </div>
+            <div>
+                <span>@Model.OrganizerName</span>
+            </div>
+            <div>
+                <span>@Model.Price.ToString("N2")</span>
+            </div>    
         </div>
-   
     <div>
         <div class="row top-buffer">
             <div class="col-sm-8">
@@ -37,24 +41,23 @@
     <hr>
     <div>
         <div class="row top-buffer">
-            <div class="col-sm-8">
+            <div class="col-sm-7">
                
                     <h3>Description</h3>
                     <p></p><!--Description of event-->
-                    <h3>Event Details</h3>
-                    <p></p><!--Extra details of the event-->
+                    
                     <h3>Tags</h3>
                     <!--Tags associated with the event-->
                     <h3>Share With Friends!</h3>
                     <!--Add sharing using Facebook, Twitter, LinkedIn, Email-->
                
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-4">
                
                     <h3>Date and Time</h3>
-                    <p></p><!--Date and time of the event-->
+                    <p>@Model.StartDate</p><!--Date and time of the event-->
                     <h3>Location</h3>
-                    <p></p><!--Location of the event-->
+                    <p>@Model.Address</p><!--Location of the event-->
                     <h3>View Map</h3>
                     <!--link to the Google map at bottom of page-->
                 
