@@ -133,7 +133,7 @@ namespace EventCatalogAPI.Controllers
 
         //GET api/Events/type/1/category/null[?pageSize=4&pageIndex=0]
         [HttpGet]
-        [Route("[action]/type/{eventTypeId}/brand/{eventCategoryId}")]
+        [Route("[action]/type/{eventTypeId}/category/{eventCategoryId}")]
 
         public async Task<IActionResult> Events(int? eventTypeId, int? eventCategoryId, [FromQuery] int pageSize = 6,
                                                                               [FromQuery] int pageIndex = 0)
