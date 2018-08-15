@@ -20,5 +20,7 @@ namespace WebMvc.Services
        Task<EventCategoryCatalog> GetEventCategoriesWithImage();
 
        Task<IEnumerable<SelectListItem>> GetEventTypes();
+
+        Task<Event> GetEventItem(int EventId);
     }
 }
