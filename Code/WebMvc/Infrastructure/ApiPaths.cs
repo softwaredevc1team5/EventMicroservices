@@ -13,7 +13,7 @@ namespace WebMvc.Infrastructure
 
             public static string GetAllEvents(string baseUri,
 
-                int page, int take, int? eventcategory, int? eventtype)
+                int page, int take, int? category, int? type)
 
             {
 
@@ -21,13 +21,13 @@ namespace WebMvc.Infrastructure
 
 
 
-                if (eventcategory.HasValue || eventtype.HasValue)
+                if (category.HasValue || type.HasValue)
 
                 {
 
-                    var eventcategoryQs = (eventcategory.HasValue) ? eventcategory.Value.ToString() : "null";
+                    var eventcategoryQs = (category.HasValue) ? type.Value.ToString() : "null";
 
-                    var eventtypeQs = (eventtype.HasValue) ? eventtype.Value.ToString() : "null";
+                    var eventtypeQs = (type.HasValue) ? type.Value.ToString() : "null";
 
                     filterQs = $"/eventtype/{eventtypeQs}/eventcategory/{eventcategoryQs}";
 
