@@ -20,7 +20,7 @@ namespace WebMvc.Controllers
 
         public async Task<IActionResult> EventDetail(int id)
         {
-            id = 2;
+            //id = 2;
            
             var eventDetail = await _ecatalogSvc.GetEventItem(id);           
 
