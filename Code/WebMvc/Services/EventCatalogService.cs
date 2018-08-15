@@ -64,7 +64,7 @@ namespace WebMvc.Services
 
                     Value = category.Value<string>("id"),
 
-                    Text = category.Value<string>("eventcategory")
+                    Text = category.Value<string>("name")
 
                 });
 
@@ -76,17 +76,41 @@ namespace WebMvc.Services
 
         }
 
+        public async Task<EventCategoryCatalog> GetEventCategoriesWithImage()
+        {
+            var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategoriesForImage(_remoteServiceBaseUrl);
+
+            var dataString = await _apiClient.GetStringAsync(getEventCategoriesUri);          
+
+            var response = JsonConvert.DeserializeObject<EventCategoryCatalog>(dataString);
+
+            return response;
+        }
 
 
-        public async Task<EventCatalog> GetEvents(int page, int take, int? brand, int? type)
+        public async Task<EventCatalog> GetEvents(int page, int take, int? category, int? type)
 
         {
 
-            var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, brand, type);
-
-
+            var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type);
 
             var dataString = await _apiClient.GetStringAsync(alleventsUri);
+
+            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
+
+            return response;
+
+        }
+
+        public async Task<EventCatalog> GetEventsWithTitle(string title, int page, int take)
+
+        {
+
+            var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitle(_remoteServiceBaseUrl,title, page, take);
+
+
+
+            var dataString = await _apiClient.GetStringAsync(eventswithtitleUri);
 
 
 
@@ -98,16 +122,6 @@ namespace WebMvc.Services
 
         }
 
-        public async Task<Event> GetEventItem(int EventId)
-        {
-            var getEventDetailUri = ApiPaths.EventCatalog.GetEvent(_remoteServiceBaseUrl, EventId);
-
-            var dataString = await _apiClient.GetStringAsync(getEventDetailUri);
-
-            var item = JsonConvert.DeserializeObject<Event>(dataString);
-
-            return item;
-        }
 
         public async Task<IEnumerable<SelectListItem>> GetEventTypes()
 
@@ -141,7 +155,7 @@ namespace WebMvc.Services
 
                     Value = type.Value<string>("id"),
 
-                    Text = type.Value<string>("eventtype")
+                    Text = type.Value<string>("type")
 
                 });
 

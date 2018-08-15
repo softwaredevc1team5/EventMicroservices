@@ -33,9 +33,10 @@ namespace WebMvc.Infrastructure
 
                 }
 
-
-                return $"{baseUri}events";
-               // return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
+               
+                 return $"{baseUri}events{filterQs}";
+               
+              // return $"{baseUri}events{filterQs}?pageSize={page}&pageIndex={take}";
 
             }
 
@@ -44,8 +45,15 @@ namespace WebMvc.Infrastructure
             public static string GetEvent(string baseUri, int id)
 
             {
-
                 return $"{baseUri}events/{id}";
+
+            }
+            public static string GetEventsWithTitle(string baseUri, string title, int page, int take)
+
+            {
+             
+               // return $"{baseUri}events/withtitle/{title}?pageSize={page}&pageIndex={take}";
+                return $"{baseUri}events/withtitle/{title}";
 
             }
 
@@ -54,6 +62,14 @@ namespace WebMvc.Infrastructure
             {
 
                 return $"{baseUri}eventCategories";
+
+            }
+
+            public static string GetAllEventCategoriesForImage(string baseUri)
+
+            {
+
+                return $"{baseUri}eventCategoriesforimage";
 
             }
 

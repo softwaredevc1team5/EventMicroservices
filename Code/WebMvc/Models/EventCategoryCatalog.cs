@@ -16,9 +16,6 @@ namespace WebMvc.Models
 
         public int Count { get; set; }
 
-        // public List<Event> Data { get; set; }
-        //did this generic  because we could have events, event categories and event types rendered on screen
-        //should we have a vm that does this instead?
-        public IEnumerable<EventCategory> Data { get; set; } 
+        public List<EventCategory> Data { get; set; } 
     }
 }

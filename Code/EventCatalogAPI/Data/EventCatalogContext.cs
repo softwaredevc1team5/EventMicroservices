@@ -96,6 +96,8 @@ namespace EventCatalogAPI.Data
             builder.Property(c => c.Name)
                 .IsRequired()
                 .HasMaxLength(100);
+            builder.Property(c => c.ImageUrl)
+                .IsRequired(false);
 
         }
 }
