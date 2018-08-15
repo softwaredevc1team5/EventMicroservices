@@ -22,10 +22,10 @@ namespace WebMvc.Controllers
         {
             id = 2;
            
-                var eventDetail = await _ecatalogSvc.GetEventItem(id);
+            var eventDetail = await _ecatalogSvc.GetEventItem(id);           
 
-                //pass event into view model to return back to httpclient
-                var vm = new EventDetailViewModel
+            //pass event into view model to return back to httpclient
+            var vm = new EventDetailViewModel
                 {
                     Id = eventDetail.Id,
                     Title = eventDetail.Title,
@@ -35,15 +35,18 @@ namespace WebMvc.Controllers
                     Zipcode = eventDetail.Zipcode,
                     ImageUrl = eventDetail.ImageUrl,
                     Price = eventDetail.Price,
-                    StartDate = eventDetail.StartDate.ToString("f"),
-                    EndDate = eventDetail.EndDate.ToString("f"),
+                    StartDate = eventDetail.StartDate.ToString("D"),
+                    EndDate = eventDetail.EndDate.ToString("D"),
                     EventTypeId = eventDetail.EventTypeId,
                     EventCategoryId = eventDetail.EventCategoryId,
                     EventType = eventDetail.EventType,
                     EventCategory = eventDetail.EventCategory,
                     OrganizerId = eventDetail.OrganizerId,
-                    OrganizerName = eventDetail.OrganizerName
-                };
+                    OrganizerName = eventDetail.OrganizerName,
+                    StartTime = eventDetail.StartDate.ToString("h:mm tt"),
+                    EndTime = eventDetail.EndDate.ToString("h:mm tt"),
+                    FancyStartDate = eventDetail.StartDate.ToString("m")
+    };
 
                 return View(vm);
             }

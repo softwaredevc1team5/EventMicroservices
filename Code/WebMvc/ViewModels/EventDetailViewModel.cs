@@ -24,6 +24,9 @@ namespace WebMvc.ViewModels
         public string EventCategory { get; set; }
         public int OrganizerId { get; internal set; }
         public string OrganizerName { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+        public string FancyStartDate { get; set; }
 
     }
 }
