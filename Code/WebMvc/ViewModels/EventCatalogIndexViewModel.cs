@@ -13,6 +13,8 @@ namespace WebMvc.ViewModels
 
         public IEnumerable<SelectListItem> EventCategories { get; set; }
 
+        public IEnumerable<EventCategory> EventCategoriesWithImage { get; set; }
+
         public IEnumerable<SelectListItem> EventTypes { get; set; }
 
         public int? EventCategoryFilterApplied { get; set; }
@@ -20,5 +22,7 @@ namespace WebMvc.ViewModels
         public int? EventTypeFilterApplied { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; }
+
+       // public PaginationInfo PaginationInfo1 { get; set; }
     }
 }

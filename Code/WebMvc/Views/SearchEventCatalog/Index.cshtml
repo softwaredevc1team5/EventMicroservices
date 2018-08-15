@@ -1,0 +1,56 @@
+@{
+
+    ViewData["Title"] = "SearchEventCatalog";
+
+    @model WebMvc.ViewModels.EventCatalogIndexViewModel
+
+}
+
+
+
+
+
+<div class="container">
+
+    @if (Model.Events.Count() > 0)
+
+    {
+
+        @Html.Partial("_pagination", Model.PaginationInfo)
+
+
+
+        <div class="esh-catalog-items row">
+
+            @foreach (var catalogItem in Model.Events)
+            {
+
+                <div class="esh-catalog-item col-md-4">
+
+                    @Html.Partial("_event", catalogItem)
+
+                </div>
+
+            }
+
+        </div>
+
+
+
+        @Html.Partial("_pagination", Model.PaginationInfo)
+
+    }
+
+    else
+
+    {
+
+        <div class="esh-catalog-items row">
+
+            THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+
+        </div>
+
+    }
+
+</div>

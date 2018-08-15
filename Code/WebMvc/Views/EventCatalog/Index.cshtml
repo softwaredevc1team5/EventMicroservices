@@ -30,7 +30,7 @@
 
                 <p>
 
-                    Learn how to build ASP.NET apps that can run anywhere.
+                    <h2>Go to  concerts and festivals.</h2>
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
 
@@ -52,7 +52,7 @@
 
                 <p>
 
-                    There are powerful new features in Visual Studio for building modern web apps.
+                    <h2> Interesting networking events going on in your city.</h2>
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
 
@@ -74,7 +74,7 @@
 
                 <p>
 
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
+                    <h2>Find your next experience</h2>
 
                     <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
 
@@ -109,8 +109,19 @@
     </a>
 
 </div>
+<section class="search-section">
+    <div class="container">
+        <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
+            <p>
+                Title: <input type="text"  name="SearchEventTitle">
+                City: <input type="text" name="SearchEventCity">
+                <input type="submit" value="Submit" />
 
 
+            </p>
+        </form>
+    </div>
+</section>
 
 <section class="esh-catalog-filters">
 
@@ -182,3 +193,56 @@
     }
 
 </div>
+<section class="top-categories">
+
+    <div class="container">
+        <p>
+            <h2> Top Categories</h2>
+        </p>
+
+    </div>
+    <div class="container">
+
+        @if (Model.EventCategories.Count() > 0)
+
+        {
+
+            @Html.Partial("_pagination", Model.PaginationInfo)
+
+
+
+            <div class="esh-category row">
+
+                @foreach (var category in Model.EventCategoriesWithImage)
+                {
+
+                    <div class="esh-catalog-item col-md-4">
+
+                        @Html.Partial("_category", category)
+
+                    </div>
+
+                }
+
+            </div>
+
+
+
+            @Html.Partial("_pagination", Model.PaginationInfo)
+
+        }
+
+        else
+
+        {
+
+            <div class="esh-category row">
+
+                THERE ARE NO  CATEGORIES
+
+            </div>
+
+        }
+
+    </div>
+</section>

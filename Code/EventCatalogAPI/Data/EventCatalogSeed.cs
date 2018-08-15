@@ -44,16 +44,17 @@ namespace EventCatalogAPI.Data
             return new List<EventCategory>()
             {
 
-                new EventCategory() { Name = "Music"},
-                new EventCategory() { Name = "Arts"},
-                new EventCategory() { Name = "Food and Drink"},
-                new EventCategory() { Name = "Business"},
-                new EventCategory() { Name = "Health"},
-                new EventCategory() { Name = "Charity"},
-                new EventCategory() { Name = "Science and Tech"},
-                new EventCategory() { Name = "Fashion"},
-                new EventCategory() { Name = "Film and Media"},
-                new EventCategory() { Name = "Other"}
+                new EventCategory() { Name = "Music", ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/54"},
+                new EventCategory() { Name = "Arts", ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/58"},
+                new EventCategory() { Name = "Food and Drink", ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/52"},
+                new EventCategory() { Name = "Business", ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/51"},
+                new EventCategory() { Name = "Health", ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/50"},
+                new EventCategory() { Name = "Charity",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/53"},
+                new EventCategory() { Name = "Science and Tech",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/55"},
+                new EventCategory() { Name = "Fashion",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/57"},
+                new EventCategory() { Name = "Sports",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/60"},
+                new EventCategory() { Name = "Film and Media",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/59"},
+                new EventCategory() { Name = "Other",ImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/56"}
 
 
             };
