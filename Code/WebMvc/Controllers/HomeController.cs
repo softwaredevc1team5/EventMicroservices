@@ -17,7 +17,7 @@ namespace WebMvc.Controllers
 
         public IActionResult About(int id, string name)
         {
-            ViewData["Message"] = $"Your application description page. id is {id} name is {name}";
+            ViewData["Message"] = $"The category chosen : ID {id} name is {name}";
 
             return View();
         }
