@@ -82,6 +82,28 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventTypes";
 
             }
+            //EventCity ApiPaths
+            public static string GetCatalogEventsInCity(string baseUri, string city)
+            {
+                return $"{baseUri}EventCities";
+            }
+            public static string GetCityDescription(string baseUri, int? city)
+            {
+                var filterQs = string.Empty;
+                if (city.HasValue)
+                {
+                    filterQs = (city.HasValue) ? city.Value.ToString() : "null";
+                }
+                return $"{baseUri}City/withId/{1}?pageSize=1&pageIndex=0";
+                // }
+                // return $"{baseUri}City/withId/{filterQs}?pageSize={6}&pageIndex={0}";
+                //return $"{baseUri}City/withname/{city}";
+            }
+            public static string GetAllCities(string baseUri)
+            {
+                return $"{baseUri}EventCities";
+
+            }
 
         }
     }

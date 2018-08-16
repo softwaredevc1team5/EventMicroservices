@@ -22,5 +22,9 @@ namespace WebMvc.Services
        Task<IEnumerable<SelectListItem>> GetEventTypes();
 
         Task<Event> GetEventItem(int EventId);
+
+        Task<EventCityCatalog> GetCityInfo(int? city);
+        Task<EventCityCatalog> GetEventsInCity();
+        Task<IEnumerable<SelectListItem>> GetCities();
     }
 }

@@ -1,0 +1,17 @@
+﻿@model WebMvc.Models.CityItem
+
+
+<form asp-controller="City" asp-action="AddToCart">
+
+
+    <div class="esh-catalog-name">
+        <span>@Model.CityDescription</span>
+    </div>
+    <div class="esh-catalog-price">
+        <span>@Model.CityName</span>
+    </div>
+    <div class="esh-catalog-price">
+        <span>@Model.Id</span>
+    </div>
+
+</form>

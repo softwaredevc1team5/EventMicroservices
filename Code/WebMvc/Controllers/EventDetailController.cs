@@ -12,8 +12,6 @@ namespace WebMvc.Controllers
     {
         private IEventCatalogService _ecatalogSvc;
 
-
-
         public EventDetailController(IEventCatalogService ecatalogSvc) =>
 
             _ecatalogSvc = ecatalogSvc;
