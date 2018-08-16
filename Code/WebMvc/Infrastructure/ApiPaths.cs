@@ -13,7 +13,7 @@ namespace WebMvc.Infrastructure
 
             public static string GetAllEvents(string baseUri,
 
-                int page, int take, int? eventcategory, int? eventtype)
+                int page, int take, int? category, int? type)
 
             {
 
@@ -21,22 +21,22 @@ namespace WebMvc.Infrastructure
 
 
 
-                if (eventcategory.HasValue || eventtype.HasValue)
+                if (category.HasValue || type.HasValue)
 
                 {
 
-                    var eventcategoryQs = (eventcategory.HasValue) ? eventcategory.Value.ToString() : "null";
+                    var eventcategoryQs = (category.HasValue) ? type.Value.ToString() : "null";
 
-                    var eventtypeQs = (eventtype.HasValue) ? eventtype.Value.ToString() : "null";
+                    var eventtypeQs = (type.HasValue) ? type.Value.ToString() : "null";
 
                     filterQs = $"/eventtype/{eventtypeQs}/eventcategory/{eventcategoryQs}";
 
                 }
 
                
-                 return $"{baseUri}events{filterQs}";
+                // return $"{baseUri}events{filterQs}";
                
-              // return $"{baseUri}events{filterQs}?pageSize={page}&pageIndex={take}";
+               return $"{baseUri}events{filterQs}?pageSize={take}&pageIndex={page}";
 
             }
 
@@ -52,9 +52,16 @@ namespace WebMvc.Infrastructure
 
             {
              
-               // return $"{baseUri}events/withtitle/{title}?pageSize={page}&pageIndex={take}";
-                return $"{baseUri}events/withtitle/{title}";
+                return $"{baseUri}events/withtitle/{title}?pageSize={take}&pageIndex={page}";
+               // return $"{baseUri}events/withtitle/{title}";
 
+            }
+            public static string GetEventsWithTitleCityDate(string baseUri, string title, string city, string date, int page, int take)
+
+            {
+
+                return $"{baseUri}events/title/{title}/city/{city}/date/{date}?pageSize={take}&pageIndex={page}";
+                
             }
 
             public static string GetAllEventCategories(string baseUri)
@@ -65,11 +72,11 @@ namespace WebMvc.Infrastructure
 
             }
 
-            public static string GetAllEventCategoriesForImage(string baseUri)
+            public static string GetAllEventCategoriesForImage(string baseUri, int page, int take)
 
             {
-
-                return $"{baseUri}eventCategoriesforimage";
+               
+                return $"{baseUri}eventCategoriesforimage?pageSize={take}&pageIndex={page}";
 
             }
 

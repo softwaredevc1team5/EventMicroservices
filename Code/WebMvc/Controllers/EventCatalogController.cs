@@ -39,7 +39,7 @@ namespace WebMvc.Controllers
                 EventTypeFilterApplied);
 
             //get eventcategories from service, then from apipath who gets it from EventCatalog api to get  categories from EventCategoryDB
-            var ecategories = await _ecatalogSvc.GetEventCategoriesWithImage();
+            var ecategories = await _ecatalogSvc.GetEventCategoriesWithImage(page ?? 0, itemsPage);
 
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
@@ -57,6 +57,7 @@ namespace WebMvc.Controllers
 
                 EventTypeFilterApplied = EventTypeFilterApplied ?? 0,
 
+                
                 PaginationInfo = new PaginationInfo()
 
                 {
@@ -72,8 +73,14 @@ namespace WebMvc.Controllers
                 }
 
             };
-            
 
+            //update the categoryname of allevents in vm
+            foreach (var category in vm.EventCategoriesWithImage) {
+                foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
+                {
+                    eventitem.EventCategory = category.Name;
+                }
+            }
 
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
 
@@ -85,44 +92,40 @@ namespace WebMvc.Controllers
         }
 
 
-        public  IActionResult Search(string SearchEventTitle, string SearchEventCity)
+        public  IActionResult Search(string SearchEventTitle, string SearchEventCity, string SearchEventDate)
         {
             //ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
+            //DateTime SearchEventDate = DateTime.Parse(strSearchEventDate,  MM-dd-yyyy);
 
-            if (SearchEventTitle != null)
+            if (SearchEventTitle == null && SearchEventDate == null && SearchEventCity != null)
             {
-               
-               
-                if (SearchEventCity != null)
-                {
-                    //ViewData["Message"] = $"Searching by both title and city.";
-
-                    //search both title and city
-                    return RedirectToAction("CityTitle", "SearchEventCatalog", new { title = SearchEventTitle, city = SearchEventCity });
-                }
-                else
-                {
-                    //search for title
-                    return RedirectToAction("Index", "SearchEventCatalog", new { title = SearchEventTitle });
-                }
-
+                //bhuvana
+                return RedirectToAction("Index", "CityDescription", new { city = SearchEventCity });
+            }
+            else if (SearchEventTitle == null && SearchEventDate == null && SearchEventCity == null)
+            {
+                //uer did not provide anything
+                ViewData["Message"] = $"PLEASE ENTER TITLE OR CITY OR DATE";
             }
             else
             {
-                if (SearchEventCity != null)
+                //allother redirect to search
+                if(SearchEventTitle == null)
                 {
-                    //search just city
-                    // ViewData["Message"] = $"Searching by just city. {SearchEventCity}";
-                    return RedirectToAction("Index", "CityDescription", new { city = SearchEventCity });
+                    SearchEventTitle = "notitle";
                 }
-                else
+                if (SearchEventCity == null)
                 {
-                    //both title and city are empty
-                    ViewData["Message"] = $"Enter event title and/or  city";
+                    SearchEventCity = "nocity";
                 }
-            }
+                if (SearchEventDate == null || SearchEventDate == "mm-dd-yyyy")
+                {
+                    SearchEventDate = "nodate";
+                }
+                return RedirectToAction("Index", "SearchEventCatalog", new { title = SearchEventTitle, city = SearchEventCity, date = SearchEventDate });
 
-            
+            }
+           
             return View();
         }
 

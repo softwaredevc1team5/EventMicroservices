@@ -3,6 +3,7 @@ using EventCatalogAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,6 +51,7 @@ namespace EventCatalogAPI.Controllers
                                         .Skip(pageSize * pageIndex)
                                         .Take(pageSize)
                                         .ToListAsync();
+            
             itemsOnPage = ChangeUrlPlaceHolderForCategory(itemsOnPage);
             var model = new PaginatedEventViewModel<EventCategory>
                    (pageIndex, pageSize, totalItems, itemsOnPage);
@@ -162,7 +164,30 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
 
-        //GET api/Events/eventtype/1/eventcategory/null[?pageSize=4&pageIndex=0]
+        [HttpGet]
+        [Route("Events/date/{date}")]
+        public async Task<IActionResult> EventsWithDate(DateTime date,
+         [FromQuery] int pageSize = 6,
+         [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .Where(c => c.StartDate == date)
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .Where(c => c.StartDate == date)
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+        
+
+        //GET api/Events/eventtype/1/eventcategory/null?pageSize=4&pageIndex=0
         [HttpGet]
         [Route("[action]/eventtype/{eventTypeId}/eventcategory/{eventCategoryId}")]
 
