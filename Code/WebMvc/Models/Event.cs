@@ -27,7 +27,5 @@ namespace WebMvc.Models
         public string EventCategory { get; set; }
         public int OrganizerId { get; internal set; }
         public string OrganizerName { get; set; }
-        public string EventDescription { get; set; }
-        public string OrganizerDescription { get; set; }
     }
 }

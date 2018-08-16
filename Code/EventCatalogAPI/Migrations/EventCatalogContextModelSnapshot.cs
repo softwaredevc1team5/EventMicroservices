@@ -41,17 +41,9 @@ namespace EventCatalogAPI.Migrations
 
                     b.Property<int>("EventCategoryId");
 
-                    b.Property<string>("EventDescription")
-                        .IsRequired()
-                        .HasMaxLength(5000);
-
                     b.Property<int>("EventTypeId");
 
                     b.Property<string>("ImageUrl");
-
-                    b.Property<string>("OrganizerDescription")
-                        .IsRequired()
-                        .HasMaxLength(2000);
 
                     b.Property<int>("OrganizerId")
                         .HasMaxLength(50);

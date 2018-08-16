@@ -59,12 +59,6 @@ namespace EventCatalogAPI.Data
             builder.Property(c => c.OrganizerName)
                .IsRequired()
                .HasMaxLength(100);
-            builder.Property(c => c.OrganizerDescription)
-                .IsRequired()
-                .HasMaxLength(2000);
-            builder.Property(c => c.EventDescription)
-                .IsRequired()
-                .HasMaxLength(5000);
             builder.Property(c => c.ImageUrl)
                 .IsRequired(false);
             builder.Property(c => c.Address)
