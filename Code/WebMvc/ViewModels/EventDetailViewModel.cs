@@ -27,6 +27,8 @@ namespace WebMvc.ViewModels
         public string StartTime { get; set; }
         public string EndTime { get; set; }
         public string FancyStartDate { get; set; }
+        public string EventDescription { get; set; }
+        public string OrganizerDescription { get; set; }
 
     }
 }
