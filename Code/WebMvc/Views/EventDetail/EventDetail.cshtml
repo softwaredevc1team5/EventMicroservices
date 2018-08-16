@@ -4,7 +4,6 @@
 }
 @model WebMvc.ViewModels.EventDetailViewModel
 
-
 <body>
     <div class="container">
         <div class="row equal">
@@ -20,7 +19,7 @@
                     <H2>@Model.Title</H2>
                 </div>
                 <div class="padding grayText">
-                    <span>Organized by @Model.OrganizerName</span>
+                    <span>Organized by <a href="#organizer">@Model.OrganizerName</a></span>
                 </div>
                 <div class="padding grayText">
                     <br />
@@ -31,9 +30,10 @@
     </div>
     <div>
         <div class="row top-buffer">
-            <div class="col-sm-7">
+            <div class="col-sm-7 padding">
 
                 <!--Share and save options-->
+                
 
             </div>
             <div class="col-sm-4">
@@ -51,7 +51,7 @@
             <div class="col-sm-7">
 
                 <h3>Description</h3>
-                <p></p><!--Description of event-->
+                <p>@Model.EventDescription</p><!--Description of event-->
 
                 <h3>Share With Friends!</h3>
                 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
@@ -64,14 +64,15 @@
                 <p>@Model.StartDate<br />@Model.StartTime - @Model.EndTime</p><!--Date and time of the event-->
                 <h3>Location</h3>
                 <p>@Model.Address<br />@Model.City, @Model.State @Model.Zipcode</p><!--Location of the event-->
-                <h3>View Map</h3>
+                <!-- <h3>View Map</h3>-->
                 <!--link to the Google map at bottom of page-->
             </div>
         </div>
     </div>
     <hr>
     <div class="centered-text top-buffer">
-        <h3>Organizer Information</h3>
+        <a id="organizer"><h3>Organizer Information</h3></a>
+        <p>@Model.OrganizerDescription</p>
         <p></p>
 
         <!--MAP-->
