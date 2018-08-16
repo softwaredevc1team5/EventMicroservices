@@ -190,6 +190,57 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
 
+        //EventCity get methods.
+        private List<EventCity> ChangeUrlPlaceHolder(List<EventCity> items)
+        {
+            items.ForEach(
+                x => x.CityImageUrl =
+                x.CityImageUrl
+                .Replace("http://externalcatalogbaseurltobereplaced",
+                _settings.Value.ExternalCatalogBaseUrl));
+
+            return items;
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventCities([FromQuery] int pageSize = 6,
+                                                [FromQuery] int pageIndex = 0)
+        {
+            var items = await _eventCatalogContext.EventCities.ToListAsync();
+            return Ok(items);
+        }
+
+
+        [HttpGet]
+        [Route("[action]/withId/{cityId:int}")]
+        public async Task<IActionResult> City
+             (int? cityId,
+             [FromQuery] int pageSize = 6,
+             [FromQuery] int pageIndex = 0)
+        {
+            
+            var root = (IQueryable<EventCity>)_eventCatalogContext.EventCities;
+            if (cityId.HasValue)
+            {
+                root = root.Where(c => c.Id == cityId);
+            }
+
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.CityName)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<EventCity>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+
+        
+
         [HttpPost]
         [Route("events")]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)

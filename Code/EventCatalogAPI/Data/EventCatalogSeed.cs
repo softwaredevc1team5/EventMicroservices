@@ -35,8 +35,26 @@ namespace EventCatalogAPI.Data
                 context.SaveChanges();
             }
 
-        }
+            if (!context.EventCities.Any())
+            {
+                context.EventCities.AddRange
+                    (GetPreconfiguredEventCities());
+                context.SaveChanges();
+            }
 
+        }
+        private static IEnumerable<EventCity> GetPreconfiguredEventCities()
+        {
+            return new List<EventCity>()
+            {
+                new EventCity(){CityName = "Redmond,WA",CityDescription="Redmond, Washington, is a growing tech and science hub that's all about the latest innovations. This groundbreaking town is the place to be if you're in the mood for fresh air, fresher food, and the freshest ideas. Blast off to fun and check out some of the area events below!",CityImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/City/1"},
+                new EventCity(){CityName = "New York ,NY",CityDescription="This cultural mecca is loaded with events and things to do. Walk the High Line and drop into the Meatpacking District for galleries and good eats. Shop the West Village. Get your American Art on at the Whitney. Take a breather in Central Park.",CityImageUrl="http://externalcatalogbaseurltobereplaced/api/pic/City/1"},
+                new EventCity() { CityName = "Bellevue,WA", CityDescription = "Looking for something to do in Bellevue? Whether you're a local, new in town or just cruising through we've got loads of great tips and events. You can explore by location, what's popular, our top picks, free stuff... you got this. Ready?", CityImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/City/1" },
+                new EventCity() { CityName = "Dallas,TX",CityDescription = "Yes sir this friendly city keeps it live with hot events, strong margaritas and gas station tacos that are genuinely delish. You'll need to see Big Tex at the Texas State Fair. Two-step with the LGBTQ crowd at the Round-Up Saloon. See something amazing at the Perot Museum of Nature and Science. And eat any version of fried chicken/chicken-fried steak/fried other stuff.",CityImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/City/2"},
+                new EventCity() { CityName = "Frederick",CityDescription = "Looking for something to do in Frederick,MD? Whether you're a local, new in town or just cruising through we've got loads of great tips and events. You can explore by location, what's popular, our top picks, free stuff... you got this. Ready?",CityImageUrl = "http://externalcatalogbaseurltobereplaced/api/pic/City/1"},
+            };
+
+        }
 
 
         static IEnumerable<EventCategory> GetPreconfiguredEventCategories()

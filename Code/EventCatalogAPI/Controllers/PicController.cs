@@ -28,5 +28,15 @@ namespace EventCatalogAPI.Controllers
             var buffer = System.IO.File.ReadAllBytes(path);
             return File(buffer, "image/png");
         }
+
+        [HttpGet]
+        [Route("City/{id}")]
+        public IActionResult GetCityImage(int id)
+        {
+            var webRoot = _env.WebRootPath;
+            var path = Path.Combine(webRoot + "/City/", "city-" + id + ".png");
+            var buffer = System.IO.File.ReadAllBytes(path);
+            return File(buffer, "image/png");
+        }
     }
 }

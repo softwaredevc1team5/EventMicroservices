@@ -18,13 +18,30 @@ namespace EventCatalogAPI.Data
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<EventCategory> EventCategories { get; set; }
         public DbSet<Event> Events { get; set; }
-        
+        public DbSet<EventCity> EventCities { get; set; }
+
         protected override void OnModelCreating
             (ModelBuilder builder)
         {
             builder.Entity<EventType>(ConfigureEventType);
             builder.Entity<EventCategory>(ConfigureEventCategory);
             builder.Entity<Event>(ConfigureEvent);
+            builder.Entity<EventCity>(ConfigureEventCity);
+        }
+        private void ConfigureEventCity(EntityTypeBuilder<EventCity> builder)
+        {
+            builder.ToTable("EventCity");
+            builder.Property(c => c.Id)
+                .ForSqlServerUseSequenceHiLo("event_city_hilo")
+                .IsRequired();
+            builder.Property(c => c.CityName)
+                .IsRequired()
+                .HasMaxLength(40);
+            builder.Property(c => c.CityDescription)
+                .IsRequired()
+                .HasMaxLength(500);
+            builder.Property(c => c.CityImageUrl)
+                .IsRequired(false);
         }
         private void ConfigureEvent(EntityTypeBuilder<Event> builder)
         {
