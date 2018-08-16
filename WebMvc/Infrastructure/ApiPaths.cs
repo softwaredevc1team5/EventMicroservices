@@ -13,7 +13,7 @@ namespace WebMvc.Infrastructure
 
             public static string GetAllEvents(string baseUri,
 
-                int page, int take, int? eventcategory, int? eventtype)
+                int page, int take, int? eventcategory, int? eventtype, String date, String city)
 
             {
 
@@ -21,21 +21,26 @@ namespace WebMvc.Infrastructure
 
 
 
-                if (eventcategory.HasValue || eventtype.HasValue)
+                if (eventcategory.HasValue || eventtype.HasValue || city != null ||date!= null)
 
                 {
 
                     var eventcategoryQs = (eventcategory.HasValue) ? eventcategory.Value.ToString() : "null";
 
                     var eventtypeQs = (eventtype.HasValue) ? eventtype.Value.ToString() : "null";
-
-                    filterQs = $"/type/{eventtypeQs}/category/{eventcategoryQs}";
-
+                    var eventdateQs = date ?? "null";
+                    var eventcityQs = city ?? "null";
+                    filterQs = $"/type/{eventtypeQs}/category/{eventcategoryQs}/date/{eventdateQs}/city/{eventcityQs}";
                 }
+                
+               
+
+                //filterQs = $"/date/{eventdateQs}/city/{eventcityQs}";
+
 
 
                 //return $"{baseUri}events";
-               return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
+                return $"{baseUri}events{filterQs}?pageIndex={page}&pageSize={take}";
 
             }
 
@@ -66,6 +71,15 @@ namespace WebMvc.Infrastructure
             {
 
                 return $"{baseUri}eventTypes";
+
+            }
+
+            public static string GetAllCities(string baseUri)
+
+            {
+
+
+                return $"{baseUri}allEventsCities";
 
             }
 

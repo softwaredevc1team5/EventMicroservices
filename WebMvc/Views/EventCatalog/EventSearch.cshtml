@@ -7,6 +7,23 @@
 <h2>EventSearch</h2>
 
 <div class="container">
+    <section class="esh-catalog-filters">
+        <div class="container">
+            <form asp-action="Index" asp-controller="EventCatalog" method="post">
+                <label class="esh-catalog-label" data-title="eventcategory">
+                    <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-catalog-filter"></select>
+                </label>
+              <label class="esh-catalog-label" data-title="eventtype">
+                    <select asp-for="@Model.EventDateFilterApplied" asp-items="@Model.EventDates" class="esh-catalog-filter"></select>
+                </label>
+             <!--   <label class="esh-catalog-label" data-title="AllCities">
+                    <select asp-for="@Model.EventCityFilterApplied" asp-items="@Model.AllCities" class="esh-catalog-filter"></select>
+                </label>-->
+                <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+            </form>
+        </div>
+    </section>
+
     @if (Model.Events.Count() > 0)
 
     {

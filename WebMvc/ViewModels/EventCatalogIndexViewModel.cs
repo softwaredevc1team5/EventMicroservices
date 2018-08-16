@@ -14,11 +14,18 @@ namespace WebMvc.ViewModels
         public IEnumerable<SelectListItem> EventCategories { get; set; }
 
         public IEnumerable<SelectListItem> EventTypes { get; set; }
+        public IEnumerable<SelectListItem> AllCities { get; set; }
+        public IEnumerable<SelectListItem> EventDates { get; set; }
+
+
+        public String EventDateFilterApplied { get; set; }
+        public String EventCityFilterApplied { get; set; }
 
         public int? EventCategoryFilterApplied { get; set; }
 
         public int? EventTypeFilterApplied { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; }
+
     }
 }

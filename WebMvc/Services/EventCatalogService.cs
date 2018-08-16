@@ -57,18 +57,19 @@ namespace WebMvc.Services
             };
 
             var categories = JArray.Parse(dataString);
-
-            foreach (var category in categories.Children<JObject>())
+            
+            foreach(var category in categories.Children<JObject>())
 
             {
+               
 
                 items.Add(new SelectListItem()
 
                 {
 
-                    Value = category.Value<string>("id"),
+                    Value = category.Value<String>("id"),
 
-                    Text = category.Value<string>("name")
+                    Text = category.Value<String>("name")
 
                 });
 
@@ -81,12 +82,51 @@ namespace WebMvc.Services
         }
 
 
+        public async Task<IEnumerable<SelectListItem>> GetAllCities()
+        {
 
-        public async Task<EventCatalog> GetEvents(int page, int take, int? category, int? type)
+            var getAllCitiesUri = ApiPaths.EventCatalog.GetAllCities(_remoteServiceBaseUrl);
+
+
+            var dataString = await _apiClient.GetStringAsync(getAllCitiesUri);
+            
+          
+
+            var items = new List<SelectListItem>
+
+            {
+
+                new SelectListItem() { Value = null, Text = "All", Selected = true }
+
+            };
+            var cities = JsonConvert.DeserializeObject<List<string>>(dataString);
+            //var cities = JArray.Parse(dataString);
+            foreach(var city in cities)
+
+            {                               
+                items.Add(new SelectListItem()
+
+                {
+                   
+
+                    Text = city
+
+                });
+
+            }
+
+
+
+            return items;
+
+        }
+
+
+        public async Task<EventCatalog> GetEvents(int page, int take, int? category, int? type, String date, String city)
 
         {
 
-            var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type);
+            var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type, date, city);
 
 
             var dataString = await _apiClient.GetStringAsync(alleventsUri);
@@ -120,7 +160,7 @@ namespace WebMvc.Services
 
             {
 
-                new SelectListItem() { Value = null, Text = "All", Selected = true }
+                new SelectListItem() { Value = "Redmond,Washington",  Selected = true }
 
             };
 
@@ -145,5 +185,25 @@ namespace WebMvc.Services
             return items;
 
         }
+
+        public  IEnumerable<SelectListItem> GetEventDates()
+        {
+            List<String> eventDates = new List<string> { "Today","Tomorrow"};
+            var items = new List<SelectListItem>
+            {
+                new SelectListItem() { Value = "All Days", Text = "All Days", Selected = true }
+            };
+            foreach (var eventDate in eventDates)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Value = eventDate,
+
+                    Text = eventDate
+                });
+            }
+            return items;
+        }
+
     }
 }
