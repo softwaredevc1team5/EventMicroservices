@@ -113,8 +113,9 @@
     <div class="container">
         <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
             <p>
-                Title: <input type="text"  name="SearchEventTitle">
-                City: <input type="text" name="SearchEventCity">
+                Title: <input type="text" name="SearchEventTitle" placeholder="Washington Jazz Fest">
+                City: <input type="text" name="SearchEventCity" placeholder="Redmond">
+                Date: <input type="text" name="SearchEventDate" placeholder="mm-dd-yyyy" pattern="\d{2}-\d{2}-\d{4}" title="mm-dd-yyyy">
                 <input type="submit" value="Submit" />
 
 
@@ -123,25 +124,25 @@
     </div>
 </section>
 
-<section class="esh-catalog-filters">
+<section class="esh-event-filters">
 
     <div class="container">
 
         <form asp-action="Index" asp-controller="EventCatalog" method="post">
 
-            <label class="esh-catalog-label" data-title="eventcategory">
+            <label class="esh-event-label" data-title="eventcategory">
 
-                <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-catalog-filter"></select>
-
-            </label>
-
-            <label class="esh-catalog-label" data-title="eventtype">
-
-                <select asp-for="@Model.EventTypeFilterApplied" asp-items="@Model.EventTypes" class="esh-catalog-filter"></select>
+                <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-event-filter"></select>
 
             </label>
 
-            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+            <label class="esh-event-label" data-title="eventtype">
+
+                <select asp-for="@Model.EventTypeFilterApplied" asp-items="@Model.EventTypes" class="esh-event-filter"></select>
+
+            </label>
+
+            <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
 
         </form>
 
@@ -159,12 +160,12 @@
 
 
 
-        <div class="esh-catalog-items row">
+        <div class="esh-event-items row">
 
             @foreach (var catalogItem in Model.Events)
             {
 
-                <div class="esh-catalog-item col-md-4">
+                <div class="esh-event-item col-md-4">
 
                     @Html.Partial("_event", catalogItem)
 
@@ -207,16 +208,13 @@
 
         {
 
-            @Html.Partial("_pagination", Model.PaginationInfo)
 
-
-
-            <div class="esh-category row">
+            <div class="esh-event row">
 
                 @foreach (var category in Model.EventCategoriesWithImage)
                 {
 
-                    <div class="esh-catalog-item col-md-4">
+                    <div class="esh-event-item col-md-4">
 
                         @Html.Partial("_category", category)
 
@@ -228,7 +226,7 @@
 
 
 
-            @Html.Partial("_pagination", Model.PaginationInfo)
+           
 
         }
 
@@ -236,7 +234,7 @@
 
         {
 
-            <div class="esh-category row">
+            <div class="esh-event row">
 
                 THERE ARE NO  CATEGORIES
 

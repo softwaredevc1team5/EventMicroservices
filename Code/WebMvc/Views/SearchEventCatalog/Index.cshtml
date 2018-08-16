@@ -9,6 +9,7 @@
 
 
 
+<h2>@ViewData["Message"]</h2>
 
 <div class="container">
 
@@ -20,12 +21,12 @@
 
 
 
-        <div class="esh-catalog-items row">
+        <div class="esh-event-items row">
 
             @foreach (var catalogItem in Model.Events)
             {
 
-                <div class="esh-catalog-item col-md-4">
+                <div class="esh-event-item col-md-4">
 
                     @Html.Partial("_event", catalogItem)
 
