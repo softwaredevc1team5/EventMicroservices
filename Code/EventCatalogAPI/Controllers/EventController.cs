@@ -150,6 +150,31 @@ namespace EventCatalogAPI.Controllers
             {
                 dateTime = dateTime.AddDays(1);
             }
+            
+            else if (eventDate == "This weekend")
+            {
+                var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek);
+                var weekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+            }
+            else if (eventDate == "Next weekend")
+            {
+                var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek+7);
+                var weekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek+7);
+            }
+            else if (eventDate == "This week")
+            {
+                
+                var thisWeekdaySun = dateTime.AddDays(-(7 - (int)dateTime.DayOfWeek));
+                var comingSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+            }
+            else if (eventDate == "This month")
+            {
+                var thisMonth = dateTime.Month;
+            }
+            else if (eventDate == "Next month")
+            {
+                var nextMonth = dateTime.Month+1;
+            }
 
             var root = (IQueryable<Event>)_eventCatalogContext.Events;
             if (eventTypeId.HasValue)
@@ -160,7 +185,7 @@ namespace EventCatalogAPI.Controllers
             {
                 root = root.Where(c => c.EventCategoryId == eventCategoryId);
             }
-             if(eventCity != null)
+             if(eventCity != null && eventCity!="All")
             {
                 var citystr = eventCity.Split(',')[0];
                 var statestr = eventCity.Split(',')[1];
@@ -303,6 +328,64 @@ namespace EventCatalogAPI.Controllers
             }                                             
 
             return Ok(cities);
+        }
+
+
+        public IQueryable<Event> FindingEventsByDate(IQueryable<Event> root, String date)
+        {
+            DateTime dateTime = DateTime.Now.Date;
+
+            if (date != null && date != "All Days")
+            {
+                switch (date)
+                {
+                    case "Today":
+                        dateTime = DateTime.Now;
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime) == 0);
+                        break;
+                    case "Tomorrow":
+                        var tomorrow = dateTime.AddDays(1);
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, tomorrow) == 0);
+                        break;
+                    case "This week":
+                        var thisWeekdaySun = dateTime.AddDays(-(7 - (int)dateTime.DayOfWeek));
+                        var comingSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+
+                        root = root.Where(c => (c.StartDate.Date >= thisWeekdaySun && c.StartDate.Date <= comingSun));
+
+                        break;
+                    case "This weekend":
+                        var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek);
+                        var weekendSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+                        root = root.Where(c => (c.StartDate.Date >= weekendFri && c.StartDate.Date <= weekendSun));
+                        break;
+                    case "Next week":
+
+                        break;
+                    case "Next weekend":
+                        var nextWeekFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek + 7);
+                        var nextWeekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek + 7);
+
+                        root = root.Where(c => (c.StartDate.Date >= nextWeekFri && c.StartDate.Date <= nextWeekSun));
+
+                        break;
+                    case "This month":
+
+                        var thisMonth = dateTime.Month;
+                        root = root.Where(c => c.StartDate.Date.Month == thisMonth );
+                        break;
+
+                    case "Next month":
+                        var nextMonth = dateTime.AddMonths(1).Month;
+                        root = root.Where(c => c.StartDate.Date.Month == nextMonth);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+               
+            return root;
         }
 
 
