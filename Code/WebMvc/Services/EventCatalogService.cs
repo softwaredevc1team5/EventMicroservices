@@ -76,9 +76,9 @@ namespace WebMvc.Services
 
         }
 
-        public async Task<EventCategoryCatalog> GetEventCategoriesWithImage()
+        public async Task<EventCategoryCatalog> GetEventCategoriesWithImage(int page, int take)
         {
-            var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategoriesForImage(_remoteServiceBaseUrl);
+            var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategoriesForImage(_remoteServiceBaseUrl, page, take);
 
             var dataString = await _apiClient.GetStringAsync(getEventCategoriesUri);          
 
@@ -106,7 +106,7 @@ namespace WebMvc.Services
 
         {
 
-            var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitle(_remoteServiceBaseUrl,title, page, take);
+            var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitle(_remoteServiceBaseUrl,title,page, take);
 
 
 
@@ -122,6 +122,36 @@ namespace WebMvc.Services
 
         }
 
+        public async Task<EventCatalog> GetEventsWithTitleCityDate(string title, string city, string date, int page, int take)
+
+        {
+
+            var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitleCityDate(_remoteServiceBaseUrl, title, city, date, page, take);
+
+
+
+            var dataString = await _apiClient.GetStringAsync(eventswithtitleUri);
+
+
+
+            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
+
+
+
+            return response;
+
+        }
+
+        public async Task<Event> GetEventItem(int EventId)
+        {
+            var getEventDetailUri = ApiPaths.EventCatalog.GetEvent(_remoteServiceBaseUrl, EventId);
+
+            var dataString = await _apiClient.GetStringAsync(getEventDetailUri);
+
+            var item = JsonConvert.DeserializeObject<Event>(dataString);
+
+            return item;
+        }
 
         public async Task<IEnumerable<SelectListItem>> GetEventTypes()
 

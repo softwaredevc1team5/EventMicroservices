@@ -15,10 +15,14 @@ namespace WebMvc.Services
 
        Task<EventCatalog> GetEventsWithTitle(string title, int page, int take);
 
+       Task<EventCatalog> GetEventsWithTitleCityDate(string title, string city, string date, int page, int take);
+
        Task<IEnumerable<SelectListItem>> GetEventCategories();
 
-       Task<EventCategoryCatalog> GetEventCategoriesWithImage();
+       Task<EventCategoryCatalog> GetEventCategoriesWithImage(int page, int take);
 
        Task<IEnumerable<SelectListItem>> GetEventTypes();
+
+        Task<Event> GetEventItem(int EventId);
     }
 }

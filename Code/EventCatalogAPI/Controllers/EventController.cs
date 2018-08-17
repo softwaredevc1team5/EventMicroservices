@@ -3,6 +3,7 @@ using EventCatalogAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,6 +51,7 @@ namespace EventCatalogAPI.Controllers
                                         .Skip(pageSize * pageIndex)
                                         .Take(pageSize)
                                         .ToListAsync();
+            
             itemsOnPage = ChangeUrlPlaceHolderForCategory(itemsOnPage);
             var model = new PaginatedEventViewModel<EventCategory>
                    (pageIndex, pageSize, totalItems, itemsOnPage);
@@ -162,7 +164,30 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
 
-        //GET api/Events/eventtype/1/eventcategory/null[?pageSize=4&pageIndex=0]
+        [HttpGet]
+        [Route("Events/date/{date}")]
+        public async Task<IActionResult> EventsWithDate(DateTime date,
+         [FromQuery] int pageSize = 6,
+         [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .Where(c => c.StartDate == date)
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .Where(c => c.StartDate == date)
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+        
+
+        //GET api/Events/eventtype/1/eventcategory/null?pageSize=4&pageIndex=0
         [HttpGet]
         [Route("[action]/eventtype/{eventTypeId}/eventcategory/{eventCategoryId}")]
 
@@ -190,6 +215,37 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
 
+        //GET api/events/title/Redmond/city/null/date/10/01/2018?pageSize=4&pageIndex=0
+        [HttpGet]
+        [Route("events/title/{title}/city/{city}/date/{date}")]
+        public async Task<IActionResult> EventswithTitleCityDate(string title, string city, string date, [FromQuery] int pageSize = 6,
+                                                                              [FromQuery] int pageIndex = 0)
+        {
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+            if (title !="notitle")
+            {
+                root = root.Where(c => c.Title.StartsWith(title));
+            }
+            if (city!="nocity")
+            {
+                root = root.Where(c => c.City.StartsWith(city));
+            }
+            if (date!="nodate")
+            {
+                DateTime dt = Convert.ToDateTime(date);
+                root = root.Where(c => c.StartDate.ToShortDateString() == dt.ToShortDateString());
+            }
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
+            return Ok(model);
+        }
         [HttpPost]
         [Route("events")]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
