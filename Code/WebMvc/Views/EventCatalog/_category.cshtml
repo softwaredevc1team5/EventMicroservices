@@ -4,20 +4,21 @@
 
 <form asp-controller="Home" asp-action="About" method="post">
 
+    <a href="@Url.Action("EventSearchByCategory","EventCatalog",
+            new { EventCategoryFilterApplied = @Model.Id })">
 
-    
-    <input type="image" name="submitCategory" src="@Model.ImageUrl"   border="0" alt="@Model.Name" />
-    <p>
-        <a>@Model.Name</a>
-    </p>
+        <input type="image" name="submitCategory" src="@Model.ImageUrl" border="0" alt="@Model.Name" /> </a>
+        <p>
+            <a>@Model.Name</a>
+        </p>
 
 
-  
-    <input type="hidden" asp-for="@Model.Id" value ="@Model.Id" name="id" />
 
-    <input type="hidden" asp-for="@Model.Name" name="name" />
+        <input type="hidden" asp-for="@Model.Id" value="@Model.Id" name="id" />
 
-    <input type="hidden" asp-for="@Model.ImageUrl" name="imageUri" />
+        <input type="hidden" asp-for="@Model.Name" name="name" />
+
+        <input type="hidden" asp-for="@Model.ImageUrl" name="imageUri" />
 
 
 
