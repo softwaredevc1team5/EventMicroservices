@@ -141,41 +141,6 @@ namespace EventCatalogAPI.Controllers
         {
             
 
-            DateTime dateTime = DateTime.Now;
-            if (eventDate == "Today")
-            {
-                dateTime = DateTime.Now;
-            }
-            else if (eventDate == "Tomorrow")
-            {
-                dateTime = dateTime.AddDays(1);
-            }
-            
-            else if (eventDate == "This weekend")
-            {
-                var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek);
-                var weekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
-            }
-            else if (eventDate == "Next weekend")
-            {
-                var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek+7);
-                var weekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek+7);
-            }
-            else if (eventDate == "This week")
-            {
-                
-                var thisWeekdaySun = dateTime.AddDays(-(7 - (int)dateTime.DayOfWeek));
-                var comingSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
-            }
-            else if (eventDate == "This month")
-            {
-                var thisMonth = dateTime.Month;
-            }
-            else if (eventDate == "Next month")
-            {
-                var nextMonth = dateTime.Month+1;
-            }
-
             var root = (IQueryable<Event>)_eventCatalogContext.Events;
             if (eventTypeId.HasValue)
             {
@@ -191,9 +156,10 @@ namespace EventCatalogAPI.Controllers
                 var statestr = eventCity.Split(',')[1];
                 root = root.Where(c => c.City == citystr && c.State == statestr);
             }
-            if(dateTime != null)
+            
+            if(eventDate!=null && eventDate!="All Days")
             {
-                root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime.Date) == 0);
+                root = FindingEventsByDate(root, eventDate);
 
             }
 
@@ -341,7 +307,7 @@ namespace EventCatalogAPI.Controllers
                 {
                     case "Today":
                         dateTime = DateTime.Now;
-                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime) == 0);
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime.Date) == 0);
                         break;
                     case "Tomorrow":
                         var tomorrow = dateTime.AddDays(1);
@@ -360,7 +326,10 @@ namespace EventCatalogAPI.Controllers
                         root = root.Where(c => (c.StartDate.Date >= weekendFri && c.StartDate.Date <= weekendSun));
                         break;
                     case "Next week":
+                        var nextWeekSunday= dateTime.AddDays((7 - (int)dateTime.DayOfWeek)+7);
+                        var comingSunday = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
 
+                        root = root.Where(c => (c.StartDate.Date >= comingSunday && c.StartDate.Date <= nextWeekSunday));
                         break;
                     case "Next weekend":
                         var nextWeekFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek + 7);

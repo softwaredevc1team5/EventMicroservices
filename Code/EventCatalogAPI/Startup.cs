@@ -32,6 +32,7 @@ namespace EventCatalogAPI
             services.AddSwaggerGen(options =>
             {
                 options.DescribeAllEnumsAsStrings();
+                
                 options.SwaggerDoc("v1",
                     new Swashbuckle.AspNetCore.Swagger.Info
                     {
