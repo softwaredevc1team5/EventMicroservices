@@ -1,0 +1,75 @@
+﻿@model WebMvc.ViewModels.EventFiltersCatalogViewModel
+
+@{
+    ViewData["Title"] = "EventSearchByCategory";
+}
+
+<section class="esh-event-filters">
+
+    <div class="container">
+
+        <form asp-action="EventSearchByCategory" asp-controller="EventCatalog" method="post">
+            <label class="esh-catalog-label" data-title="eventcategory">
+                <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-event-filter"></select>
+            </label>
+            <label class="esh-catalog-label" data-title="eventtype">
+                <select asp-for="@Model.EventTypeFilterApplied" asp-items="@Model.EventTypes" class="esh-event-filter"></select>
+            </label>
+            <label class="esh-catalog-label" data-title="AllCities">
+                <select asp-for="@Model.EventCityFilterApplied" asp-items="@Model.AllCities" class="esh-event-filter"></select>
+            </label>
+            <label class="esh-catalog-label" data-title="AllCities">
+                <select asp-for="@Model.EventDateFilterApplied" asp-items="@Model.EventDates" class="esh-event-filter"></select>
+            </label>
+            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+        </form>
+
+    </div>
+
+</section>
+
+<div class="container">
+
+    @if (Model.Events.Count() > 0)
+
+    {
+
+        @Html.Partial("_pagination", Model.PaginationInfo)
+
+
+    <div class="row text-center text-lg-left">
+        @*  <div class="esh-catalog-items row">*@
+
+
+        @foreach (var catalogItem in Model.Events)
+        {
+            <div class="col-lg-3 col-md-4 col-xs-6">
+               @* <div class="esh-catalog-item col-md-4">*@
+
+                    @Html.Partial("_event", catalogItem)
+
+                </div>
+
+                }
+
+            </div>
+
+
+
+            @Html.Partial("_pagination", Model.PaginationInfo)
+
+        }
+
+        else
+
+        {
+
+        <div class="esh-catalog-items row">
+
+            THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+
+        </div>
+
+        }
+
+    </div>

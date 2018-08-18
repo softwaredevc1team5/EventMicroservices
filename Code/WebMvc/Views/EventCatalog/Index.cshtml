@@ -189,13 +189,13 @@
             <div class="esh-event row">
 
                 @foreach (var category in Model.EventCategoriesWithImage)
-                {
+                    {
 
-                    <div class="esh-event-item col-md-4">
+                <div class="esh-event-item col-md-4">
 
-                        @Html.Partial("_category", category)
+                    @Html.Partial("_category", category)
 
-                    </div>
+                </div>
 
                 }
 

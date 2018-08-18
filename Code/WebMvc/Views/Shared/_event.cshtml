@@ -3,7 +3,7 @@
 
 <form asp-controller="EventDetail" asp-action="EventDetail">
 
-    <input class="esh-event-thumbnail" type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" />
+    <input class="img-fluid img-thumbnail" type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:150px" />
     
 
     <input type="hidden" asp-for="@Model.Id" name="id" />

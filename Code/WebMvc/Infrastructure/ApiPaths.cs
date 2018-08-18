@@ -131,7 +131,38 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}EventCities";
 
             }
+            //get all events by all filters by chitra
+            public static string GetEventsByAllFilters(string baseUri,
 
+                int page, int take, int? eventcategory, int? eventtype, String date, String city)
+
+            {
+                var filterQs = string.Empty;
+
+
+
+
+                if (eventcategory.HasValue || eventtype.HasValue || city != null || date != null)
+
+                {
+
+                    var eventcategoryQs = (eventcategory.HasValue) ? eventcategory.Value.ToString() : "null";
+
+                    var eventtypeQs = (eventtype.HasValue) ? eventtype.Value.ToString() : "null";
+                    var eventdateQs = date ?? "null";
+                    var eventcityQs = city ?? "null";
+                    filterQs = $"/type/{eventtypeQs}/category/{eventcategoryQs}/date/{eventdateQs}/city/{eventcityQs}";
+                }
+                //filterQs = $"/date/{eventdateQs}/city/{eventcityQs}";
+                //return $"{baseUri}events";
+                return $"{baseUri}eventsByFilters{filterQs}?pageIndex={page}&pageSize={take}";
+            }
+
+            public static string GetAllCities(string baseUri)
+
+            {
+                return $"{baseUri}allEventsCities";
+            }
         }
     }
 }

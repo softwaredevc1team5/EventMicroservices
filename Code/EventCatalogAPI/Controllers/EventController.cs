@@ -441,8 +441,124 @@ namespace EventCatalogAPI.Controllers
             _eventCatalogContext.Events.Remove(catalogEvent);
             await _eventCatalogContext.SaveChangesAsync();
             return NoContent();
-
         }
+
+       //chitra
+        [HttpGet]
+        [Route("[action]/type/{eventTypeId}/category/{eventCategoryId}/date/{eventDate}/city/{eventCity}")]
+
+        public async Task<IActionResult> EventsByFilters(int? eventTypeId, int? eventCategoryId, String eventDate, String eventCity, [FromQuery] int pageSize = 6,[FromQuery] int pageIndex = 0)
+        {
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+            if (eventTypeId.HasValue)
+            {
+                root = root.Where(c => c.EventTypeId == eventTypeId);
+            }
+            if (eventCategoryId.HasValue)
+            {
+                root = root.Where(c => c.EventCategoryId == eventCategoryId);
+            }
+            if (eventCity != "null" && eventCity != "All")
+            {
+                var citystr = eventCity.Split(',')[0];
+                var statestr = eventCity.Split(',')[1];
+                root = root.Where(c => c.City == citystr && c.State == statestr);
+            }
+
+            if (eventDate != "null" && eventDate != "All Days")
+            {
+                root = FindingEventsByDate(root, eventDate);
+
+            }
+
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> AllEventsCities()
+        {
+            //IList<String> totalItems;
+            List<String> cities = new List<string>();
+            var totalItems = await _eventCatalogContext.Events.ToListAsync();
+            foreach (var item in totalItems)
+            {
+                if (!cities.Contains(item.City + "," + item.State))
+                    cities.Add(item.City + "," + item.State);
+            }
+
+            return Ok(cities);
+        }
+
+        public IQueryable<Event> FindingEventsByDate(IQueryable<Event> root, String date)
+        {
+            DateTime dateTime = DateTime.Now.Date;
+
+            if (date != null && date != "All Days")
+            {
+                switch (date)
+                {
+                    case "Today":
+                        dateTime = DateTime.Now;
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime.Date) == 0);
+                        break;
+                    case "Tomorrow":
+                        var tomorrow = dateTime.AddDays(1);
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, tomorrow) == 0);
+                        break;
+                    case "This week":
+                        var thisWeekdaySun = dateTime.AddDays(-(7 - (int)dateTime.DayOfWeek));
+                        var comingSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+
+                        root = root.Where(c => (c.StartDate.Date >= thisWeekdaySun && c.StartDate.Date <= comingSun));
+
+                        break;
+                    case "This weekend":
+                        var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek);
+                        var weekendSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+                        root = root.Where(c => (c.StartDate.Date >= weekendFri && c.StartDate.Date <= weekendSun));
+                        break;
+                    case "Next week":
+                        var nextWeekSunday = dateTime.AddDays((7 - (int)dateTime.DayOfWeek) + 7);
+                        var comingSunday = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+
+                        root = root.Where(c => (c.StartDate.Date >= comingSunday && c.StartDate.Date <= nextWeekSunday));
+                        break;
+                    case "Next weekend":
+                        var nextWeekFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek + 7);
+                        var nextWeekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek + 7);
+
+                        root = root.Where(c => (c.StartDate.Date >= nextWeekFri && c.StartDate.Date <= nextWeekSun));
+
+                        break;
+                    case "This month":
+
+                        var thisMonth = dateTime.Month;
+                        root = root.Where(c => c.StartDate.Date.Month == thisMonth);
+                        break;
+
+                    case "Next month":
+                        var nextMonth = dateTime.AddMonths(1).Month;
+                        root = root.Where(c => c.StartDate.Date.Month == nextMonth);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            return root;
+        }
+
 
     }
 }
