@@ -1,6 +1,6 @@
 using System;
 
-namespace TokenServiceApi.Models
+namespace TokenServiceAPI.Models
 {
     public class ErrorViewModel
     {

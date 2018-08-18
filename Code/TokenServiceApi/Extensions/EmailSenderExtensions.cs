@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using TokenServiceApi.Services;
+using TokenServiceAPI.Services;
 
-namespace TokenServiceApi.Services
+namespace TokenServiceAPI.Services
 {
     public static class EmailSenderExtensions
     {

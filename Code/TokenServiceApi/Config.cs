@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace TokenServiceApi
+namespace TokenServiceAPI
 {
     public class Config
     {
@@ -15,7 +15,7 @@ namespace TokenServiceApi
         public static Dictionary<string, string> GetUrls(IConfiguration configuration)
         {
             Dictionary<string, string> urls = new Dictionary<string, string>();
-            // The line means I'm allowed to issue a token on behalf of Mvc project
+
             urls.Add("Mvc", configuration.GetValue<string>("MvcClient"));
 
             return urls;

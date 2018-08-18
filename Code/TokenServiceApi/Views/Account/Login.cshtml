@@ -37,6 +37,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-default">Log in</button>
+
                 </div>
                 <div class="form-group">
                     <p>
@@ -45,6 +46,10 @@
                     <p>
                         <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
                     </p>
+                    <div>
+                        Click <a class="PostLogoutRedirectUri" href="http://localhost:5200">here</a> to return to the
+                        <span>EventHub</span> application.
+                    </div>
                 </div>
             </form>
         </section>
