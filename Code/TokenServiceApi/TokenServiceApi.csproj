@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\catalog.component.css" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="IdentityServer4" Version="2.2.0" />
     <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

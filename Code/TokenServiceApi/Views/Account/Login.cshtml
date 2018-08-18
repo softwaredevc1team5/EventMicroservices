@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
+                    <button  type="submit" class="register-button">LOG IN</button>
                    
                 </div>
                 <div class="form-group">
@@ -44,7 +44,7 @@
                         <a asp-action="ForgotPassword">Forgot your password?</a>
                     </p>
                     <p>
-                        <a asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
+                        <a  asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
                     </p>
                     <div>
                         Click <a class="PostLogoutRedirectUri" href="http://localhost:5200">here</a> to return to the
@@ -55,7 +55,7 @@
         </section>
     </div>
     <div class="col-md-6 col-md-offset-2">
-        <section>
+        @*<section>
             <h4>Use another service to log in.</h4>
             <hr />
             @{
@@ -83,7 +83,7 @@
                     </form>
                 }
             }
-        </section>
+        </section>*@
     </div>
 </div>
 

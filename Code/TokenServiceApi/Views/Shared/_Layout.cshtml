@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/userDisplay.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,7 +18,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" >
+    @*<nav class="navbar navbar-inverse navbar-fixed-top" >
             <div class="container">
 
                 <div class="navbar-collapse collapse">
@@ -25,9 +26,20 @@
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
+        </nav>*@
 
-   
+    <header class="navbar navbar-light navbar-static-top">
+        <div class="container">
+            <article class="row">
+                <section class="col-lg-7 col-md-6 col-xs-12">                                   
+                   <a class="PostLogoutRedirectUri" href="http://localhost:5200"><img src="~/images/EventHubLogo.png" /></a>                 
+                </section>
+                @*@await Html.PartialAsync("_LoginPartial")*@
+            </article>
+        </div>
+    </header>
+
+
 
     <partial name="_CookieConsentPartial" />
 
