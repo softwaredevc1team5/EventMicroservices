@@ -126,11 +126,22 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}CityEvents/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
             }
 
-            public static string GetAllCities(string baseUri)
-            {
-                return $"{baseUri}EventCities";
+            //public static string GetAllCities(string baseUri)
+            //{
+            //    return $"{baseUri}EventCities";
 
+            //}
+
+
+            public static string GetAllCities(string baseUri)
+
+            {
+                return $"{baseUri}allEventsCities";
             }
+
+
+            //get all events by all filters by chitra
+
             //get all events by all filters by chitra
             public static string GetEventsByAllFilters(string baseUri,
 
@@ -158,11 +169,7 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventsByFilters{filterQs}?pageIndex={page}&pageSize={take}";
             }
 
-            public static string GetAllCities(string baseUri)
 
-            {
-                return $"{baseUri}allEventsCities";
-            }
         }
     }
 }

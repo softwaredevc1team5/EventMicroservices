@@ -237,7 +237,7 @@ namespace WebMvc.Services
         }
 
 
-        }
+      
 
        public async Task<EventCatalog> GetEventsByAllFilters(int page, int take, int? category, int? type, String date, String city)
         {
