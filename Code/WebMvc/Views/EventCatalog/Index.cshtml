@@ -61,16 +61,12 @@
             <div class="carousel-caption" role="option">
 
                 <p>
-
                     <h2>Find your next experience</h2>
-
                 </p>
 
             </div>
 
         </div>
-
-
 
     </div>
 
@@ -99,8 +95,6 @@
                 City: <input type="text" name="SearchEventCity" placeholder="Redmond">
                 Date: <input type="text" name="SearchEventDate" placeholder="mm-dd-yyyy" pattern="\d{2}-\d{2}-\d{4}" title="mm-dd-yyyy">
                 <input type="submit" value="Submit" />
-
-
             </p>
         </form>
     </div>
@@ -114,7 +108,7 @@
 
             <label class="esh-event-label" data-title="eventcategory">
 
-                <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-event-filter"></select>
+                <select asp-for="@Model.EventCategoryFilterApplied"  asp-items="@Model.EventCategories" class="esh-event-filter"></select>
 
             </label>
 
@@ -170,7 +164,6 @@
         <div class="esh-catalog-items row">
 
             THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
-
         </div>
 
     }

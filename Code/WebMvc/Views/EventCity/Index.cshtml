@@ -1,0 +1,113 @@
+﻿
+
+@{
+    ViewData["Title"] = "Event";
+    @model WebMvc.ViewModels.EventCityIndexViewModel
+}
+@*
+    <section class="search-section">
+        <div class="container">
+            <form asp-action="CityFilter" asp-controller="EventCity" method="post" style="height: 50px; padding :30px">
+                <p>
+                    Browsing in
+                    <select asp-for="@Model.CityFilterName" asp-items="@Model.Cities" class="esh-eventcity-filter"></select>
+                    <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
+                </p>
+            </form>
+        </div>
+    </section>*@
+@*
+    <div class="container" style="width:100%;height:50%;">
+        @if (Model.CityItems.Count() > 0)
+        {
+            @foreach (var catalogItem in Model.CityItems)
+            {
+                <div style="float:left; width:50%;height:50%">
+                    <br />
+                    Things to do in
+                    <h4><span>@catalogItem.CityName</span></h4>
+                    <br />@catalogItem.CityDescription
+                    <br />
+                </div>
+                <div style="float:right; width:50%;height:50%; ">
+                    <img src="@catalogItem.CityImageUrl" alt="City Picture" class="eventImg img-fluid">
+                </div>
+            }
+        }
+        else
+        {
+            <div class="esh-catalog-items row">
+                THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+            </div>
+        }
+    </div>*@
+
+
+<div class="container" style="width:100%;height:100%;">
+
+
+    
+    
+    @if (Model.CityItems.Count() > 0)
+    {
+       
+    <div style="float:left; width:50%;height:100%">
+        <section class="search-section">
+   
+    <form asp-action="Index" asp-controller="EventCity" method="post" style="height: 50px; padding :30px">
+        <p>
+            <img aligh="center"src=@Url.Content("~/images/locationIcon1.png") style="height: 50px; width:50px" alt="Location" >
+            Browsing in
+            <select asp-for="@Model.CityFilterApplied" style="height: 50px; width:50px" name="city" asp-items="@Model.Cities" class="esh-eventcity-filter"></select>
+            <input class="esh-event-send" style="height: 50px; width:50px" type="image" src="~/images/arrow-right.svg" />
+        </p>
+    </form>
+    </section>
+    <br /><br /><br />
+    Things to do in
+    @foreach (var catalogItem in Model.CityItems)
+    {
+        <h2>@catalogItem.CityName</h2><br />
+        <br />@catalogItem.CityDescription
+        <br />
+    }
+</div>
+    <div style="float:right; width:50%;height:100%; ">
+        @foreach (var catalogItem in Model.CityItems)
+        {
+            <img src="@catalogItem.CityImageUrl" alt="City Picture" class="eventImg img-fluid">
+        }
+    </div>
+           
+        }
+        else
+        {
+        <div class="esh-catalog-items row">
+            THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+        </div>
+        }
+    </div>
+
+    <div class="container">
+                <h2>Popular Events</h2>
+                @if (Model.Events.Count() > 0)
+                {
+                    @Html.Partial("_pagination", Model.PaginationInfo)
+                    <div class="esh-event-items row">
+                        @foreach (var catalogItem in Model.Events)
+                        {
+                           <div class="esh-event-item col-md-4">
+                                     @Html.Partial("_event", catalogItem)
+                           </div>
+                        }
+                    </div>
+                    @Html.Partial("_pagination", Model.PaginationInfo)
+                }
+                else
+                {
+                    <div class="esh-catalog-items row">
+                        THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+                    </div>
+                }
+       </div>
+

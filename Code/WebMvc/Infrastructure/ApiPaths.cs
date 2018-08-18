@@ -89,6 +89,48 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventTypes";
 
             }
+            //EventCity ApiPaths
+            public static string GetCatalogEventsInCity(string baseUri, string city)
+            {
+                return $"{baseUri}Events/withcity/{city}";
+            }
+            public static string GetCityDescription(string baseUri, string city)
+            {
+
+                return $"{baseUri}City/withcityname/{city}?pageSize=6&pageIndex=0";
+            }
+
+            //Get city with cityId or cityName
+            public static string GetCityDescription(string baseUri,int? cityFilterApplied,string city,int page,int take)
+            {
+                var filterQs = string.Empty;
+
+                if (cityFilterApplied.HasValue || city != null)
+
+                {
+                    
+                    var cityFilterQs = (cityFilterApplied.HasValue) ? cityFilterApplied.Value.ToString() : "null";
+
+                    var cityQs =   city??"null";
+
+                    filterQs = $"City/withId/{cityFilterQs}/cityname/{cityQs}";
+
+                }
+                return $"{baseUri}{filterQs}?pageSize={take}&pageIndex={page}";
+               // return $"{baseUri}City/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
+            }
+            //Get cityEvents with cityId or cityName
+            //[action]/withId/{cityId:int}/cityname/{cityName}
+            public static string GetEventsWithCityId(string baseUri, int? cityFilterApplied,string city, int page, int take)
+            {
+                return $"{baseUri}CityEvents/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
+            }
+
+            public static string GetAllCities(string baseUri)
+            {
+                return $"{baseUri}EventCities";
+
+            }
 
         }
     }

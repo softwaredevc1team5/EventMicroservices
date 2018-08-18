@@ -12,12 +12,9 @@ namespace WebMvc.Controllers
     {
         private IEventCatalogService _ecatalogSvc;
 
-
-
         public EventCatalogController(IEventCatalogService ecatalogSvc) =>
              
             _ecatalogSvc = ecatalogSvc;
-
 
 
         public async Task<IActionResult> Index(
@@ -44,7 +41,6 @@ namespace WebMvc.Controllers
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
             {
-
                 Events = ecatalog.Data,
 
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
@@ -56,12 +52,9 @@ namespace WebMvc.Controllers
                 EventCategoryFilterApplied = EventCategoryFilterApplied ?? 0,
 
                 EventTypeFilterApplied = EventTypeFilterApplied ?? 0,
-
-                
+   
                 PaginationInfo = new PaginationInfo()
-
                 {
-
                     ActualPage = page ?? 0,
 
                     ItemsPerPage = itemsPage, //catalog.Data.Count,
@@ -69,9 +62,7 @@ namespace WebMvc.Controllers
                     TotalItems = ecatalog.Count,
 
                     TotalPages = (int)Math.Ceiling(((decimal)ecatalog.Count / itemsPage))
-
                 }
-
             };
 
             //update the categoryname of allevents in vm
@@ -83,15 +74,11 @@ namespace WebMvc.Controllers
             }
 
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
-
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
-
 
             return View(vm);
 
         }
-
-
         public  IActionResult Search(string SearchEventTitle, string SearchEventCity, string SearchEventDate)
         {
             //ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
@@ -100,7 +87,7 @@ namespace WebMvc.Controllers
             if (SearchEventTitle == null && SearchEventDate == null && SearchEventCity != null)
             {
                 //bhuvana
-                return RedirectToAction("Index", "CityDescription", new { city = SearchEventCity });
+                return RedirectToAction("Index", "EventCity", new { city = SearchEventCity });
             }
             else if (SearchEventTitle == null && SearchEventDate == null && SearchEventCity == null)
             {

@@ -22,7 +22,14 @@ namespace WebMvc.Services
        Task<EventCategoryCatalog> GetEventCategoriesWithImage(int page, int take);
 
        Task<IEnumerable<SelectListItem>> GetEventTypes();
-
+        
         Task<Event> GetEventItem(int EventId);
+
+        //EventCities
+        Task<EventCityCatalog> GetCityInfo(string city);
+        Task<EventCatalog> GetEventsInCity(string city);
+        Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city,int page,int take);
+        Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take);
+        Task<IEnumerable<SelectListItem>> GetCities();
     }
 }
