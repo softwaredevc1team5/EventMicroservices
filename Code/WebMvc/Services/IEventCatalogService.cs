@@ -10,8 +10,12 @@ namespace WebMvc.Services
     public interface IEventCatalogService
 
     {
-       
-       Task<EventCatalog> GetEvents(int page, int take, int? category, int? type);
+        //chitra
+        Task<EventCatalog> GetEventsByAllFilters(int page, int take, int? brand, int? type, String date, String city);
+        Task<IEnumerable<SelectListItem>> GetAllCities();
+        IEnumerable<SelectListItem> GetEventDates();
+
+        Task<EventCatalog> GetEvents(int page, int take, int? category, int? type);
 
        Task<EventCatalog> GetEventsWithTitle(string title, int page, int take);
 
