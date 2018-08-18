@@ -91,21 +91,6 @@
     </a>
 
 </div>
-<section class="search-section">
-    <div class="container">
-        <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
-            <p>
-                Title: <input type="text" name="SearchEventTitle" placeholder="Washington Jazz Fest">
-                City: <input type="text" name="SearchEventCity" placeholder="Redmond">
-                Date: <input type="text" name="SearchEventDate" placeholder="mm-dd-yyyy" pattern="\d{2}-\d{2}-\d{4}" title="mm-dd-yyyy">
-                <input type="submit" value="Submit" />
-
-
-            </p>
-        </form>
-    </div>
-</section>
-
 <section class="esh-event-filters">
 
     <div class="container">
@@ -131,6 +116,22 @@
     </div>
 
 </section>
+<section class="search-section">
+    <div class="container">
+        <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
+            <p>
+                Title: <input type="text" name="SearchEventTitle" placeholder="Washington Jazz Fest">
+                City: <input type="text" name="SearchEventCity" placeholder="Redmond">
+                Date: <input type="text" name="SearchEventDate" placeholder="mm-dd-yyyy" pattern="\d{2}-\d{2}-\d{4}" title="mm-dd-yyyy">
+                <input type="submit" value="Submit" />
+
+
+            </p>
+        </form>
+    </div>
+</section>
+
+
 
 <div class="container">
 
