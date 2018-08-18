@@ -17,7 +17,7 @@
     </environment>
 </head>
 <body>
-    @*<nav class="navbar navbar-inverse navbar-fixed-top" >
+    <nav class="navbar navbar-inverse navbar-fixed-top" >
             <div class="container">
 
                 <div class="navbar-collapse collapse">
@@ -25,30 +25,9 @@
                     <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>*@
+        </nav>
 
-    <header class="navbar navbar-light navbar-static-top">
-        <div class="container">
-            <article class="row">
-                <section class="col-lg-7 col-md-6 col-xs-12">
-                    <a class="navbar-brand" routerLink="catalog">
-                        <a asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="~/images/logo-4.png" />
-                        </a>
-                    </a>
-                </section>
-                @await Html.PartialAsync("_LoginPartial")
-            </article>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                    <li><a asp-area="" asp-controller="EventCatalog" asp-action="About">About</a></li>
-
-                </ul>
-
-            </div>
-        </div>
-    </header>
+   
 
     <partial name="_CookieConsentPartial" />
 
