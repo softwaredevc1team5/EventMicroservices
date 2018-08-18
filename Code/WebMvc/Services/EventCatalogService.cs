@@ -155,17 +155,11 @@ namespace WebMvc.Services
 
             var getEventTypesUri = ApiPaths.EventCatalog.GetAllEventTypes(_remoteServiceBaseUrl);
 
-
-
             var dataString = await _apiClient.GetStringAsync(getEventTypesUri);
 
-
-
             var items = new List<SelectListItem>
-
             {
-
-                new SelectListItem() { Value = null, Text = "All", Selected = true }
+                   new SelectListItem() { Value = null, Text = "All", Selected = true }
 
             };
 
@@ -190,7 +184,7 @@ namespace WebMvc.Services
         }
 
         //EventCity Services
-        public async Task<EventCityCatalog> GetCityInfo(int? city)
+        public async Task<EventCityCatalog> GetCityInfo( string city)
         {
             var allEventsCityUri = ApiPaths.EventCatalog.GetCityDescription(_remoteServiceBaseUrl, city);
             var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
@@ -199,15 +193,29 @@ namespace WebMvc.Services
             return response;
 
         }
-        public async Task<EventCityCatalog> GetEventsInCity()
+        public async Task<EventCatalog> GetEventsInCity(string city)
         {
-            var allEventsCityUri = ApiPaths.EventCatalog.GetCatalogEventsInCity(_remoteServiceBaseUrl, "Redmond");
+            var allEventsCityUri = ApiPaths.EventCatalog.GetCatalogEventsInCity(_remoteServiceBaseUrl, city);
             var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
-            var response = JsonConvert.DeserializeObject<EventCityCatalog>(dataString);
+            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
             return response;
 
         }
-
+        public async Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city, int page, int take)
+        {
+            var allEventsCityUri = ApiPaths.EventCatalog.GetCityDescription(_remoteServiceBaseUrl,cityFilterApplied,city,page,take);
+            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
+            var response = JsonConvert.DeserializeObject<EventCityCatalog>(dataString);
+            return response;
+        }
+        
+        public async Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take)
+        {
+            var allEventsCityUri = ApiPaths.EventCatalog.GetEventsWithCityId(_remoteServiceBaseUrl, cityFilterApplied,city, page, take);
+            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
+            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
+            return response;
+        }
         public async Task<IEnumerable<SelectListItem>> GetCities()
         {
             var getCitiesUri = ApiPaths.EventCatalog.GetAllCities(_remoteServiceBaseUrl);

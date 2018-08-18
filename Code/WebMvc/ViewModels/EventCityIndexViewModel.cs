@@ -7,11 +7,13 @@ using WebMvc.Models;
 
 namespace WebMvc.ViewModels
 {
-    public class CityIndexViewModel
+    public class EventCityIndexViewModel
     {
+        public IEnumerable<Event> Events { get; set; }
         public IEnumerable<EventCity> CityItems { get; set; }
         public IEnumerable<SelectListItem> Cities { get; set; }
         public int? CityFilterApplied { get; set; }
+        public string CityFilterName { get; set; }
       //  public string? SelectedCityFilter { get; set; }
         public PaginationInfo PaginationInfo { get; set; }
     }

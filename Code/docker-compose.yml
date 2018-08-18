@@ -41,43 +41,6 @@ services:
       depends_on:
          - eventcatalog
  
-   wishlist:
-      build:
-         context: .\WishListAPI
-         dockerfile: Dockerfile
-      image: event/wishlistapi
-      environment:
-         DatabaseServer: mssqlserver
-         DatabaseName: wishlistdb
-         DatabaseUser: sa
-         DatabaseUserPassword: ProductApi(!)
-      container_name: wishlistapi
-      ports:
-         - "55400:80"
-      networks:
-         - backend
-         - frontend
-      depends_on:
-         - mssqlserver
-       
-   eventticket:
-      build:
-         context: .\EventTicketAPI
-         dockerfile: Dockerfile
-      image: event/ticketapi
-      environment:
-         DatabaseServer: mssqlserver
-         DatabaseName: ticketdb
-         DatabaseUser: sa
-         DatabaseUserPassword: ProductApi(!)
-      container_name: eventticketapi
-      ports:
-         - "55401:80"
-      networks:
-         - backend
-         - frontend
-      depends_on:
-         - mssqlserver
 
    mssqlserver:
       image: "microsoft/mssql-server-linux:latest"

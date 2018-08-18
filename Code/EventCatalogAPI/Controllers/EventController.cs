@@ -235,21 +235,108 @@ namespace EventCatalogAPI.Controllers
             return Ok(items);
         }
 
+        
+                [HttpGet]
+                [Route("[action]/withId/{cityId:int}/cityname/{cityName}")]
+                public async Task<IActionResult> City
+                     (int? cityId,string cityName,
+                     [FromQuery] int pageSize = 6,
+                     [FromQuery] int pageIndex = 0)
+                {
+
+                    var root = (IQueryable<EventCity>)_eventCatalogContext.EventCities;
+                    if (cityId.HasValue)
+                    {
+                        root = root.Where(c => c.Id == cityId);
+                    }
+                    if(cityName != null)
+                             root = root.Where(c => c.CityName.StartsWith(cityName));
+                  
+                        
+
+                    var totalItems = await root
+                                        .LongCountAsync();
+                    var itemsOnPage = await root
+                                        .OrderBy(c => c.CityName)
+                                        .Skip(pageSize * pageIndex)
+                                        .Take(pageSize)
+                                        .ToListAsync();
+                    itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+                    var model = new PaginatedEventViewModel<EventCity>
+                            (pageIndex, pageSize, totalItems, itemsOnPage);
+
+                    return Ok(model);
+                }
+        //CityEvents
+        [HttpGet]
+        [Route("[action]/withId/{cityId:int}/cityname/{cityName}")]
+        public async Task<IActionResult> CityEvents
+                     (int? cityId, string cityName,
+                     [FromQuery] int pageSize = 6,
+                     [FromQuery] int pageIndex = 0)
+        {
+
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+            if (cityId.HasValue)
+            {
+                root = root.Where(c => c.Id == cityId);
+            }
+            if (cityName != null)
+            {
+                root = root.Where(c => c.City.StartsWith(cityName));
+            }
+
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
 
         [HttpGet]
-        [Route("[action]/withId/{cityId:int}")]
-        public async Task<IActionResult> City
-             (int? cityId,
-             [FromQuery] int pageSize = 6,
-             [FromQuery] int pageIndex = 0)
+        [Route("Events/withcityId/{cityId:minlength(1)}")]
+        public async Task<IActionResult> EventsWithCityId(int? cityId,
+          [FromQuery] int pageSize = 6,
+          [FromQuery] int pageIndex = 0)
         {
-            
             var root = (IQueryable<EventCity>)_eventCatalogContext.EventCities;
             if (cityId.HasValue)
             {
                 root = root.Where(c => c.Id == cityId);
             }
+            var totalItems = await root.LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
 
+            return Ok(model);
+        }
+        [HttpGet]
+        [Route("[action]/withId/{cityId:int}")]
+        public async Task<IActionResult> City
+                     (int? cityId, 
+                     [FromQuery] int pageSize = 6,
+                     [FromQuery] int pageIndex = 0)
+        {
+
+            var root = (IQueryable<EventCity>)_eventCatalogContext.EventCities;
+            if (cityId.HasValue)
+            {
+                root = root.Where(c => c.Id == cityId);
+            }
+            
             var totalItems = await root
                                 .LongCountAsync();
             var itemsOnPage = await root
@@ -263,8 +350,27 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
+        [HttpGet]
+        [Route("[action]/withcityname/{city:minlength(1)}")]
+        public async Task<IActionResult>City(string city,
+                       [FromQuery] int pageSize = 6,
+                        [FromQuery] int pageIndex = 0)
+        {
+                 var totalItems = await _eventCatalogContext.EventCities
+                                      .Where(c => c.CityName.StartsWith(city))
+                                      .LongCountAsync();
+                 var itemsOnPage = await _eventCatalogContext.EventCities
+                                      .Where(c => c.CityName.StartsWith(city))
+                                      .OrderBy(c => c.CityName)
+                                      .Skip(pageSize * pageIndex)
+                                      .Take(pageSize)
+                                      .ToListAsync();
+                 itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+                 var model = new PaginatedEventViewModel<EventCity>
+                      (pageIndex, pageSize, totalItems, itemsOnPage);
 
-        
+                 return Ok(model);
+        }
 
         [HttpPost]
         [Route("events")]
