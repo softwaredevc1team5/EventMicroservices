@@ -96,7 +96,7 @@ namespace WebMvc.Infrastructure
             {
                 return $"{baseUri}City/withcityname/{city}?pageSize=6&pageIndex=0";
             }
-            public static string GetAllCities(string baseUri)
+            public static string GetAllEventCities(string baseUri)
             {
                 return $"{baseUri}EventCities";
 
