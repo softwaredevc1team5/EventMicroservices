@@ -6,19 +6,7 @@
 
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-
-    <ol class="carousel-indicators">
-
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-
-    </ol>
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="7000">
 
     <div class="carousel-inner" role="listbox">
 
@@ -85,6 +73,33 @@
         <span class="sr-only">Next</span>
 
     </a>
+    <section class="esh-event-filters">
+
+        <div class="container">
+
+            <form asp-action="Index" asp-controller="EventCatalog" method="post">
+
+                <label class="esh-event-label" data-title="eventcategory">
+
+                    <select asp-for="@Model.EventCategoryFilterApplied" asp-items="@Model.EventCategories" class="esh-event-filter"></select>
+
+                </label>
+
+                <label class="esh-event-label" data-title="eventtype">
+
+                    <select asp-for="@Model.EventTypeFilterApplied" asp-items="@Model.EventTypes" class="esh-event-filter"></select>
+
+                </label>
+
+                <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
+
+            </form>
+
+        </div>
+
+    </section>
+
+
 
 </div>
 <section class="search-section">
@@ -98,32 +113,6 @@
             </p>
         </form>
     </div>
-</section>
-
-<section class="esh-event-filters">
-
-    <div class="container">
-
-        <form asp-action="Index" asp-controller="EventCatalog" method="post">
-
-            <label class="esh-event-label" data-title="eventcategory">
-
-                <select asp-for="@Model.EventCategoryFilterApplied"  asp-items="@Model.EventCategories" class="esh-event-filter"></select>
-
-            </label>
-
-            <label class="esh-event-label" data-title="eventtype">
-
-                <select asp-for="@Model.EventTypeFilterApplied" asp-items="@Model.EventTypes" class="esh-event-filter"></select>
-
-            </label>
-
-            <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
-
-        </form>
-
-    </div>
-
 </section>
 
 <div class="container">
@@ -152,8 +141,6 @@
         </div>
 
 
-
-        @Html.Partial("_pagination", Model.PaginationInfo)
 
     }
 
@@ -200,11 +187,7 @@
                 }
 
             </div>
-
-
-
            
-
         }
 
         else
