@@ -12,7 +12,7 @@ namespace WebMvc.ViewModels
         public IEnumerable<Event> Events { get; set; }
         public IEnumerable<EventCity> CityItems { get; set; }
         public IEnumerable<SelectListItem> Cities { get; set; }
-        public int? CityFilterApplied { get; set; }
+        public string CityFilterApplied { get; set; }
         public string CityFilterName { get; set; }
       //  public string? SelectedCityFilter { get; set; }
         public PaginationInfo PaginationInfo { get; set; }

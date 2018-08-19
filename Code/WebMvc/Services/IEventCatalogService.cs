@@ -28,8 +28,9 @@ namespace WebMvc.Services
         //EventCities
         Task<EventCityCatalog> GetCityInfo(string city);
         Task<EventCatalog> GetEventsInCity(string city);
-        Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city,int page,int take);
-        Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take);
         Task<IEnumerable<SelectListItem>> GetCities();
+       /* Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city,int page,int take);
+        Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take);*/
+        
     }
 }
