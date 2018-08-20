@@ -19,7 +19,3 @@ Video:
 	- Thing to do in a City
 	- Search Anything
 	
-
-# Assingment 3a
-
-Video: https://youtu.be/AVkO3VDDAhI 
