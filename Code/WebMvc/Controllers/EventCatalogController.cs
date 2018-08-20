@@ -23,7 +23,7 @@ namespace WebMvc.Controllers
             int? EventTypeFilterApplied, int? page)
         {
 
-            int itemsPage = 10;
+            int itemsPage = 9;
 
             //get events from service who goes thr api path to get to eventcatalog api to get events from EventDB
             var ecatalog = await
@@ -56,9 +56,9 @@ namespace WebMvc.Controllers
                 {
                     ActualPage = page ?? 0,
 
-                    ItemsPerPage = itemsPage, //catalog.Data.Count,
-
                     TotalItems = ecatalog.Count,
+                    ItemsPerPage = ecatalog.Count < itemsPage ? ecatalog.Count : itemsPage, //catalog.Data.Count,
+
 
                     TotalPages = (int)Math.Ceiling(((decimal)ecatalog.Count / itemsPage))
                 }
@@ -119,7 +119,7 @@ namespace WebMvc.Controllers
         public async Task<IActionResult> EventSearchByCategory(int? EventCategoryFilterApplied, int? EventTypeFilterApplied, int? page, String EventDateFilterApplied, String EventCityFilterApplied)
         {
 
-            int itemsPage = 10;
+            int itemsPage = 9;
             var ecatalog = await _ecatalogSvc.GetEventsByAllFilters(page ?? 0, itemsPage, EventCategoryFilterApplied, EventTypeFilterApplied, EventDateFilterApplied, EventCityFilterApplied);
 
             var vm = new EventFiltersCatalogViewModel()
@@ -144,9 +144,8 @@ namespace WebMvc.Controllers
 
                     ActualPage = page ?? 0,
 
-                    ItemsPerPage = itemsPage, //catalog.Data.Count,
-
                     TotalItems = ecatalog.Count,
+                    ItemsPerPage = ecatalog.Count < itemsPage ? ecatalog.Count : itemsPage, //catalog.Data.Count,
 
                     TotalPages = (int)Math.Ceiling(((decimal)ecatalog.Count / itemsPage))
 

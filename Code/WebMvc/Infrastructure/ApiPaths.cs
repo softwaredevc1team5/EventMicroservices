@@ -25,7 +25,7 @@ namespace WebMvc.Infrastructure
 
                 {
 
-                    var eventcategoryQs = (category.HasValue) ? type.Value.ToString() : "null";
+                    var eventcategoryQs = (category.HasValue) ? category.Value.ToString() : "null";
 
                     var eventtypeQs = (type.HasValue) ? type.Value.ToString() : "null";
 

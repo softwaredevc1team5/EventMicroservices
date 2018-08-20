@@ -26,7 +26,7 @@ namespace WebMvc.Controllers
         {
 
 
-            int itemsPage = 10;
+            int itemsPage = 9;
             
             var ecatalog = await
 
@@ -58,9 +58,8 @@ namespace WebMvc.Controllers
 
                     ActualPage = page ?? 0,
 
-                    ItemsPerPage = itemsPage, //catalog.Data.Count,
-
                     TotalItems = ecatalog.Count,
+                    ItemsPerPage = ecatalog.Count < itemsPage ? ecatalog.Count : itemsPage, //catalog.Data.Count,
 
                     TotalPages = (int)Math.Ceiling(((decimal)ecatalog.Count / itemsPage))
 
