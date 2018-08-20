@@ -462,7 +462,8 @@ namespace EventCatalogAPI.Controllers
             {
                 var citystr = eventCity.Split(',')[0];
                 var statestr = eventCity.Split(',')[1];
-                root = root.Where(c => c.City == citystr && c.State == statestr);
+                root = root.Where(c => c.City == citystr );
+                //root = root.Where(c => c.City == citystr && c.State == statestr);
             }
 
             if (eventDate != "null" && eventDate != "All Days")

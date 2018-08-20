@@ -20,10 +20,12 @@ namespace WebMvc.Controllers
 
             int? EventCategoryFilterApplied,
 
-            int? EventTypeFilterApplied, int? page)
+            int? EventTypeFilterApplied, int? page, String EventDateFilterApplied)
         {
 
             int itemsPage = 10;
+
+            
 
             //get events from service who goes thr api path to get to eventcatalog api to get events from EventDB
             var ecatalog = await
@@ -40,7 +42,10 @@ namespace WebMvc.Controllers
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
             {
+
                 Events = ecatalog.Data,
+                EventDates = _ecatalogSvc.GetEventDates(),
+                EventDateFilterApplied = EventDateFilterApplied,
 
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
 
@@ -80,6 +85,7 @@ namespace WebMvc.Controllers
         }
         public  IActionResult Search(string SearchEventTitle, string SearchEventCity, string SearchEventDate)
         {
+            //var SearchEventDate = EventDateFilterApplied;
             //ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
             //DateTime SearchEventDate = DateTime.Parse(strSearchEventDate,  MM-dd-yyyy);
 
@@ -92,6 +98,10 @@ namespace WebMvc.Controllers
             {
                 //uer did not provide anything
                 ViewData["Message"] = $"PLEASE ENTER TITLE OR CITY OR DATE";
+            }
+            else if(SearchEventTitle != null || SearchEventDate != null && SearchEventCity != null)
+            {
+                return RedirectToAction("EventSearchByCategory", "EventCatalog", new { city = SearchEventCity, EventDateFilterApplied = SearchEventDate });
             }
             else
             {

@@ -32,7 +32,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://10.0.75.1:5020
+         IdentityUrl: http://192.168.149.17:5020
       container_name: webevents
       ports:
          - "5200:80"
