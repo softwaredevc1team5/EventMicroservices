@@ -1,13 +1,7 @@
 ![alt text](https://github.com/softwaredevc1team5/EventMicroservices/blob/LastAssignment3b/Code/WebMvc/wwwroot/images/EventHubLogo2.png)
 
-
-# Assingment 3a
-
-Video: https://youtu.be/AVkO3VDDAhI 
-
-
-
 # Assignment 3b
+Video: 
 
 - All the project is Dockerized we are using 6 containers:
 	- eventcatalog
@@ -25,3 +19,7 @@ Video: https://youtu.be/AVkO3VDDAhI
 	- Thing to do in a City
 	- Search Anything
 	
+
+# Assingment 3a
+
+Video: https://youtu.be/AVkO3VDDAhI 
