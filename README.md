@@ -1,7 +1,7 @@
 ![alt text](https://github.com/softwaredevc1team5/EventMicroservices/blob/LastAssignment3b/Code/WebMvc/wwwroot/images/EventHubLogo2.png)
 
 # Assignment 3b
-Video: 
+Video: https://youtu.be/7K1khtbUwTM
 
 - All the project is Dockerized we are using 6 containers:
 	- eventcatalog
