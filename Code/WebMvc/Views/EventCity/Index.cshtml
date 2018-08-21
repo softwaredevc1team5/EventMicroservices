@@ -4,50 +4,9 @@
     ViewData["Title"] = "Event";
     @model WebMvc.ViewModels.EventCityIndexViewModel
 }
-@*
-    <section class="search-section">
-        <div class="container">
-            <form asp-action="CityFilter" asp-controller="EventCity" method="post" style="height: 50px; padding :30px">
-                <p>
-                    Browsing in
-                    <select asp-for="@Model.CityFilterName" asp-items="@Model.Cities" class="esh-eventcity-filter"></select>
-                    <input class="esh-event-send" type="image" src="~/images/arrow-right.svg" />
-                </p>
-            </form>
-        </div>
-    </section>*@
-@*
-    <div class="container" style="width:100%;height:50%;">
-        @if (Model.CityItems.Count() > 0)
-        {
-            @foreach (var catalogItem in Model.CityItems)
-            {
-                <div style="float:left; width:50%;height:50%">
-                    <br />
-                    Things to do in
-                    <h4><span>@catalogItem.CityName</span></h4>
-                    <br />@catalogItem.CityDescription
-                    <br />
-                </div>
-                <div style="float:right; width:50%;height:50%; ">
-                    <img src="@catalogItem.CityImageUrl" alt="City Picture" class="eventImg img-fluid">
-                </div>
-            }
-        }
-        else
-        {
-            <div class="esh-catalog-items row">
-                THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
-            </div>
-        }
-    </div>*@
-
 
 <div class="container" style="width:100%;height:100%;">
 
-
-    
-    
     @if (Model.CityItems.Count() > 0)
     {
        
