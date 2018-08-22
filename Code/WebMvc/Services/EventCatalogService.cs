@@ -92,7 +92,7 @@ namespace WebMvc.Services
 
         {
 
-            var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type);
+             var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type);
 
             var dataString = await _apiClient.GetStringAsync(alleventsUri);
 
