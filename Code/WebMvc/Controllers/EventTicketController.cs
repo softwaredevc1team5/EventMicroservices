@@ -8,5 +8,10 @@ namespace WebMvc.Controllers
 {
     public class EventTicketController:Controller
     {
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
