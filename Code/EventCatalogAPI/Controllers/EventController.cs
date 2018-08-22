@@ -460,9 +460,9 @@ namespace EventCatalogAPI.Controllers
             }
             if (eventCity != "null" && eventCity != "All")
             {
-                var citystr = eventCity.Split(',')[0];
-                var statestr = eventCity.Split(',')[1];
-                root = root.Where(c => c.City == citystr );
+               // var citystr = eventCity.Split(',')[0];
+                //var statestr = eventCity.Split(',')[1];
+                root = root.Where(c => c.City.ToLower() == eventCity.ToLower() );
                 //root = root.Where(c => c.City == citystr && c.State == statestr);
             }
 

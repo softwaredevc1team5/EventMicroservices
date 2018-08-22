@@ -125,14 +125,14 @@ namespace WebMvc.Infrastructure
             {
                 return $"{baseUri}CityEvents/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
             }
+            
+            public static string GetAllEventCities(string baseUri)
+            {
+                return $"{baseUri}EventCities";
 
-            //public static string GetAllCities(string baseUri)
-            //{
-            //    return $"{baseUri}EventCities";
+            }
 
-            //}
-
-
+            //chitra
             public static string GetAllCities(string baseUri)
 
             {
