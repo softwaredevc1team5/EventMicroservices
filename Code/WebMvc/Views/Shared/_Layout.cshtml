@@ -34,20 +34,20 @@
 </head>
 <body>
     <header class="navbar navbar-light navbar-static-top">
-            <div class="container">
-                <article class="row">
-                    <section class="col-lg-7 col-md-6 col-xs-12">
-                        <a class="navbar-brand" routerLink="catalog">
-                            <a asp-area="" asp-controller="EventCatalog" asp-action="Index">
-                                <img src="~/images/EventHubLogo.png" />
-                            </a>
+        <div class="container">
+            <article class="row">
+                <section class="col-lg-7 col-md-6 col-xs-12">
+                    <a class="navbar-brand" routerLink="catalog">
+                        <a asp-area="" asp-controller="EventCatalog" asp-action="Index">
+                            <img src="~/images/EventHubLogo.png" />
                         </a>
-                    </section>
-         @await Html.PartialAsync("_LoginPartial")
-                </article>
-            </div>
-        </header>
-   
+                    </a>
+                </section>
+                @await Html.PartialAsync("_LoginPartial")
+            </article>
+        </div>
+    </header>
+
 
 
 
@@ -67,6 +67,12 @@
         </footer>
     </div>
 
+
+    <a class="navbar-brand" routerLink="catalog">
+        <a asp-area="" asp-controller="EventTicket" asp-action="Index">
+            <img src="~/images/EventHubLogo.png" />
+        </a>
+    </a>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
