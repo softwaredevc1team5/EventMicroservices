@@ -41,7 +41,7 @@ namespace WebMvc.Services
                 };
             }
             var basketItem = wishlist.Items
-                .Where(p => p.Id == product.Id)
+                .Where(p => p.productId == product.productId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
@@ -71,7 +71,7 @@ namespace WebMvc.Services
 
             var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, user.Id);
             _logger.LogInformation(getBasketUri);
-            // var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
+           // var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
             var dataString = "";
             _logger.LogInformation(dataString);
 

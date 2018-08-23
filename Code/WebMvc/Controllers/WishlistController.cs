@@ -47,7 +47,7 @@ namespace WebMvc.Controllers
                         EventTitle = eventDetails.EventTitle,
                         ImageUrl = eventDetails.ImageUrl,
                         TicketPrice = eventDetails.TicketPrice,
-                        EventId = eventDetails.Id,
+                        City = eventDetails.City,
                         TicketType=eventDetails.TicketType
                     };
                     await _wishlistService.AddItemToWishlist(user, product);

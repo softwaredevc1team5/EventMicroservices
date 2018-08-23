@@ -10,9 +10,9 @@ namespace WishListAPI.Model
         public string BuyerId { get; set; }
         public List<WishlistItems> Items { get; set; }
 
-        public Wishlist(string cartId)
+        public Wishlist(string whishlistId)
         {
-            BuyerId = cartId;
+            BuyerId = whishlistId;
             Items = new List<Model.WishlistItems>();
         }
     }
