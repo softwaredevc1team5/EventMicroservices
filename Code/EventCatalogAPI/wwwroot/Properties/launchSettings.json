@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:5200/",
+      "applicationUrl": "http://localhost:55399/",
       "sslPort": 0
     }
   },
@@ -11,21 +11,19 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "WebMvc": {
+    "EventCatalogAPI": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "api/events",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "Docker": {
-        "commandName": "Docker",
-        "launchBrowser": true,
-        "launchUrl": "{Scheme}://localhost:{ServicePort}"
-      }
+      "applicationUrl": "http://localhost:55399/"
     }
   }
 }

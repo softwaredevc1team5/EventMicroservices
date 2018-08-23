@@ -45,6 +45,7 @@ namespace WebMvc
             services.AddTransient<IEventCatalogService, EventCatalogService>();
 
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+            services.AddTransient<IWishlistService, WishlistService>();
             //services.AddTransient<ICartService, CartService>();
 
 

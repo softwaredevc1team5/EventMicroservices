@@ -1,0 +1,18 @@
+﻿@using WebMvc.Services
+@using WebMvc.ViewModels
+
+@*@model  WebMvc.Models.wishlistModels.Wishlist*@
+@inject IIdentityService<ApplicationUser> identityService
+
+@{
+    ViewData["Title"] = "My Wishlist";
+}
+
+<form method="post" id="wishlistForm">
+    <div class="esh-basket">
+        @Html.Partial("_Header", new List<Header>() {
+            new Header() { Controller = "EventCatalog", Text = "Back to events" } })
+
+        @await Component.InvokeAsync("WishlistList", new { user = identityService.Get(User) })
+    </div>
+</form>
