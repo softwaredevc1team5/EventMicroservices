@@ -70,7 +70,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://172.20.60.161:5020
+         IdentityUrl: http://172.16.59.221:5020
       container_name: webevents
       ports:
          - "5200:80"
@@ -79,6 +79,7 @@ services:
       depends_on:
          - eventcatalog
          - tokenserver
+         - order
  
    tokenserver:
       build: 
@@ -120,7 +121,7 @@ services:
          DATABASE: OrdersDb
       container_name: orderapi
       ports:
-         - "5600:80"
+         - "5601:80"
       networks:
          - backend
          - frontend 

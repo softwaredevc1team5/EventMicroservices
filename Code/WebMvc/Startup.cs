@@ -41,8 +41,10 @@ namespace WebMvc
 
             services.Configure<AppSettings>(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.Configure<PaymentSettings>(Configuration);
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventCatalogService, EventCatalogService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             //services.AddTransient<ICartService, CartService>();
@@ -73,6 +75,7 @@ namespace WebMvc
                 options.Scope.Add("profile");
                 options.Scope.Add("offline_access");
                 options.Scope.Add("basket");
+                options.Scope.Add("order");
 
 
             });
