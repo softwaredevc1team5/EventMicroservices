@@ -52,9 +52,10 @@ namespace EventCatalogAPI
                         Description = "The Product Catalog Microservice HTTP API. This is a Data-Driven/CRUD microservice sample",
                         TermsOfService = "Terms Of Service"
                     });
-            });
 
-        
+            });
+            
+
     }
 
 
@@ -72,6 +73,7 @@ namespace EventCatalogAPI
             });
 
             app.UseMvc();
-        }
+            
+    }
     }
 }
