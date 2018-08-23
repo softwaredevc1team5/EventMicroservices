@@ -70,7 +70,8 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://172.16.59.221:5020
+         IdentityUrl: http://192.168.86.36:5200
+         OrderUrl: http://order
       container_name: webevents
       ports:
          - "5200:80"
@@ -111,7 +112,7 @@ services:
    order:
       image: event/orderapi
       build:
-         context: C:\Github\EventMicroservices\EventMicroservices
+         context: .\OrderApi
          dockerfile: Dockerfile
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
