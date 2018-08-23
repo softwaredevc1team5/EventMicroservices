@@ -143,7 +143,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
         
-
+        
         [HttpGet]
         [Route("Events/date/{date}")]
         public async Task<IActionResult> EventsWithDate(DateTime date,
@@ -194,7 +194,7 @@ namespace EventCatalogAPI.Controllers
             var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
             return Ok(model);
         }
-
+        
         //EventCity get methods.
         private List<EventCity> ChangeUrlPlaceHolder(List<EventCity> items)
         {
@@ -256,43 +256,7 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
-        /*   [HttpGet]
-           [Route("[action]/withId/{cityId:int}/cityname/{cityName}")]
-           public async Task<IActionResult> City
-                (int? cityId,string cityName,
-                [FromQuery] int pageSize = 6,
-                [FromQuery] int pageIndex = 0)
-           {
-
-               var root = (IQueryable<EventCity>)_eventCatalogContext.EventCities;
-               if (cityId.HasValue)
-               {
-                   root = root.Where(c => c.Id == cityId);
-               }
-               if(cityName != null)
-                        root = root.Where(c => c.CityName.StartsWith(cityName));
-
-
-
-               var totalItems = await root
-                                   .LongCountAsync();
-               var itemsOnPage = await root
-                                   .OrderBy(c => c.CityName)
-                                   .Skip(pageSize * pageIndex)
-                                   .Take(pageSize)
-                                   .ToListAsync();
-               itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
-               var model = new PaginatedEventViewModel<EventCity>
-                       (pageIndex, pageSize, totalItems, itemsOnPage);
-
-               return Ok(model);
-           }*/
-
-
-
-
-
-
+              
         [HttpPost]
         [Route("events")]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
@@ -300,7 +264,6 @@ namespace EventCatalogAPI.Controllers
 
             var item = new Event
             {
-                
                 Title =  newEvent.Title,
                 OrganizerId = newEvent.OrganizerId,
                 Address = newEvent.Address,
@@ -313,8 +276,9 @@ namespace EventCatalogAPI.Controllers
                 EndDate = newEvent.EndDate,
                 EventCategoryId = newEvent.EventCategoryId,
                 EventTypeId = newEvent.EventTypeId,
-                OrganizerName=newEvent.OrganizerName
-                
+                OrganizerName=newEvent.OrganizerName,
+                OrganizerDescription = newEvent.OrganizerDescription,
+                EventDescription = newEvent.EventDescription
                 
                 
             };
@@ -365,7 +329,7 @@ namespace EventCatalogAPI.Controllers
         }
 
        //chitra
-        [HttpGet]
+      [HttpGet]
         [Route("[action]/type/{eventTypeId}/category/{eventCategoryId}/date/{eventDate}/city/{eventCity}")]
 
         public async Task<IActionResult> EventsByFilters(int? eventTypeId, int? eventCategoryId, String eventDate, String eventCity, [FromQuery] int pageSize = 6,[FromQuery] int pageIndex = 0)
@@ -480,6 +444,6 @@ namespace EventCatalogAPI.Controllers
             return root;
         }
 
-
+    
     }
 }
