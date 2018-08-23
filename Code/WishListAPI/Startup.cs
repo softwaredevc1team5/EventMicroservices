@@ -4,14 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WishListAPI.Data;
+using StackExchange.Redis;
+using Swashbuckle.AspNetCore.Swagger;
+using WishListAPI;
+using WishListAPI.Infrastructure.Filters;
+using WishListAPI.Model;
 
-namespace WishListAPI
+namespace WishList
 {
     public class Startup
     {
@@ -25,34 +29,49 @@ namespace WishListAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvcCore(
+                options => options.Filters.Add(typeof(HttpGlobalExceptionFilter))
+                )
+                .AddJsonFormatters()
+                .AddApiExplorer();
+            services.Configure<WishlistSetting>(Configuration);
+            services.AddSingleton<ConnectionMultiplexer>(sp =>
+            {
+                var settings = sp.GetRequiredService<IOptions<WishlistSetting>>().Value;
+                var configuration = ConfigurationOptions.Parse(settings.ConnectionString, true);
 
-            services.AddMvc();
+                configuration.ResolveDns = true;
+                configuration.AbortOnConnectFail = false;
 
-
-            //For Docker
-            var server = Configuration["DatabaseServer"];
-            var database = Configuration["DatabaseName"];
-            var user = Configuration["DatabaseUser"];
-            var password = Configuration["DatabaseUserPassword"];
-            var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
-            services.AddDbContext<WishListContext>(
-                options => options.UseSqlServer(connectionString));
-
-            //IIS
-           // services.AddDbContext<WishListContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
-
+                return ConnectionMultiplexer.Connect(configuration);
+            });
             services.AddSwaggerGen(options =>
             {
                 options.DescribeAllEnumsAsStrings();
-                options.SwaggerDoc("v1",
-                    new Swashbuckle.AspNetCore.Swagger.Info
-                    {
-                        Title = "EventMicroservices - WishList HTTP API",
-                        Version = "v1",
-                        Description = "The WishList Microservice HTTP API. This is a Data-Driven/CRUD microservice sample",
-                        TermsOfService = "Terms Of Service"
-                    });
+                options.SwaggerDoc("v1", new Info
+                {
+                    Title = "Basket HTTP API",
+                    Version = "v1",
+                    Description = "The Basket Service HTTP API",
+                    TermsOfService = "Terms Of Service"
+                });
+
+
             });
+
+
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IWishlistRepository, RedisWishlistRepository>();
+             // services.AddTransient<IIdentityService, IdentityService>();
 
         }
 
@@ -63,15 +82,22 @@ namespace WishListAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            var pathBase = Configuration["PATH_BASE"];
+            if (!string.IsNullOrEmpty(pathBase))
+            {
+                app.UsePathBase(pathBase);
+            }
+
+            app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
+            app.UseMvcWithDefaultRoute();
 
             app.UseSwagger()
-            .UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"/swagger/v1/swagger.json", "WishListAPI V1");
-
-            });
-            app.UseMvc();
+               .UseSwaggerUI(c =>
+               {
+                   c.SwaggerEndpoint($"{ (!string.IsNullOrEmpty(pathBase) ? pathBase : string.Empty) }/swagger/v1/swagger.json", "Basket.API V1");
+                   //c.ConfigureOAuth2("basketswaggerui", "", "", "Basket Swagger UI");
+               });
         }
     }
 }
-    

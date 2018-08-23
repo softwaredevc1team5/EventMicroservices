@@ -71,8 +71,8 @@ namespace WebMvc.Services
 
             var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, user.Id);
             _logger.LogInformation(getBasketUri);
-           // var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
-            var dataString = "";
+            var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
+            //var dataString = "";
             _logger.LogInformation(dataString);
 
             var response = JsonConvert.DeserializeObject<Wishlist>(dataString.ToString()) ??

@@ -6,31 +6,32 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WishListAPI.Data;
 
-namespace WishListAPI
+namespace WishList
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var host = BuildWebHost(args);
-
-            using (var scope = host.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var context =
-                    services.GetRequiredService<WishListContext>();
-                WishListSeed.SeedAsync(context).Wait();
-            }
-            host.Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .Build();
+              WebHost.CreateDefaultBuilder(args)
+                  .UseContentRoot(Directory.GetCurrentDirectory())
+                  .UseStartup<Startup>()
+                   .ConfigureAppConfiguration((builderContext, config) =>
+                   {
+                       config.AddEnvironmentVariables();
+                   })
+                  .ConfigureLogging((hostingContext, builder) =>
+                  {
+                      builder.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                      builder.AddConsole();
+                      builder.AddDebug();
+                  })
+                  .UseApplicationInsights()
+                  .Build();
     }
 }
