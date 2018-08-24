@@ -57,4 +57,5 @@ namespace WebMvc.Models.Orders
         Shipped = 2,
         Delivered = 3
     }
+
 }

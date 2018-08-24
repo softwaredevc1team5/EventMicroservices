@@ -57,6 +57,21 @@ namespace WebMvc.Services.Orders
                 return new List<Order>(); 
         }
 
+        public async Task<List<OrderTicket>> GetOrderTicketByOrderIdAsync(int orderId, int page, int take)
+        {
+            await Task.Delay(10);
+            //  var token = await GetUserTokenAsync();
+            string token = "Temp"; // I dont wan't to test tokerService
+
+            if (!string.IsNullOrEmpty(token))
+            {
+
+                return MockTickets.Where(o => o.OrderId == orderId).ToList();
+            }
+            else
+                return new List<OrderTicket>();
+        }
+
 
     }
 

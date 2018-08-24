@@ -1,0 +1,29 @@
+﻿@model WebMvc.Models.Orders.Order
+
+
+
+
+<form asp-controller="OrderTicket" asp-action="Index" method="post">
+    <img class="class=" img-fluid img-thumbnail"" src="http://localhost:55399/api/pic/10" style="width:320px;height:150px" />
+
+
+    <div>
+        <a href="" class="esh-event-title"><span>@Model.EventTitle</span></a>
+        <span class="badge" style="right:auto">@Model.OrderId</span>
+    </div> 
+
+    <div>
+
+        <span>@Model.Address</span>
+
+    </div>
+
+    <div class="esh-order-date">
+
+        <span>@Model.EventStartDate.ToShortDateString()</span>
+
+    </div>
+
+
+
+</form>

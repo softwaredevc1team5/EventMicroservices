@@ -15,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
 using WebMvc.Services;
+using WebMvc.Services.Orders;
 
 namespace WebMvc
 {
@@ -43,7 +44,7 @@ namespace WebMvc
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventCatalogService, EventCatalogService>();
-
+            services.AddTransient<IOrderService, MockOrderService>();// Lisa Change this when you finish the OrderService
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             //services.AddTransient<ICartService, CartService>();
 

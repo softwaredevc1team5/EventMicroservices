@@ -10,5 +10,6 @@ namespace WebMvc.Services.Orders
     {
           Task<Order> GetOrderByIdAsync(int orderId);
           Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take);
+          Task<List<OrderTicket>> GetOrderTicketByOrderIdAsync(int orderId, int page, int take);
     }
 }

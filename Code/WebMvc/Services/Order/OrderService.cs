@@ -19,5 +19,10 @@ namespace WebMvc.Services.Orders
         {
             throw new NotImplementedException();
         }
+
+        Task<List<OrderTicket>> IOrderService.GetOrderTicketByOrderIdAsync(int orderId, int page, int take)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
