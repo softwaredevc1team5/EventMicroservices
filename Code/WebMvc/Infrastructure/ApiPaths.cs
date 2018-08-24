@@ -7,6 +7,7 @@ namespace WebMvc.Infrastructure
 {
     public class ApiPaths
     {
+
         public static class EventCatalog
 
         {
@@ -125,14 +126,14 @@ namespace WebMvc.Infrastructure
             {
                 return $"{baseUri}CityEvents/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
             }
-
+            
             public static string GetAllEventCities(string baseUri)
             {
                 return $"{baseUri}EventCities";
 
             }
 
-
+            //chitra
             public static string GetAllCities(string baseUri)
 
             {
@@ -191,5 +192,23 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}/new";
             }
         }
+        public static class Basket
+        {
+            public static string GetBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
+
+            public static string UpdateBasket(string baseUri)
+            {
+                return baseUri;
+            }
+
+            public static string CleanBasket(string baseUri, string basketId)
+            {
+                return $"{baseUri}/{basketId}";
+            }
+        }
     }
+    
 }

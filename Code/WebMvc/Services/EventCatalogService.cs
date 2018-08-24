@@ -216,6 +216,8 @@ namespace WebMvc.Services
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
             return response;
         }
+
+        //bhuvana
         public async Task<IEnumerable<SelectListItem>> GetCities()
         {
             var getCitiesUri = ApiPaths.EventCatalog.GetAllEventCities(_remoteServiceBaseUrl);
@@ -255,7 +257,7 @@ namespace WebMvc.Services
 
             return response;
         }
-
+        //chitra
         public async Task<IEnumerable<SelectListItem>> GetAllCities()
         {
 
@@ -277,10 +279,11 @@ namespace WebMvc.Services
             //var cities = JArray.Parse(dataString);
             foreach (var city in cities)
             {
+                
                 items.Add(new SelectListItem()
                 {
                     Text = city,
-                    Value = city
+                    Value = city.Split(',')[0].ToLower()
                 });
             }
             return items;

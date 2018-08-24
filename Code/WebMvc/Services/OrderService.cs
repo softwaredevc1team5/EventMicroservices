@@ -11,7 +11,7 @@ using WebMvc.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using WebMvc.Models.Orders;
 
 namespace WebMvc.Services
 {
@@ -86,6 +86,8 @@ namespace WebMvc.Services
 
             return await context.GetTokenAsync("access_token");
         }
+
+        
 
 
         //public async  Task<List<Order>> GetOrdersByUser(ApplicationUser user)

@@ -63,6 +63,24 @@ services:
       depends_on:
          - mssqlserver
 
+   cart:
+      image: cartimage
+      build: 
+         context: .\CartApi
+         dockerfile: Dockerfile
+      environment: 
+         ASPNETCORE_ENVIRONMENT: Development 
+         IdentityUrl: http://tokenserver
+      container_name: cartapi
+      ports:
+         - "5050:80"
+      networks:
+         - backend
+         - frontend 
+      depends_on:
+         - basket.data
+         - tokenserver
+
    webmvc:
       build: 
          context: .\WebMvc
@@ -71,6 +89,8 @@ services:
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
          IdentityUrl: http://172.18.13.97:5020
+         CartUrl: http://cart
+         OrderUrl: http://order
          
       container_name: webevents
       ports:
@@ -109,3 +129,31 @@ services:
          - backend
 
    
+   order:
+      image: event/order
+      build: 
+         context: .\OrderApi
+         dockerfile: Dockerfile
+    
+      environment: 
+         ASPNETCORE_ENVIRONMENT: Development 
+         IdentityUrl: http://tokenserver
+         SQLSERVER_HOST: mssqlcontainer
+         SA_PASSWORD: ProductApi(!)
+         DATABASE: OrdersDb
+      container_name: orderapi
+      ports:
+         - "5600:80"
+      networks:
+         - backend
+         - frontend 
+      depends_on:
+        - mssqlserver
+        - tokenserver 
+
+   basket.data:
+      image: redis
+      ports:
+         - "6377:6379"  
+      networks:
+         - backend 

@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="obj\Debug\netcoreapp2.0\OrderApi.AssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="bin\Debug\netcoreapp2.0\OrderApi.deps.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\OrderApi.runtimeconfig.dev.json" />
+    <Content Include="bin\Debug\netcoreapp2.0\OrderApi.runtimeconfig.json" />
+    <Content Include="obj\Debug\netcoreapp2.0\OrderApi.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\project.assets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="obj\Docker\empty\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.2" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.1" />
+    <PackageReference Include="Stripe.net" Version="18.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bin\Debug\netcoreapp2.0\OrderApi.dll" />
+    <None Include="bin\Debug\netcoreapp2.0\OrderApi.pdb" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.AssemblyInfoInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.assets.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.csprojAssemblyReference.cache" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.dll" />
+    <None Include="obj\Debug\netcoreapp2.0\OrderApi.pdb" />
+    <None Include="obj\Docker\AppType.cache" />
+    <None Include="obj\Docker\CanonicalServiceNames.cache" />
+    <None Include="obj\Docker\ProjectReferences.cache" />
+    <None Include="obj\Docker\RelativeOutputAssemblyPath.Fast.cache" />
+    <None Include="obj\Docker\RelativeOutputAssemblyPath.Regular.cache" />
+    <None Include="obj\Docker\TargetFramework.cache" />
+    <None Include="obj\OrderApi.csproj.nuget.cache" />
+    <None Include="obj\OrderApi.csproj.nuget.g.props" />
+    <None Include="obj\OrderApi.csproj.nuget.g.targets" />
+    <None Include="OrderApi.csproj" />
+    <None Include="OrderApi.csproj.user" />
+  </ItemGroup>
+
+</Project>

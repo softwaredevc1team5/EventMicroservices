@@ -11,6 +11,7 @@ using WebMvc.Models.OrderModels;
 using Stripe;
 using Polly.CircuitBreaker;
 using Microsoft.AspNetCore.Authorization;
+using WebMvc.Models.Orders;
 
 namespace WebMvc.Controllers
 {
