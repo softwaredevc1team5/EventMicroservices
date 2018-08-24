@@ -31,7 +31,6 @@ namespace WebMvc.Models.Orders
         public string UserName { get; set; }
 
         [BindNever]
-
         public string BuyerId { get; set; }
 
         public string StripeToken { get; set; }
