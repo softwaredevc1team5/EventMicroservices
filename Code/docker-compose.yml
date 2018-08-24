@@ -70,7 +70,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://172.20.60.161:5020
+         IdentityUrl: http://192.168.1.134:5020
       container_name: webevents
       ports:
          - "5200:80"
