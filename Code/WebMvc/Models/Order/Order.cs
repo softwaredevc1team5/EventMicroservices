@@ -36,6 +36,8 @@ namespace WebMvc.Models.Orders
         public string StripeToken { get; set; }
 
         public OrderStatus OrderStatus { get; set; }
+
+        public int NumTotalTickets { get; set; }
         
         //EventProperties
         public int EventId { get; set; }
@@ -55,7 +57,8 @@ namespace WebMvc.Models.Orders
     {
         Preparing = 1,
         Shipped = 2,
-        Delivered = 3
+        Delivered = 3,
+        Canceled = 4
     }
 
 }

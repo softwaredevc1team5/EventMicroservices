@@ -36,7 +36,7 @@
 
         <h1 class="text-right">Tickets</h1>
         <ul class="nav nav-tabs" style="font-family: Montserrat, sans-serif; font-size: 20px">
-            <li class="active"><a data-toggle="tab" href="#home">Upcomming</a></li>
+            <li class="active"><a data-toggle="tab" href="#home">Upcoming</a></li>
             <li><a data-toggle="tab" href="#past">Past</a></li>
             <li><a data-toggle="tab" href="#canceled">Canceled</a></li>
         </ul>
@@ -45,44 +45,26 @@
             <div id="home" class="tab-pane fade in active">
                 <div class="esh-event-items row">
 
-                @if (Model.Orders.Count() > 0)
+                @if (Model.UpcomingOrders().Count() > 0)
 
-                {
-
-
-                    @*<div class="esh-event row">*@
-                    @*<ul class="list-group">*@
-                    @foreach (var order in Model.Orders)
+                {                  
+                    @foreach (var order in Model.UpcomingOrders())
                     {
 
                     <div class="esh-event-item col-md-4">
-
-
-                        @*<li class="list-group-item"> @Html.Partial("_OrderTicket", order) </li>*@
-
-
-                        @Html.Partial("_OrderTicket", order)
-                       
-
-                       
+                        @Html.Partial("_OrderTicket", order)                
                     </div>
 
-
-                    @*</div>*@
-
-                    }
-                    @*</ul>*@
-                    @*</div>*@
-
+                    }                   
                 }
 
                 else
 
                 {
-
                     <div class="esh-event row">
 
-                        THERE ARE NO  UPCOMMING EVENTS
+                        <h2>There are not upcoming events</h2>
+                        <p>Register to one right now!!!</p>
 
                     </div>
 
@@ -91,12 +73,68 @@
                 </div>
             </div>
             <div id="past" class="tab-pane fade">
-                <h2>Events you attended</h2>
-                <p>We hope you enjoyed it as much as we did.</p>
-            </div>
-            <div id="canceled" class="tab-pane fade">
-                <h2>Tickets Canceled</h2>
 
+                <div class="esh-event-items row">
+
+                    @if (Model.PastOrders().Count() > 0)
+
+                    {
+                        @foreach (var order in Model.PastOrders())
+                        {
+
+                            <div class="esh-event-item col-md-4">
+                                @Html.Partial("_OrderTicket", order)
+                            </div>
+
+                        }
+                    }
+
+                    else
+
+                    {
+                            <div class="esh-event row">
+
+                                <h2>There aren't past tickets</h2>
+                                <p>Register to one right now!!!</p>
+
+                            </div>
+
+                    }
+
+                </div>
+               
+            </div>
+
+
+            <div id="canceled" class="tab-pane fade">
+                
+                <div class="esh-event-items row">
+
+                    @if (Model.CanceledOrders().Count() > 0)
+
+                    {
+                        @foreach (var order in Model.CanceledOrders())
+                        {
+
+                            <div class="esh-event-item col-md-4">
+                                @Html.Partial("_OrderTicket", order)
+                            </div>
+
+                        }
+                    }
+
+                    else
+
+                    {
+                        <div class="esh-event row">
+
+                            <h2>There aren't tickets canceled</h2>
+
+                        </div>
+
+                    }
+
+                </div>
             </div>
         </div>
     </div>
