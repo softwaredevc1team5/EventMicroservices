@@ -52,7 +52,7 @@ namespace OrderApi.Controllers
             //var conString = _settings.Value.ConnectionString;
             //_logger.LogInformation($"{conString}");
 
-            order.OrderStatus = OrderStatus.Preparing;
+            //order.OrderStatus = OrderStatus.Preparing;
             order.OrderDate = DateTime.UtcNow;
 
             //_logger.LogInformation(" In Create Order");

@@ -13,8 +13,7 @@ namespace OrderApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-
-        public string ProductName { get; set; }
+        public string EventName { get; set; }
         public string PictureUrl { get; set; }
         public decimal UnitPrice { get; set; }
 
@@ -25,7 +24,7 @@ namespace OrderApi.Models
         public Order Order { get; set; }
         public int OrderId { get; set; }
 
-        public OrderItem(int productId, string productName, decimal unitPrice, string pictureUrl, int units = 1)
+        public OrderItem(int productId, string eventName, decimal unitPrice, string pictureUrl, int units = 1)
         {
             if (units <= 0)
             {
@@ -34,7 +33,7 @@ namespace OrderApi.Models
 
             ProductId = productId;
 
-            ProductName = productName;
+            EventName = eventName;
             UnitPrice = unitPrice;
 
             Units = units;
