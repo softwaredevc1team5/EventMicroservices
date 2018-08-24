@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebMvc.Controllers
 {
-    public class EventTicketController:Controller
+    public class OrderTicketController:Controller
     {
 
         public IActionResult Index()
