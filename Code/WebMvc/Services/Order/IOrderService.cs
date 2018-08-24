@@ -8,8 +8,9 @@ namespace WebMvc.Services.Orders
 {
     public interface IOrderService
     {
-          Task<Order> GetOrderByIdAsync(int orderId);
-          Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take);
-          Task<List<OrderTicket>> GetOrderTicketByOrderIdAsync(int orderId, int page, int take);
+         Task<Order> GetOrderByIdAsync(int orderId);
+         Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take);
+         Task<List<Order>> GetOrdersByUserNameAsync(string buyerId, int page, int take);
+        
     }
 }

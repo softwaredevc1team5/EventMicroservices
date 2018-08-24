@@ -8,6 +8,7 @@ namespace WebMvc.Services.Orders
 {
     public class OrderService : IOrderService
     {
+        
 
         // Lisa you have to implement this interface to get The Real Data from the OrderMicroservice
         Task<Order> IOrderService.GetOrderByIdAsync(int orderId)
@@ -20,7 +21,7 @@ namespace WebMvc.Services.Orders
             throw new NotImplementedException();
         }
 
-        Task<List<OrderTicket>> IOrderService.GetOrderTicketByOrderIdAsync(int orderId, int page, int take)
+        public Task<List<Order>> GetOrdersByUserNameAsync(string buyerId, int page, int take)
         {
             throw new NotImplementedException();
         }

@@ -38,7 +38,9 @@ namespace WebMvc.Models.Orders
         public OrderStatus OrderStatus { get; set; }
 
         public int NumTotalTickets { get; set; }
-        
+
+        public List<OrderTicket> OrderTickets { get; set; } = new List<OrderTicket>();
+
         //EventProperties
         public int EventId { get; set; }
 

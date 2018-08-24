@@ -57,7 +57,8 @@ namespace WebMvc.Services.Orders
                 return new List<Order>(); 
         }
 
-        public async Task<List<OrderTicket>> GetOrderTicketByOrderIdAsync(int orderId, int page, int take)
+
+        public async Task<List<Order>> GetOrdersByUserNameAsync(string userName, int page, int take)
         {
             await Task.Delay(10);
             //  var token = await GetUserTokenAsync();
@@ -66,11 +67,13 @@ namespace WebMvc.Services.Orders
             if (!string.IsNullOrEmpty(token))
             {
 
-                return MockTickets.Where(o => o.OrderId == orderId).ToList();
+                return MockOrders.Where(o => o.UserName == userName).ToList();
             }
             else
-                return new List<OrderTicket>();
+                return new List<Order>();
         }
+
+
 
 
     }
