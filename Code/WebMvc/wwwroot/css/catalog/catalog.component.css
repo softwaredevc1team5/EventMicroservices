@@ -100,7 +100,7 @@
     text-align: center;
     margin-bottom: 1.5rem;
     width: 33%;
-    display: inline-block;
+    display: block;
     float: none !important;
 }
 
@@ -129,6 +129,7 @@
     font-size: 1rem;
     height: 3rem;
     margin-top: 1rem;
+    transition: all 0.35s;
     transition: all 0.35s;
     width: 80%;
 }
@@ -182,6 +183,13 @@
     color: gray;
 }
 .esh-event-date{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: gray;
+}
+.esh-order-date {
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
     text-align: center;
     font-weight: 500;
