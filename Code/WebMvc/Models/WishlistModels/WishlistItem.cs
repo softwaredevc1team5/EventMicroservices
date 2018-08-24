@@ -13,7 +13,7 @@ namespace WebMvc.Models.WishlistModels
         public decimal TicketPrice { get; set; }
         public decimal OldTicketPrice { get; set; }
         public string  City { get; set; }
-        public string TicketType { get; set; }
+       // public string TicketType { get; set; }
         public string ImageUrl { get; set; }
     }
 }

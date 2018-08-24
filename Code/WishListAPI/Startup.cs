@@ -15,7 +15,7 @@ using WishListAPI;
 using WishListAPI.Infrastructure.Filters;
 using WishListAPI.Model;
 
-namespace WishList
+namespace WishListAPI
 {
     public class Startup
     {
@@ -26,7 +26,7 @@ namespace WishList
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.    
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore(
@@ -42,7 +42,7 @@ namespace WishList
 
                 configuration.ResolveDns = true;
                 configuration.AbortOnConnectFail = false;
-
+                //connection to redis
                 return ConnectionMultiplexer.Connect(configuration);
             });
             services.AddSwaggerGen(options =>

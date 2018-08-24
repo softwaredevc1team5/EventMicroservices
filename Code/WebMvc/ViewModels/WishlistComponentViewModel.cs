@@ -9,5 +9,6 @@ namespace WebMvc.ViewModels
     {
         public int ItemsInWishlist { get; set; }
         public string Disabled => (ItemsInWishlist == 0) ? "is-disabled" : "";
+
     }
 }

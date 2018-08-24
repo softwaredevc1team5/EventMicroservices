@@ -23,7 +23,7 @@ namespace WebMvc.Services
         public WishlistService(IOptionsSnapshot<AppSettings> settings, IHttpContextAccessor httpContextAccesor, IHttpClient httpClient, ILoggerFactory logger)
         {
             _settings = settings;
-            _remoteServiceBaseUrl = $"{_settings.Value.WishlistUrl}/api/v1/whislist";
+            _remoteServiceBaseUrl = $"{_settings.Value.WishlistUrl}/api/v1/wishlist";
             _httpContextAccesor = httpContextAccesor;
             _apiClient = httpClient;
             _logger = logger.CreateLogger<WishlistService>();
@@ -72,7 +72,6 @@ namespace WebMvc.Services
             var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, user.Id);
             _logger.LogInformation(getBasketUri);
             var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
-            //var dataString = "";
             _logger.LogInformation(dataString);
 
             var response = JsonConvert.DeserializeObject<Wishlist>(dataString.ToString()) ??
@@ -84,6 +83,7 @@ namespace WebMvc.Services
         }
         public async  Task<Wishlist> UpdateWishlist(Wishlist wishlist)
         {
+            _logger.LogInformation("Wish list is: ", wishlist.BuyerId);
             var token = await GetUserTokenAsync();
             _logger.LogDebug("Service url: " + _remoteServiceBaseUrl);
             var updateBasketUri = ApiPaths.Basket.UpdateBasket(_remoteServiceBaseUrl);

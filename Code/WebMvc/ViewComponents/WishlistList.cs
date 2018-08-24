@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using WebMvc.Controllers;
 using WebMvc.Models;
 using WebMvc.Services;
+using WebMvc.ViewModels;
 
 namespace WebMvc.ViewComponents
 {
@@ -16,7 +17,7 @@ namespace WebMvc.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(ApplicationUser user)
         {
             var vm = new Models.WishlistModels.Wishlist();
-            {
+            
                 try
                 {
                     vm = await _wishlistsvc.GetWishlist(user);
@@ -32,7 +33,7 @@ namespace WebMvc.ViewComponents
 
                 return View(vm);
 
-            }
+            
         }
     }
 }

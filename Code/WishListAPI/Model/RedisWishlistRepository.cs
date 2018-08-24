@@ -45,7 +45,8 @@ namespace WishListAPI.Model
 
          public async  Task<Wishlist> UpdateWishlistAsync(Wishlist basket)
          {
-             var created = await _database.StringSetAsync(basket.BuyerId, JsonConvert.SerializeObject(basket));
+            _logger.LogInformation("Wishlist being saved is: ", basket.BuyerId, basket.Items);
+            var created = await _database.StringSetAsync(basket.BuyerId, JsonConvert.SerializeObject(basket));
              if (!created)
              {
                  _logger.LogInformation("Problem occur persisting the item.");

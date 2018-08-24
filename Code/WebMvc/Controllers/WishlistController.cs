@@ -26,15 +26,58 @@ namespace WebMvc.Controllers
 
 
         }
-
-       
-        [HttpPost]
         public IActionResult Index()
         {
+            //try
+            //{
+
+            //    var user = _identityService.Get(HttpContext.User);
+            //    var cart = await _cartService.GetCart(user);
+
+
+            //    return View();
+            //}
+            //catch (BrokenCircuitException)
+            //{
+            //    // Catch error when CartApi is in circuit-opened mode                 
+            //    HandleBrokenCircuitException();
+            //}
+
             return View();
         }
 
-        public async Task<IActionResult> AddToWishlist(WishlistItem eventDetails)
+
+        [HttpPost]
+        public async Task<IActionResult> Index( string action)
+        {
+           /* if (action == "[ Checkout ]")
+            {
+                return RedirectToAction("Create", "Order");
+            }*/
+
+
+            try
+            {
+                var user = _identityService.Get(HttpContext.User);
+                var basket = await _wishlistService.GetWishlist(user);
+                var vm = await _wishlistService.UpdateWishlist(basket);
+
+            }
+            catch (BrokenCircuitException)
+            {
+                // Catch error when CartApi is in open circuit  mode                 
+                HandleBrokenCircuitException();
+            }
+
+            return View();
+        }
+
+        private void handlebrokencircuitexception()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IActionResult> AddToWishlist(Event eventDetails)
         {
             try
             {
@@ -44,11 +87,11 @@ namespace WebMvc.Controllers
                     var product = new WishlistItem()
                     {
                         Id = Guid.NewGuid().ToString(),
-                        EventTitle = eventDetails.EventTitle,
+                        EventTitle = eventDetails.Title,
                         ImageUrl = eventDetails.ImageUrl,
-                        TicketPrice = eventDetails.TicketPrice,
+                        TicketPrice = eventDetails.Price,
                         City = eventDetails.City,
-                        TicketType=eventDetails.TicketType
+                        productId=eventDetails.Id,
                     };
                     await _wishlistService.AddItemToWishlist(user, product);
                 }

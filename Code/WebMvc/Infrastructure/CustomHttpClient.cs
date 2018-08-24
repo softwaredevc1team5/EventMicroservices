@@ -57,6 +57,9 @@ namespace WebMvc.Infrastructure
 
             requestMessage.Content = new StringContent(JsonConvert.SerializeObject(item), System.Text.Encoding.UTF8, "application/json");
             //  SetAuthorizationHeader(requestMessage);
+            _logger.LogInformation("Item being saved is: ", item);
+            _logger.LogInformation("Request message being saved is: ", requestMessage);
+
             if (authorizationToken != null)
             {
 

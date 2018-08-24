@@ -36,6 +36,7 @@ namespace WishListAPI.Controllers
         [ProducesResponseType(typeof(Wishlist), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Post([FromBody]Wishlist value)
         {
+            _logger.LogInformation("Received a request to save wishList: ", value.BuyerId);
             var basket = await _repository.UpdateWishlistAsync(value);
 
             return Ok(basket);
