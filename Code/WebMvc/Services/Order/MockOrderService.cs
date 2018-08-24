@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models.Orders;
@@ -25,15 +26,38 @@ namespace WebMvc.Services.Orders
             };
 
 
-        public Task<Order> GetOrderById(int orderId)
+        public async Task<Order> GetOrderByIdAsync(int orderId )
         {
-            throw new NotImplementedException();
+            await Task.Delay(10);
+            //  var token = await GetUserTokenAsync();
+            string token ="Temp"; // I dont wan't to test tokerService
+
+            if (!string.IsNullOrEmpty(token))
+            {
+
+              return  MockOrders.FirstOrDefault(o => o.OrderId == orderId);                                            
+            }
+            else
+                return new Order();
         }
 
-        public Task<Order> GetOrdersByBuyer(int buyerId, int page, int take)
+     
+        public async Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take)
         {
-            throw new NotImplementedException();
+            await Task.Delay(10);
+            //  var token = await GetUserTokenAsync();
+            string token = "Temp"; // I dont wan't to test tokerService
+
+            if (!string.IsNullOrEmpty(token))
+            {
+
+                return MockOrders.Where(o => o.BuyerId == buyerId).ToList();
+            }
+            else
+                return new List<Order>(); 
         }
+
+
     }
 
        

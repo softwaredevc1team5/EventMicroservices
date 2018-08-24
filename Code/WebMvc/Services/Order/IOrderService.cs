@@ -6,9 +6,9 @@ using WebMvc.Models.Orders;
 
 namespace WebMvc.Services.Orders
 {
-    interface IOrderService
+    public interface IOrderService
     {
-        Task<Order> GetOrdersByBuyer(int buyerId, int page, int take);
-        Task<Order> GetOrderById(int orderId);
+          Task<Order> GetOrderByIdAsync(int orderId);
+          Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take);
     }
 }
