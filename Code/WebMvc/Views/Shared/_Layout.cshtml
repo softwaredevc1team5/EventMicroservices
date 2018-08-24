@@ -33,7 +33,7 @@
     </environment>*@
 </head>
 <body>
-    <header class="navbar navbar-light navbar-static-top">
+   <!--- <header class="navbar navbar-light navbar-static-top">
         <div class="container">
             <article class="row">
                 <section class="col-lg-7 col-md-6 col-xs-12">
@@ -46,8 +46,43 @@
                 @await Html.PartialAsync("_LoginPartial")
             </article>
         </div>
-    </header>
+    </header> -->
 
+    <header class="navbar navbar-light navbar-static-top">
+        <div class="container">
+            <article class="row">
+                <section class="col-lg-7 col-md-6 col-xs-12">
+                    <a class="navbar-brand" routerLink="catalog">
+                        <a asp-area="" asp-controller="EventCatalog" asp-action="Index">
+                            <img src="~/images/EventHubLogo.png" />
+                        </a>
+                    </a>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("Index", "EventCatalog")">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("About", "Home")">
+                                Create Events
+                            </a>
+                        </li>
+                       
+                    </ul>
+
+                                                          
+                                @await Html.PartialAsync("_LoginPartial")                                  
+                    
+                </section>
+            </article>
+        </div>
+
+    </header>
 
 
 

@@ -200,3 +200,48 @@
     content: '#';
     color: gray;
 }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    /*background-color: #000080 */
+}
+
+li {
+    float: left;
+    
+}
+
+    li a {
+        display: block;
+        padding: 8px;
+        /*background-color: #000080; */
+        font-size: 1rem;
+        font-weight: 200;
+        font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        text-align: center;
+        text-transform: uppercase;
+        float:left;
+        
+    }
+
+        li a:hover {
+            background-color: #f1f1f1;
+        }
+
+.esh-header-signin {
+    display: block;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 200;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+   
+}
+
+    .esh-header-signin:hover {
+        background-color: #f1f1f1;
+    }

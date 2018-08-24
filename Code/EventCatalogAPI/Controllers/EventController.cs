@@ -214,16 +214,37 @@ namespace EventCatalogAPI.Controllers
             var items = await _eventCatalogContext.EventCities.ToListAsync();
             return Ok(items);
         }
+
+
         [HttpGet]
         [Route("Events/withcity/{city:minlength(1)}")]
         public async Task<IActionResult> EventsWithCity(string city,
           [FromQuery] int pageSize = 6,
           [FromQuery] int pageIndex = 0)
         {
-            var totalItems = await _eventCatalogContext.Events
+
+
+            //need to address city and state
+            string State = null;
+            if (city.Contains(","))
+            {
+                var cityState = city.Split(',');
+                city = cityState[0];
+                State = cityState[1];
+            }
+
+
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+
+            if (State != null)
+            {
+                root = root.Where(c => c.State.StartsWith(State));
+            }
+
+            var totalItems = await root
                                     .Where(c => c.City.StartsWith(city))
                                     .LongCountAsync();
-            var itemsOnPage = await _eventCatalogContext.Events
+            var itemsOnPage = await root
                                     .Where(c => c.City.StartsWith(city))
                                     .OrderBy(c => c.Title)
                                     .Skip(pageSize * pageIndex)
@@ -234,6 +255,7 @@ namespace EventCatalogAPI.Controllers
                     (pageIndex, pageSize, totalItems, itemsOnPage);
 
             return Ok(model);
+
         }
         [HttpGet]
         [Route("[action]/withcityname/{city:minlength(1)}")]
@@ -256,7 +278,43 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
-              
+
+
+        [HttpGet]
+        [Route("events/title/{title}/city/{city}/date/{date}")]
+
+        public async Task<IActionResult> EventsWithTitleCityDate(string title, string city, string date, [FromQuery] int pageSize = 6,
+                                                                         [FromQuery] int pageIndex = 0)
+        {
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+
+            if (title != "notitle")
+            {
+                root = root.Where(c => c.Title.StartsWith(title));
+            }
+            if (city != "nocity")
+            {
+                root = root.Where(c => c.City.StartsWith(city));
+            }
+            if (date != "nodate")
+            {
+                root = root.Where(c => c.StartDate.ToShortDateString() == date.ToString());
+            }
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
+            return Ok(model);
+        }
+
+
+
+
         [HttpPost]
         [Route("events")]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
