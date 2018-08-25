@@ -17,6 +17,7 @@ namespace EventCatalogAPI.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:Sequence:.event_category_hilo", "'event_category_hilo', '', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:.event_city_hilo", "'event_city_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("Relational:Sequence:.event_hilo", "'event_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("Relational:Sequence:.event_type_hilo", "'event_type_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -41,9 +42,17 @@ namespace EventCatalogAPI.Migrations
 
                     b.Property<int>("EventCategoryId");
 
+                    b.Property<string>("EventDescription")
+                        .IsRequired()
+                        .HasMaxLength(5000);
+
                     b.Property<int>("EventTypeId");
 
                     b.Property<string>("ImageUrl");
+
+                    b.Property<string>("OrganizerDescription")
+                        .IsRequired()
+                        .HasMaxLength(2000);
 
                     b.Property<int>("OrganizerId")
                         .HasMaxLength(50);
@@ -86,6 +95,8 @@ namespace EventCatalogAPI.Migrations
                         .HasAnnotation("SqlServer:HiLoSequenceName", "event_category_hilo")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
+                    b.Property<string>("ImageUrl");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -93,6 +104,28 @@ namespace EventCatalogAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EventCategory");
+                });
+
+            modelBuilder.Entity("EventCatalogAPI.Domain.EventCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "event_city_hilo")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
+
+                    b.Property<string>("CityDescription")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.Property<string>("CityImageUrl");
+
+                    b.Property<string>("CityName")
+                        .IsRequired()
+                        .HasMaxLength(40);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EventCity");
                 });
 
             modelBuilder.Entity("EventCatalogAPI.Domain.EventType", b =>

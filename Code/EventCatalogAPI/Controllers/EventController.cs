@@ -3,6 +3,7 @@ using EventCatalogAPI.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,10 +32,31 @@ namespace EventCatalogAPI.Controllers
         }
         [HttpGet]
         [Route("[action]")]
-        public async Task<IActionResult> EventCategories()
+           public async Task<IActionResult> EventCategories()
+           {
+               var items = await _eventCatalogContext.EventCategories.ToListAsync();
+
+               return Ok(items);
+           }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventCategoriesForImage([FromQuery] int pageSize = 6,
+                                                [FromQuery] int pageIndex = 0)
         {
-            var items = await _eventCatalogContext.EventCategories.ToListAsync();
-            return Ok(items);
+            var totalItems = await _eventCatalogContext.EventCategories
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.EventCategories
+                                        .OrderBy(c => c.Name)
+                                        .Skip(pageSize * pageIndex)
+                                        .Take(pageSize)
+                                        .ToListAsync();
+            
+            itemsOnPage = ChangeUrlPlaceHolderForCategory(itemsOnPage);
+            var model = new PaginatedEventViewModel<EventCategory>
+                   (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
         }
 
         [HttpGet]
@@ -57,6 +79,17 @@ namespace EventCatalogAPI.Controllers
         }
 
         private List<Event> ChangeUrlPlaceHolder(List<Event> items)
+        {
+            items.ForEach(
+                x => x.ImageUrl =
+                x.ImageUrl
+                .Replace("http://externalcatalogbaseurltobereplaced",
+                _settings.Value.ExternalCatalogBaseUrl));
+
+            return items;
+        }
+
+        private List<EventCategory> ChangeUrlPlaceHolderForCategory(List<EventCategory> items)
         {
             items.ForEach(
                 x => x.ImageUrl =
@@ -109,17 +142,19 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
+        
+        
         [HttpGet]
-        [Route("Events/withcity/{city:minlength(1)}")]
-        public async Task<IActionResult> EventsWithCity(string city,
-          [FromQuery] int pageSize = 6,
-          [FromQuery] int pageIndex = 0)
+        [Route("Events/date/{date}")]
+        public async Task<IActionResult> EventsWithDate(DateTime date,
+         [FromQuery] int pageSize = 6,
+         [FromQuery] int pageIndex = 0)
         {
             var totalItems = await _eventCatalogContext.Events
-                                    .Where(c => c.City.StartsWith(city))
+                                    .Where(c => c.StartDate == date)
                                     .LongCountAsync();
             var itemsOnPage = await _eventCatalogContext.Events
-                                    .Where(c => c.City.StartsWith(city))
+                                    .Where(c => c.StartDate == date)
                                     .OrderBy(c => c.Title)
                                     .Skip(pageSize * pageIndex)
                                     .Take(pageSize)
@@ -130,10 +165,11 @@ namespace EventCatalogAPI.Controllers
 
             return Ok(model);
         }
+        
 
-        //GET api/Events/type/1/category/null[?pageSize=4&pageIndex=0]
+        //GET api/Events/eventtype/1/eventcategory/null?pageSize=4&pageIndex=0
         [HttpGet]
-        [Route("[action]/type/{eventTypeId}/brand/{eventCategoryId}")]
+        [Route("[action]/eventtype/{eventTypeId}/eventcategory/{eventCategoryId}")]
 
         public async Task<IActionResult> Events(int? eventTypeId, int? eventCategoryId, [FromQuery] int pageSize = 6,
                                                                               [FromQuery] int pageIndex = 0)
@@ -158,7 +194,69 @@ namespace EventCatalogAPI.Controllers
             var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
             return Ok(model);
         }
+        
+        //EventCity get methods.
+        private List<EventCity> ChangeUrlPlaceHolder(List<EventCity> items)
+        {
+            items.ForEach(
+                x => x.CityImageUrl =
+                x.CityImageUrl
+                .Replace("http://externalcatalogbaseurltobereplaced",
+                _settings.Value.ExternalCatalogBaseUrl));
 
+            return items;
+        }
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> EventCities([FromQuery] int pageSize = 6,
+                                                [FromQuery] int pageIndex = 0)
+        {
+            var items = await _eventCatalogContext.EventCities.ToListAsync();
+            return Ok(items);
+        }
+        [HttpGet]
+        [Route("Events/withcity/{city:minlength(1)}")]
+        public async Task<IActionResult> EventsWithCity(string city,
+          [FromQuery] int pageSize = 6,
+          [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.Events
+                                    .Where(c => c.City.StartsWith(city))
+                                    .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.Events
+                                    .Where(c => c.City.StartsWith(city))
+                                    .OrderBy(c => c.Title)
+                                    .Skip(pageSize * pageIndex)
+                                    .Take(pageSize)
+                                    .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>
+                    (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+        [HttpGet]
+        [Route("[action]/withcityname/{city:minlength(1)}")]
+        public async Task<IActionResult> City(string city,
+                     [FromQuery] int pageSize = 6,
+                      [FromQuery] int pageIndex = 0)
+        {
+            var totalItems = await _eventCatalogContext.EventCities
+                                 .Where(c => c.CityName.StartsWith(city))
+                                 .LongCountAsync();
+            var itemsOnPage = await _eventCatalogContext.EventCities
+                                 .Where(c => c.CityName.StartsWith(city))
+                                 .OrderBy(c => c.CityName)
+                                 .Skip(pageSize * pageIndex)
+                                 .Take(pageSize)
+                                 .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<EventCity>
+                 (pageIndex, pageSize, totalItems, itemsOnPage);
+
+            return Ok(model);
+        }
+              
         [HttpPost]
         [Route("events")]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
@@ -166,7 +264,6 @@ namespace EventCatalogAPI.Controllers
 
             var item = new Event
             {
-                
                 Title =  newEvent.Title,
                 OrganizerId = newEvent.OrganizerId,
                 Address = newEvent.Address,
@@ -179,8 +276,9 @@ namespace EventCatalogAPI.Controllers
                 EndDate = newEvent.EndDate,
                 EventCategoryId = newEvent.EventCategoryId,
                 EventTypeId = newEvent.EventTypeId,
-                OrganizerName=newEvent.OrganizerName
-                
+                OrganizerName=newEvent.OrganizerName,
+                OrganizerDescription = newEvent.OrganizerDescription,
+                EventDescription = newEvent.EventDescription
                 
                 
             };
@@ -228,8 +326,132 @@ namespace EventCatalogAPI.Controllers
             _eventCatalogContext.Events.Remove(catalogEvent);
             await _eventCatalogContext.SaveChangesAsync();
             return NoContent();
-
         }
 
+       //chitra
+      [HttpGet]
+        [Route("[action]/type/{eventTypeId}/category/{eventCategoryId}/date/{eventDate}/city/{eventCity}")]
+
+        public async Task<IActionResult> EventsByFilters(int? eventTypeId, int? eventCategoryId, String eventDate, String eventCity, [FromQuery] int pageSize = 6,[FromQuery] int pageIndex = 0)
+        {
+            var root = (IQueryable<Event>)_eventCatalogContext.Events;
+            if (eventTypeId.HasValue)
+            {
+                root = root.Where(c => c.EventTypeId == eventTypeId);
+            }
+            if (eventCategoryId.HasValue)
+            {
+                root = root.Where(c => c.EventCategoryId == eventCategoryId);
+            }
+            if (eventCity != "null" && eventCity != "All")
+            {
+               // var citystr = eventCity.Split(',')[0];
+                //var statestr = eventCity.Split(',')[1];
+                root = root.Where(c => c.City.ToLower() == eventCity.ToLower() );
+                //root = root.Where(c => c.City == citystr && c.State == statestr);
+            }
+           /*** if(eventTitle != "null")
+            {
+                StringComparison comp = StringComparison.OrdinalIgnoreCase;
+
+                root = root.Where(c => c.Title.Contains(eventTitle, comp) == true)
+            }
+            ***/
+            if (eventDate != "null" && eventDate != "All Days")
+
+            {
+                root = FindingEventsByDate(root, eventDate);
+
+            }
+
+            var totalItems = await root
+                                .LongCountAsync();
+            var itemsOnPage = await root
+                                .OrderBy(c => c.Title)
+                                .Skip(pageSize * pageIndex)
+                                .Take(pageSize)
+                                .ToListAsync();
+            itemsOnPage = ChangeUrlPlaceHolder(itemsOnPage);
+            var model = new PaginatedEventViewModel<Event>(pageIndex, pageSize, totalItems, itemsOnPage);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<IActionResult> AllEventsCities()
+        {
+            //IList<String> totalItems;
+            List<String> cities = new List<string>();
+            var totalItems = await _eventCatalogContext.Events.ToListAsync();
+            foreach (var item in totalItems)
+            {
+                if (!cities.Contains(item.City + "," + item.State))
+                    cities.Add(item.City + "," + item.State);
+            }
+
+            return Ok(cities);
+        }
+
+        public IQueryable<Event> FindingEventsByDate(IQueryable<Event> root, String date)
+        {
+            DateTime dateTime = DateTime.Now.Date;
+
+            if (date != null && date != "All Days")
+            {
+                switch (date)
+                {
+                    case "Today":
+                        dateTime = DateTime.Now;
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, dateTime.Date) == 0);
+                        break;
+                    case "Tomorrow":
+                        var tomorrow = dateTime.AddDays(1);
+                        root = root.Where(c => DateTime.Compare(c.StartDate.Date, tomorrow) == 0);
+                        break;
+                    case "This week":
+                        var thisWeekdaySun = dateTime.AddDays(-(7 - (int)dateTime.DayOfWeek));
+                        var comingSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+
+                        root = root.Where(c => (c.StartDate.Date >= thisWeekdaySun && c.StartDate.Date <= comingSun));
+
+                        break;
+                    case "This weekend":
+                        var weekendFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek);
+                        var weekendSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+                        root = root.Where(c => (c.StartDate.Date >= weekendFri && c.StartDate.Date <= weekendSun));
+                        break;
+                    case "Next week":
+                        var nextWeekSunday = dateTime.AddDays((7 - (int)dateTime.DayOfWeek) + 7);
+                        var comingSunday = dateTime.AddDays(7 - (int)dateTime.DayOfWeek);
+
+                        root = root.Where(c => (c.StartDate.Date >= comingSunday && c.StartDate.Date <= nextWeekSunday));
+                        break;
+                    case "Next weekend":
+                        var nextWeekFri = dateTime.AddDays(5 - (int)dateTime.DayOfWeek + 7);
+                        var nextWeekSun = dateTime.AddDays(7 - (int)dateTime.DayOfWeek + 7);
+
+                        root = root.Where(c => (c.StartDate.Date >= nextWeekFri && c.StartDate.Date <= nextWeekSun));
+
+                        break;
+                    case "This month":
+
+                        var thisMonth = dateTime.Month;
+                        root = root.Where(c => c.StartDate.Date.Month == thisMonth);
+                        break;
+
+                    case "Next month":
+                        var nextMonth = dateTime.AddMonths(1).Month;
+                        root = root.Where(c => c.StartDate.Date.Month == nextMonth);
+                        break;
+                    default:
+                        break;
+
+                }
+            }
+
+            return root;
+        }
+
+    
     }
 }
