@@ -1,4 +1,4 @@
-![alt text](https://github.com/softwaredevc1team5/EventMicroservices/blob/LastAssignment3b/Code/WebMvc/wwwroot/images/EventHubLogo2.png)
+![Eventhub](https://github.com/softwaredevc1team5/EventMicroservices/blob/LastAssignment3b/Code/WebMvc/wwwroot/images/EventHubLogo2.png)
 
 # Assignment 3b
 Video: https://youtu.be/7K1khtbUwTM
