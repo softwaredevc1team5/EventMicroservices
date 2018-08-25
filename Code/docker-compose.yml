@@ -25,6 +25,24 @@ services:
       depends_on:
          - mssqlserver
 
+   eventticket:
+      build:
+         context: .\EventTicketAPI
+         dockerfile: Dockerfile
+      image: event/ticketapi
+      environment:
+         DatabaseServer: mssqlserver
+         DatabaseName: ticketdb
+         DatabaseUser: sa
+         DatabaseUserPassword: ProductApi(!)
+      container_name: eventticketapi
+      ports:
+         - "55401:80"
+      networks:
+         - backend
+         - frontend
+      depends_on:
+         - mssqlserver
    webmvc:
       build: 
          context: .\WebMvc
@@ -33,6 +51,7 @@ services:
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
          IdentityUrl: http://192.168.1.134:5020
+         EventTicketUrl: http://eventticket
       container_name: webevents
       ports:
          - "5200:80"
