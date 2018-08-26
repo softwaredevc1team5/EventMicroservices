@@ -7,7 +7,6 @@ using WebMvc.Services;
 using WebMvc.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WebMvc.Models.OrderModels;
 using Stripe;
 using Polly.CircuitBreaker;
 using Microsoft.AspNetCore.Authorization;
@@ -162,9 +161,9 @@ namespace WebMvc.Controllers
         //}
 
 
-        private decimal GetTotal(List<OrderItem> orderItems)
+        private decimal GetTotal(List<OrderTicket> orderTicket)
         {
-            return orderItems.Select(p => p.UnitPrice * p.Units).Sum();
+            return orderTicket.Select(p => p.Price * p.Quantity).Sum();
 
         }
     }

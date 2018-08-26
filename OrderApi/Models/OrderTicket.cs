@@ -8,48 +8,55 @@ using System.Threading.Tasks;
 
 namespace OrderApi.Models
 {
-    public class OrderItem
+    public class OrderTicket
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        public string EventName { get; set; }
-        public string PictureUrl { get; set; }
-        public decimal UnitPrice { get; set; }
-
-        public int Units { get; set; }
-        public int ProductId { get; private set; }
-
-        protected OrderItem() { }
-        public Order Order { get; set; }
         public int OrderId { get; set; }
 
-        public OrderItem(int productId, string eventName, decimal unitPrice, string pictureUrl, int units = 1)
+        public int TicketTypeId { get; set; }
+
+        public string TypeName { get; set; }
+
+        public int Quantity { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int EventId { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        protected OrderTicket() { }
+        public Order Order { get; set; }
+
+        
+
+
+        public OrderTicket(int orderId, int ticketTypeId, decimal unitPrice, string typeName, int units, int eventId, string pictureUrl)
         {
             if (units <= 0)
             {
                 throw new OrderingDomainException("Invalid number of units");
             }
 
-            ProductId = productId;
+            OrderId = orderId;
 
-            EventName = eventName;
-            UnitPrice = unitPrice;
+            TicketTypeId = ticketTypeId;
+            Price = unitPrice;
 
-            Units = units;
-            PictureUrl = pictureUrl;
+            Quantity = units;
+            TypeName = typeName;
+
+            EventId = eventId;
+            ImageUrl = pictureUrl;
         }
         public void SetPictureUri(string pictureUri)
         {
             if (!String.IsNullOrWhiteSpace(pictureUri))
             {
-                PictureUrl = pictureUri;
+                ImageUrl = pictureUri;
             }
         }
-
-
-
-
 
         public void AddUnits(int units)
         {
@@ -58,8 +65,7 @@ namespace OrderApi.Models
                 throw new OrderingDomainException("Invalid units");
             }
 
-            Units += units;
+            Quantity += units;
         }
-
     }
 }

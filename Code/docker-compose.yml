@@ -63,23 +63,7 @@ services:
       depends_on:
          - mssqlserver
 
-   cart:
-      image: cartimage
-      build: 
-         context: .\CartApi
-         dockerfile: Dockerfile
-      environment: 
-         ASPNETCORE_ENVIRONMENT: Development 
-         IdentityUrl: http://tokenserver
-      container_name: cartapi
-      ports:
-         - "5050:80"
-      networks:
-         - backend
-         - frontend 
-      depends_on:
-         - basket.data
-         - tokenserver
+   
 
    webmvc:
       build: 
@@ -90,8 +74,7 @@ services:
          EventCatalogUrl: http://eventcatalog
          IdentityUrl: http://172.18.13.97:5020
          CartUrl: http://cart
-         OrderUrl: http://order
-         
+         OrderUrl: http://order        
       container_name: webevents
       ports:
          - "5200:80"
@@ -100,6 +83,10 @@ services:
       depends_on:
          - eventcatalog
          - tokenserver
+         - cart
+         - order
+         
+         
                 
    tokenserver:
       build: 
@@ -107,7 +94,9 @@ services:
          dockerfile: Dockerfile
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
-         MvcClient: http://localhost:5200   
+         MvcClient: http://localhost:5200
+         BasketApiClient: http://localhost:5050
+         OrderApiClient: http://localhost:5600
       container_name: tokenserviceapi
       ports:
          - "5020:80"
@@ -128,19 +117,36 @@ services:
       networks:
          - backend
 
-   
+   cart:
+      image: event/cartimage
+      build: 
+         context: .\CartApi
+         dockerfile: Dockerfile
+      environment: 
+         ASPNETCORE_ENVIRONMENT: Development 
+         IdentityUrl: http://tokenserver
+      container_name: cartapi
+      ports:
+         - "5050:80"
+      networks:
+         - backend
+         - frontend 
+      depends_on:
+         - basket.data
+         - tokenserver
+
    order:
       image: event/order
       build: 
          context: .\OrderApi
-         dockerfile: Dockerfile
-    
+         dockerfile: Dockerfile   
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          IdentityUrl: http://tokenserver
-         SQLSERVER_HOST: mssqlcontainer
-         SA_PASSWORD: ProductApi(!)
-         DATABASE: OrdersDb
+         DatabaseServer: mssqlserver
+         DatabaseName: OrdersDb
+         DatabaseUser: sa
+         DatabaseUserPassword: ProductApi(!)
       container_name: orderapi
       ports:
          - "5600:80"
@@ -149,7 +155,7 @@ services:
          - frontend 
       depends_on:
         - mssqlserver
-        - tokenserver 
+        - tokenserver  
 
    basket.data:
       image: redis
@@ -157,3 +163,4 @@ services:
          - "6377:6379"  
       networks:
          - backend 
+  

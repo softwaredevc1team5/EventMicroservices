@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMvc.Models.OrderModels;
 using WebMvc.Models.Orders;
 
 namespace WebMvc.Services
@@ -14,7 +13,7 @@ namespace WebMvc.Services
         Task<Cart> GetCart(ApplicationUser user);
         Task AddItemToCart(ApplicationUser user, CartItem product);
         Task<Cart> UpdateCart(Cart Cart);
-        Task<Cart> SetQuantities(ApplicationUser user, Dictionary<string, int> quantities);
+        Task<Cart> SetQuantities(ApplicationUser user, Dictionary<int, int> quantities);
         Order MapCartToOrder(Cart Cart);
         Task ClearCart(ApplicationUser user);
 

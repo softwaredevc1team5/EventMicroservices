@@ -13,7 +13,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json.Linq;
 using WebMvc;
 using WebMvc.Infrastructure;
-using WebMvc.Models.OrderModels;
+
 using WebMvc.Models.Orders;
 
 namespace WebMvc.Services
@@ -48,7 +48,7 @@ namespace WebMvc.Services
                 };
             }
             var basketItem = cart.Items
-                .Where(p => p.ProductId == product.ProductId)
+                .Where(p => p.OrderId == product.OrderId)
                 .FirstOrDefault();
             if (basketItem == null)
             {
@@ -98,23 +98,23 @@ namespace WebMvc.Services
 
             cart.Items.ForEach(x =>
             {
-                order.OrderItems.Add(new OrderItem()
+                order.OrderTicket.Add(new OrderTicket()
                 {
-                    ProductId = int.Parse(x.ProductId),
+                    OrderId = x.OrderId,
 
-                    PictureUrl = x.PictureUrl,
-                    ProductName = x.ProductName,
-                    Units = x.Quantity,
-                    UnitPrice = x.UnitPrice
+                    TicketTypeId = x.TicketTypeId,
+                    TypeName = x.TypeName,
+                    Quantity = x.Quantity,
+                    Price = x.Price
                 });
-                order.OrderTotal += (x.Quantity * x.UnitPrice);
+                order.OrderTotal += (x.Quantity * x.Price);
             });
 
             return order;
         }
 
 
-        public async Task<Cart> SetQuantities(ApplicationUser user, Dictionary<string, int> quantities)
+        public async Task<Cart> SetQuantities(ApplicationUser user, Dictionary<int, int> quantities)
         {
             var basket = await GetCart(user);
 
@@ -122,7 +122,7 @@ namespace WebMvc.Services
             {
                 // Simplify this logic by using the
                 // new out variable initializer.
-                if (quantities.TryGetValue(x.Id, out var quantity))
+                if (quantities.TryGetValue(x.OrderId, out var quantity))
                 {
                     x.Quantity = quantity;
                 }

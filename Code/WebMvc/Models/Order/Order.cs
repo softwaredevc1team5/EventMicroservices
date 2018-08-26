@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMvc.Models.OrderModels;
+using WebMvc.Models;
 
 namespace WebMvc.Models.Orders
 {
@@ -51,7 +51,7 @@ namespace WebMvc.Models.Orders
 
         public string PaymentAuthCode { get; set; }
 
-        public List<OrderItem> OrderItems { get; } = new List<OrderItem>();
+        public List<OrderTicket> OrderTicket { get; } = new List<OrderTicket>();
     }
 
     public enum OrderStatus

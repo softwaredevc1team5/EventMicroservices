@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
-using WebMvc.Models.OrderModels;
 using WebMvc.ViewModels;
 using System;
 using System.Collections.Generic;

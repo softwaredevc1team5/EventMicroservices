@@ -7,13 +7,19 @@ namespace WebMvc.Models.CartModels
 {
     public class CartItem
     {
-        public string Id { get; set; }
-        public string ProductId { get; set; }
-        public string ProductName { get; set; }
-        public decimal UnitPrice { get; set; }
-        public decimal OldUnitPrice { get; set; }
+        public int OrderId { get; set; }
+
+        public int TicketTypeId { get; set; }
+
+        public string TypeName { get; set; }
+
         public int Quantity { get; set; }
-        public string PictureUrl { get; set; }
+
+        public decimal Price { get; set; }
+
+        public int EventId { get; set; }
+
+        public string ImageUrl { get; set; }
 
     }
 }

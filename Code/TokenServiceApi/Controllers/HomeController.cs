@@ -4,12 +4,24 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TokenServiceAPI.Models;
+
+
+using IdentityServer4.Services;
+
+using IdentityServer4.Quickstart.UI;
+
 
 namespace TokenServiceAPI.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IIdentityServerInteractionService _interaction;
+
+        public HomeController(IIdentityServerInteractionService interaction)
+        {
+            _interaction = interaction;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -29,15 +41,21 @@ namespace TokenServiceAPI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        /// <summary>
+        /// Shows the error page
+        /// </summary>
+        public async Task<IActionResult> Error(string errorId)
         {
-            return View();
-        }
+            var vm = new ErrorViewModel();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            // retrieve error details from identityserver
+            var message = await _interaction.GetErrorContextAsync(errorId);
+            if (message != null)
+            {
+                vm.Error = message;
+            }
+
+            return View("Error", vm);
         }
     }
 }

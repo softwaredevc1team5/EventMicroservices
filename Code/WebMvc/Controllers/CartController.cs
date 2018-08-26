@@ -52,9 +52,9 @@ namespace WebMvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(Dictionary<string, int> quantities, string action)
+        public async Task<IActionResult> Index(Dictionary<int, int> quantities, string action)
         {
-            if (action == "[ Checkout ]")
+            if (action == "[ Register ]")
             {
                 return RedirectToAction("Create", "Order");
             }
@@ -86,12 +86,12 @@ namespace WebMvc.Controllers
                     var user = _identityService.Get(HttpContext.User);
                     var product = new CartItem()
                     {
-                        Id = Guid.NewGuid().ToString(),
+                        OrderId = (int)DateTime.Now.Ticks,
                         Quantity = 1,
-                        ProductName = productDetails.Title,
-                        PictureUrl = productDetails.ImageUrl,
-                        UnitPrice = productDetails.Price,
-                        ProductId = productDetails.Id.ToString()
+                        TicketTypeId = 1,
+                        ImageUrl = productDetails.ImageUrl,
+                        Price = productDetails.Price,
+                        EventId = productDetails.Id
                     };
                     await _cartService.AddItemToCart(user, product);
                 }

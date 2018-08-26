@@ -5,19 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\netcoreapp2.0\CartApi.AssemblyInfo.cs" />
+    <Compile Remove="bin\**" />
+    <Compile Remove="obj\**" />
+    <Content Remove="bin\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="bin\**" />
+    <None Remove="obj\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="bin\Debug\netcoreapp2.0\CartApi.deps.json" />
-    <Content Include="bin\Debug\netcoreapp2.0\CartApi.runtimeconfig.dev.json" />
-    <Content Include="bin\Debug\netcoreapp2.0\CartApi.runtimeconfig.json" />
-    <Content Include="obj\Debug\netcoreapp2.0\CartApi.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\project.assets.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="obj\Docker\empty\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -31,24 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bin\Debug\netcoreapp2.0\CartApi.dll" />
-    <None Include="bin\Debug\netcoreapp2.0\CartApi.pdb" />
     <None Include="CartApi.csproj" />
-    <None Include="obj\CartApi.csproj.nuget.cache" />
-    <None Include="obj\CartApi.csproj.nuget.g.props" />
-    <None Include="obj\CartApi.csproj.nuget.g.targets" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.assets.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.csprojAssemblyReference.cache" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.dll" />
-    <None Include="obj\Debug\netcoreapp2.0\CartApi.pdb" />
-    <None Include="obj\Docker\AppType.cache" />
-    <None Include="obj\Docker\CanonicalServiceNames.cache" />
-    <None Include="obj\Docker\ProjectReferences.cache" />
-    <None Include="obj\Docker\RelativeOutputAssemblyPath.Fast.cache" />
-    <None Include="obj\Docker\RelativeOutputAssemblyPath.Regular.cache" />
-    <None Include="obj\Docker\TargetFramework.cache" />
   </ItemGroup>
 
 </Project>

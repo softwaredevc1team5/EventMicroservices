@@ -21,15 +21,36 @@ namespace OrderApi.Models
         public string PaymentAuthCode { get; set; }
         // public Guid RequestId { get;  set; }
         public decimal OrderTotal { get; set; }
-        public IEnumerable<OrderItem> OrderItems { get; set; }
+        public string BuyerId { get; set; }
+
+        public string StripeToken { get; set; }
+
+        public string OrderStatus { get; set; }
+        //EventProperties
+        public int EventId { get; set; }
+
+        public string EventTitle { get; set; }
+
+        public DateTime EventStartDate { get; set; }
+
+        public DateTime EventEndDate { get; set; }
+
+        public string PictureUrl { get; set; }
+        public IEnumerable<OrderTicket> OrderItems { get; set; }
 
         protected Order()
         {
-            OrderItems = new List<OrderItem>();
+            OrderItems = new List<OrderTicket>();
         }
 
-
+        
     }
-    
+    public enum OrderStatus
+    {
+        Preparing = 1,
+        Shipped = 2,
+        Delivered = 3
+    }
+
 }
 

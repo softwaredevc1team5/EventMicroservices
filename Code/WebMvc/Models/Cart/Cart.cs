@@ -12,7 +12,7 @@ namespace WebMvc.Models.CartModels
 
         public decimal Total()
         {
-            return Math.Round(Items.Sum(x => x.UnitPrice * x.Quantity), 2);
+            return Math.Round(Items.Sum(x => x.Price * x.Quantity), 2);
         }
 
     }
