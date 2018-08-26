@@ -10,9 +10,10 @@ namespace WebMvc
     {
 
         public string EventCatalogUrl { get; set; }
-        public string CartUrl { get; set; }
+        public string WishlistUrl { get; set; }
         public Logging Logging { get; set; }
         public string OrderUrl { get; set; }
+        public string CartUrl { get; set; }
     }
 
 

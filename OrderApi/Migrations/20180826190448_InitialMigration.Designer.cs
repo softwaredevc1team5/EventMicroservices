@@ -10,7 +10,7 @@ using OrderApi.Data;
 namespace OrderApi.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20180826145519_InitialMigration")]
+    [Migration("20180826190448_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,6 +19,7 @@ namespace OrderApi.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.2-rtm-30932")
                 .HasAnnotation("Relational:Sequence:.order_hilo", "'order_hilo', '', '1', '10', '', '', 'Int64', 'False'")
+                .HasAnnotation("Relational:Sequence:.ticketorder_hilo", "'ticketorder_hilo', '', '1', '10', '', '', 'Int64', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("OrderApi.Models.Order", b =>
@@ -77,15 +78,19 @@ namespace OrderApi.Migrations
 
             modelBuilder.Entity("OrderApi.Models.OrderTicket", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("TicketOrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:HiLoSequenceName", "ticketorder_hilo")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.SequenceHiLo);
 
                     b.Property<int>("EventId");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired();
 
-                    b.Property<int?>("OrderId2");
+                    b.Property<int>("OrderId");
+
+                    b.Property<int?>("OrderId1");
 
                     b.Property<decimal>("Price");
 
@@ -97,9 +102,11 @@ namespace OrderApi.Migrations
                     b.Property<string>("TypeName")
                         .IsRequired();
 
-                    b.HasKey("OrderId");
+                    b.HasKey("TicketOrderId");
 
-                    b.HasIndex("OrderId2");
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("OrderId1");
 
                     b.ToTable("OrderTicket");
                 });
@@ -113,7 +120,7 @@ namespace OrderApi.Migrations
 
                     b.HasOne("OrderApi.Models.Order")
                         .WithMany("OrderItems")
-                        .HasForeignKey("OrderId2");
+                        .HasForeignKey("OrderId1");
                 });
 #pragma warning restore 612, 618
         }

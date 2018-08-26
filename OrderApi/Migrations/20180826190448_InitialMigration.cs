@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderApi.Migrations
@@ -10,6 +9,10 @@ namespace OrderApi.Migrations
         {
             migrationBuilder.CreateSequence(
                 name: "order_hilo",
+                incrementBy: 10);
+
+            migrationBuilder.CreateSequence(
+                name: "ticketorder_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
@@ -42,19 +45,19 @@ namespace OrderApi.Migrations
                 name: "OrderTicket",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TicketOrderId = table.Column<int>(nullable: false),
                     TicketTypeId = table.Column<int>(maxLength: 50, nullable: false),
                     TypeName = table.Column<string>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     Price = table.Column<decimal>(nullable: false),
                     EventId = table.Column<int>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: false),
-                    OrderId2 = table.Column<int>(nullable: true)
+                    OrderId = table.Column<int>(nullable: false),
+                    OrderId1 = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderTicket", x => x.OrderId);
+                    table.PrimaryKey("PK_OrderTicket", x => x.TicketOrderId);
                     table.ForeignKey(
                         name: "FK_OrderTicket_Order_OrderId",
                         column: x => x.OrderId,
@@ -62,17 +65,22 @@ namespace OrderApi.Migrations
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderTicket_Order_OrderId2",
-                        column: x => x.OrderId2,
+                        name: "FK_OrderTicket_Order_OrderId1",
+                        column: x => x.OrderId1,
                         principalTable: "Order",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderTicket_OrderId2",
+                name: "IX_OrderTicket_OrderId",
                 table: "OrderTicket",
-                column: "OrderId2");
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderTicket_OrderId1",
+                table: "OrderTicket",
+                column: "OrderId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -85,6 +93,9 @@ namespace OrderApi.Migrations
 
             migrationBuilder.DropSequence(
                 name: "order_hilo");
+
+            migrationBuilder.DropSequence(
+                name: "ticketorder_hilo");
         }
     }
 }

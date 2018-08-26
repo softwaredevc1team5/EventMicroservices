@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMvc.Infrastructure;
 using WebMvc.Services;
 using WebMvc.ViewModels;
 
@@ -22,12 +21,10 @@ namespace WebMvc.Controllers
 
             int? EventCategoryFilterApplied,
 
-            int? EventTypeFilterApplied, int? page, String EventDateFilterApplied)
+            int? EventTypeFilterApplied, int? page)
         {
 
             int itemsPage = 9;
-
-            
 
             //get events from service who goes thr api path to get to eventcatalog api to get events from EventDB
             var ecatalog = await
@@ -44,10 +41,7 @@ namespace WebMvc.Controllers
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
             {
-
                 Events = ecatalog.Data,
-                EventDates = _ecatalogSvc.GetEventDates(),
-                EventDateFilterApplied = EventDateFilterApplied,
 
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
 
@@ -85,9 +79,8 @@ namespace WebMvc.Controllers
             return View(vm);
 
         }
-        public   IActionResult Search(string SearchEventTitle, string SearchEventCity, string SearchEventDate)
+        public  IActionResult Search(string SearchEventTitle, string SearchEventCity, string SearchEventDate)
         {
-            //var SearchEventDate = EventDateFilterApplied;
             //ViewData["Message"] = $"Your application description page. {SearchEventTitle}";
             //DateTime SearchEventDate = DateTime.Parse(strSearchEventDate,  MM-dd-yyyy);
 
@@ -100,13 +93,6 @@ namespace WebMvc.Controllers
             {
                 //uer did not provide anything
                 ViewData["Message"] = $"PLEASE ENTER TITLE OR CITY OR DATE";
-            }
-            else if(SearchEventTitle != null || SearchEventDate != null && SearchEventCity != null)
-            {
-                //IEnumerable<SelectListItem> ListOfCities = Convert.ChangeType(_ecatalogSvc.GetAllCities())_ecatalogSvc.GetAllCities();
-              
-                //string text = ListOfCities.Where(x => x.Text.ToLower() == SearchEventCity.ToLower() ).FirstOrDefault().Text;
-                return RedirectToAction("EventSearchByCategory", "EventCatalog", new { EventCityFilterApplied = SearchEventCity, EventDateFilterApplied = SearchEventDate });
             }
             else
             {
@@ -126,8 +112,7 @@ namespace WebMvc.Controllers
                 return RedirectToAction("Index", "SearchEventCatalog", new { title = SearchEventTitle, city = SearchEventCity, date = SearchEventDate });
 
             }
-
-
+           
             return View();
         }
 
@@ -177,6 +162,15 @@ namespace WebMvc.Controllers
             //RedirectToAction("Index", "Catalog");
             return View(vm);
         }
+        [Authorize]
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+
+            return View();
+        }
+
 
     }
 }

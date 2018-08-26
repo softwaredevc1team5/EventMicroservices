@@ -1,0 +1,75 @@
+﻿@model  WebMvc.Models.WishlistModels.Wishlist
+
+@{
+    ViewData["Title"] = "My Wishlist";
+}
+
+<div class="container">
+    @if (TempData.ContainsKey("BasketInoperativeMsg"))
+    {
+    <br />
+    <div class="alert alert-warning" role="alert">
+        &nbsp;@TempData["BasketInoperativeMsg"]
+    </div>
+    }
+    else
+    {
+    <article class="esh-basket-titles row">
+        <br />
+        @if (TempData.ContainsKey("BasketInoperativeMsg"))
+            {
+        <div class="alert alert-warning" role="alert">
+            &nbsp;@TempData["BasketInoperativeMsg"]
+        </div>
+            }
+
+        <section class="esh-basket-title col-xs-3">Product</section>
+        <section class="esh-basket-title col-xs-3 hidden-lg-down"></section>
+        <section class="esh-basket-title col-xs-2">EventTitle</section>
+        <section class="esh-basket-title col-xs-2">TicketType</section>
+        <section class="esh-basket-title col-xs-2">NumOfTickets</section>
+    </article>
+
+    for (int i = 0; i < Model.Items.Count; i++)
+        {
+            var item = Model.Items[i];
+
+    <article class="esh-basket-items  row">
+        <div>
+            <section class="esh-basket-item esh-basket-item--middle col-lg-3 hidden-lg-down">
+                <img class="esh-basket-image" src="@item.ImageUrl" />
+            </section>
+            <section class="esh-basket-item esh-basket-item--middle col-xs-3">@item.EventTitle</section>
+            <section class="esh-basket-item esh-basket-item--middle col-xs-2">$ @item.TicketType)</section>
+        </div>
+        <div class="row">
+
+        </div>
+    </article>
+
+    <div class="esh-basket-items--border row">
+    </div>
+    <br />
+        }
+
+    <div class="container">
+        <article class="esh-basket-titles esh-basket-titles--clean row">
+            <section class="esh-basket-title col-xs-10"></section>
+            <section class="esh-basket-title col-xs-2">Total</section>
+        </article>
+
+        <article class="esh-basket-items row">
+            <section class="esh-basket-item col-xs-7"></section>
+            <section class="esh-basket-item col-xs-2">
+                <button class="btn esh-basket-checkout" name="name" value="" type="submit">[ Update ]</button>
+            </section>
+            <section class="esh-basket-item col-xs-3">
+                <input type="submit"
+                       class="btn esh-basket-checkout"
+                       value="[ Checkout ]" name="action" />
+            </section>
+        </article>
+    </div>
+    }
+
+</div>

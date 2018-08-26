@@ -12,7 +12,7 @@ namespace OrderApi.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderId { get; set; }
+        public int TicketOrderId { get; set; }
 
         public int TicketTypeId { get; set; }
 
@@ -27,7 +27,9 @@ namespace OrderApi.Models
         public string ImageUrl { get; set; }
 
         protected OrderTicket() { }
-        public Order Order { get; set; }
+
+        public int OrderId { get; set; }
+        public virtual Order Order { get; set; }
 
         
 

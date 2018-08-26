@@ -78,6 +78,9 @@ namespace OrderApi.Data
             {
                 //throw new NotImplementedException();
                 builder.ToTable("OrderTicket");
+                builder.Property(c => c.TicketOrderId)
+                    .ForSqlServerUseSequenceHiLo("ticketorder_hilo")
+                    .IsRequired();
                 builder.Property(c => c.TicketTypeId)
                     .IsRequired()
                     .HasMaxLength(50);
