@@ -54,7 +54,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://192.168.86.36:5020
+         IdentityUrl: http://172.18.13.97:5020
          CartUrl: http://cart
          OrderUrl: http://order        
          WishlistUrl: http://wishlist
@@ -93,7 +93,7 @@ services:
       image: "microsoft/mssql-server-linux:latest"
       ports:
          - "1451:1433"
-      container_name: mssqlserverEvent
+      container_name: mssqlserver
       environment:
          ACCEPT_EULA: Y
          SA_PASSWORD: ProductApi(!)
@@ -110,12 +110,12 @@ services:
          IdentityUrl: http://tokenserver
       container_name: cartapi
       ports:
-         - "5050:80"
+         - "5051:80"
       networks:
          - backend
          - frontend 
       depends_on:
-         - cart.data
+         - cartbasket.data
          - tokenserver
 
    wishlist:
@@ -156,8 +156,8 @@ services:
          - backend
          - frontend 
       depends_on:
+        - tokenserver 
         - mssqlserver
-        - tokenserver  
 
    basket.data:
       image: redis
@@ -166,8 +166,7 @@ services:
       networks:
          - backend 
   
-
-   cart.data:
+   cartbasket.data:
       image: redis
       ports:
          - "6378:6379"
