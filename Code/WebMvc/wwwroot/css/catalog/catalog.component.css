@@ -231,14 +231,31 @@ li {
             background-color: #f1f1f1;
         }
 
+    .esh-menu-item  {
+        display: inline;
+        padding: 8px;
+        /*background-color: #000080; */
+        font-size: 1rem;
+        font-weight: 200;
+        font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+        text-align: center;
+        text-transform: uppercase;
+        float: left;
+    }
+
+        .esh-menu-item:hover {
+            background-color: #f1f1f1;
+        }
+
 .esh-header-signin {
-    display: block;
+    display: inline-block;
     padding: 8px;
+    
     font-size: 1rem;
     font-weight: 200;
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
     text-align: center;
-    text-transform: uppercase;
+   /* text-transform: uppercase; */
    
 }
 
