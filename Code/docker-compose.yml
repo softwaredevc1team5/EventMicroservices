@@ -16,7 +16,7 @@ services:
          DatabaseName: eventCatalogdb
          DatabaseUser: sa
          DatabaseUserPassword: ProductApi(!)
-      container_name: eventcatalogapi2
+      container_name: eventcatalogapi
       ports:
          - "55399:80"
       networks:
@@ -35,7 +35,7 @@ services:
          DatabaseName: wishlistdb
          DatabaseUser: sa
          DatabaseUserPassword: ProductApi(!)
-      container_name: wishlistapi2
+      container_name: wishlistapi
       ports:
          - "55400:80"
       networks:
@@ -54,7 +54,7 @@ services:
          DatabaseName: ticketdb
          DatabaseUser: sa
          DatabaseUserPassword: ProductApi(!)
-      container_name: eventticketapi2
+      container_name: eventticketapi
       ports:
          - "55401:80"
       networks:
@@ -70,8 +70,8 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://10.0.0.138:5020
-      container_name: webevents2
+         IdentityUrl: http://192.168.1.134:5020
+      container_name: webevents
       ports:
          - "5200:80"
       networks:
@@ -87,7 +87,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          MvcClient: http://localhost:5200   
-      container_name: tokenserviceapi2
+      container_name: tokenserviceapi
       ports:
          - "5020:80"
       networks:
@@ -100,7 +100,7 @@ services:
       image: "microsoft/mssql-server-linux:latest"
       ports:
          - "1450:1433"
-      container_name: mssqlserverEvent2
+      container_name: mssqlserverEvent
       environment:
          ACCEPT_EULA: Y
          SA_PASSWORD: ProductApi(!)

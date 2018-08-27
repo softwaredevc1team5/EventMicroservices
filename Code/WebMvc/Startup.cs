@@ -15,6 +15,7 @@ using Newtonsoft.Json.Serialization;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
 using WebMvc.Services;
+using WebMvc.Services.Orders;
 
 namespace WebMvc
 {
@@ -30,8 +31,6 @@ namespace WebMvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
             services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -43,7 +42,7 @@ namespace WebMvc
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventCatalogService, EventCatalogService>();
-
+            services.AddTransient<IOrderService, MockOrderService>();// Lisa Change this when you finish the OrderService
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             //services.AddTransient<ICartService, CartService>();
 
