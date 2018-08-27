@@ -64,30 +64,19 @@ namespace OrderApi
             ConfigureAuthService(services);
 
             // WaitForDBInit(_connectionString);
+            //For Docker
+            var server = Configuration["DatabaseServer"];
+            var database = Configuration["DatabaseName"];
+            var user = Configuration["DatabaseUser"];
+            var password = Configuration["DatabaseUserPassword"];
+            var connectionString = String.Format("Server={0};Database={1};User={2};Password={3};", server, database, user, password);
 
-            var hostname = Environment.GetEnvironmentVariable("SQLSERVER_HOST") ?? "mssqlserver";
-            var password = Environment.GetEnvironmentVariable("SA_PASSWORD") ?? "MyProduct!123";
-            var database = Environment.GetEnvironmentVariable("DATABASE") ?? "OrdersDb";
+            services.AddDbContext<OrderDbContext>(
+                options => options.UseSqlServer(connectionString));
 
-            var connectionString = $"Server={hostname};Database={database};User ID=sa;Password={password};";
-
-
-            services.AddDbContext<OrdersContext>(options =>
-            {
-                options.UseSqlServer(connectionString,
-                                     sqlServerOptionsAction: sqlOptions =>
-                                     {
-                                         sqlOptions.MigrationsAssembly(typeof(Startup).GetTypeInfo().Assembly.GetName().Name);
-                                         //Configuring Connection Resiliency: https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-resiliency 
-                                         sqlOptions.EnableRetryOnFailure(maxRetryCount: 5, maxRetryDelay: TimeSpan.FromSeconds(30), errorNumbersToAdd: null);
-                                     });
-
-                // Changing default behavior when client evaluation occurs to throw. 
-                // Default in EF Core would be to log a warning when client evaluation is performed.
-                options.ConfigureWarnings(warnings => warnings.Throw(RelationalEventId.QueryClientEvaluationWarning));
-                //Check Client vs. Server evaluation: https://docs.microsoft.com/en-us/ef/core/querying/client-eval
-            });
-
+            ////for iis
+            //services.AddDbContext<OrderDbContext>(
+            //    options => options.UseSqlServer(Configuration["ConnectionString"]));
 
 
             services.AddSwaggerGen(options =>

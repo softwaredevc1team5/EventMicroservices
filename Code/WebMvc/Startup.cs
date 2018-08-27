@@ -47,8 +47,8 @@ namespace WebMvc
 
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
             services.AddTransient<IOrderService, OrderService>();
-            //services.AddTransient<IWishlistService, WishlistService>();
-            //services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IWishlistService, WishlistService>();
+            services.AddTransient<ICartService, CartService>();
 
 
 
@@ -76,7 +76,7 @@ namespace WebMvc
                 options.Scope.Add("profile");
                 options.Scope.Add("offline_access");
                 options.Scope.Add("basket");
-              //  options.Scope.Add("order");
+                options.Scope.Add("order");
                 options.Scope.Add("cartbasket");
 
             });
