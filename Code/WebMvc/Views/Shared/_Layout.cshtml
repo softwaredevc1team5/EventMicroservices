@@ -33,7 +33,7 @@
     </environment>*@
 </head>
 <body>
-    <header class="navbar navbar-light navbar-static-top">
+   <!--- <header class="navbar navbar-light navbar-static-top">
         <div class="container">
             <article class="row">
                 <section class="col-lg-7 col-md-6 col-xs-12">
@@ -46,55 +46,93 @@
                 @await Html.PartialAsync("_LoginPartial")
             </article>
         </div>
-    </header>
+    </header> -->
+
+    <header class="navbar navbar-light navbar-static-top">
+        <div class="container">
+            <article class="row">
+                <section class="col-lg-7 col-md-6 col-xs-12">
+                    <a class="navbar-brand" routerLink="catalog">
+                        <a asp-area="" asp-controller="EventCatalog" asp-action="Index">
+                            <img src="~/images/EventHubLogo.png" />
+                        </a>
+                    </a>
+                </section>
+
+
+                <section>
+                    @*     <ul>
+
+                <li>
+                    <a href="@Url.Action("Index", "EventCatalog")">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="@Url.Action("About", "Home")">
+                        Create Events
+                    </a>
+                </li>
+
+            </ul>
+                    *@
 
 
 
+                </section>
+                @await Html.PartialAsync("_LoginPartial")
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer class="esh-app-footer">
-            <div class="container">
-                <article class="row">
+            </article> 
 
-                    <section class="col-sm-6"></section>
+        </div>
 
-                    <section class="col-sm-6"></section>
+        </header>
 
-                </article>
-            </div>
-        </footer>
-    </div>
+
+
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer class="esh-app-footer">
+                <div class="container">
+                    <article class="row">
+
+                        <section class="col-sm-6"></section>
+
+                        <section class="col-sm-6"></section>
+
+                    </article>
+                </div>
+            </footer>
+        </div>
 
 
  
-        <a asp-area="" asp-controller="OrderTicket" asp-action="Index">
-            Ticket Link
-        </a>
+       
  
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+            <environment include="Development">
+                <script src="~/lib/jquery/dist/jquery.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+                <script src="~/js/site.js" asp-append-version="true"></script>
+            </environment>
+            <environment exclude="Development">
+                <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                        asp-fallback-test="window.jQuery"
+                        crossorigin="anonymous"
+                        integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+                </script>
+                <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                        asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                        asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                        crossorigin="anonymous"
+                        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+                </script>
+                <script src="~/js/site.min.js" asp-append-version="true"></script>
+            </environment>
 
-    @RenderSection("Scripts", required: false)
+            @RenderSection("Scripts", required: false)
 </body>
 </html>

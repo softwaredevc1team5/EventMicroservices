@@ -24,26 +24,7 @@ services:
          - frontend
       depends_on:
          - mssqlserver
-         
-   wishlist:
-      build:
-         context: .\WishListAPI
-         dockerfile: Dockerfile
-      image: event/wishlistapi
-      environment:
-         DatabaseServer: mssqlserver
-         DatabaseName: wishlistdb
-         DatabaseUser: sa
-         DatabaseUserPassword: ProductApi(!)
-      container_name: wishlistapi
-      ports:
-         - "55400:80"
-      networks:
-         - backend
-         - frontend
-      depends_on:
-         - mssqlserver
-       
+
    eventticket:
       build:
          context: .\EventTicketAPI
@@ -62,7 +43,6 @@ services:
          - frontend
       depends_on:
          - mssqlserver
-
    webmvc:
       build: 
          context: .\WebMvc
@@ -71,6 +51,7 @@ services:
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
          IdentityUrl: http://192.168.1.134:5020
+         EventTicketUrl: http://eventticket
       container_name: webevents
       ports:
          - "5200:80"
