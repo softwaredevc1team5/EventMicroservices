@@ -56,7 +56,7 @@ services:
          EventCatalogUrl: http://eventcatalog
          IdentityUrl: http://172.18.13.97:5020
          CartUrl: http://cart
-         OrderUrl: http://orders        
+         OrderUrl: http://order       
          WishlistUrl: http://wishlist
       container_name: webevents
       ports:

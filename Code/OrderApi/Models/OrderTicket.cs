@@ -24,12 +24,13 @@ namespace OrderApi.Models
 
         public int EventId { get; set; }
 
+        public string EventTitle { get; set; }
+
         public string ImageUrl { get; set; }
 
         protected OrderTicket() { }
 
         public int OrderId { get; set; }
-        public virtual Order Order { get; set; }
 
         
 

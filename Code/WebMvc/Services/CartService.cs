@@ -95,14 +95,19 @@ namespace WebMvc.Services
         {
             var order = new Order();
 
+            order.BuyerId = cart.BuyerId;
+            order.OrderId = DateTime.Now.Millisecond;
             cart.Items.ForEach(x =>
             {
                 order.OrderTicket.Add(new OrderTicket()
                 {
-                    OrderId = x.OrderId,
-
-                    TicketTypeId = x.TicketType,
-                    TypeName = x.Title,
+                    OrderId = order.OrderId,
+                    EventId = x.EventId,
+                    EventTitle = x.Title,
+                    ImageUrl = x.ImageUrl,
+                    TicketTypeId = x.TicketTypeId,
+                    TypeName = x.TicketType,
+                    
                     Quantity = x.Quantity,
                     Price = x.Price
                 });

@@ -19,9 +19,10 @@ namespace WebMvc.Models.Orders
 
         public int EventId { get; set; }
 
+        public string EventTitle { get; set; }
+
         public string ImageUrl { get; set; }
 
-        public Order Order { get; set; }
 
     }
 }

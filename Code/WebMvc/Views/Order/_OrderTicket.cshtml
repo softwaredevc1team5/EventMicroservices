@@ -1,4 +1,4 @@
-﻿@model WebMvc.Models.Orders.Order
+﻿@model WebMvc.ViewModels.Order.DetailViewModel
 
 
 <section class="esh-orders_new-section">
@@ -16,8 +16,8 @@
                 <input type="hidden" value="@item.ImageUrl" name=@("orderitems[" + i + "].ImageUrl") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-4">
-                @item.Order.EventTitle
-                <input type="hidden" value="@item.Order.EventTitle" name=@("orderitems[" + i + "].EventTitle") />
+                @item.EventTitle
+                <input type="hidden" value="@item.EventTitle" name=@("orderitems[" + i + "].EventTitle") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
                 $ @item.Price

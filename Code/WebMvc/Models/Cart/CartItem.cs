@@ -9,7 +9,8 @@ namespace WebMvc.Models.CartModels
     {
         public int OrderId { get; set; }
         public int Quantity { get; set; }
-        public int TicketType { get; set; }
+        public string TicketType { get; set; }
+        public int TicketTypeId { get; set; }
         public int EventId { get; set; }
         public string Title { get; set; }
         public string Address { get; set; }
@@ -19,6 +20,9 @@ namespace WebMvc.Models.CartModels
         public string ImageUrl { get; set; }
         public Decimal Price { get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public DateTime EndDate { get; set; }
         public int EventTypeId { get; set; }
         public int EventCategoryId { get; set; }
         public string EventType { get; set; }

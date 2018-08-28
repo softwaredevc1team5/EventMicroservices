@@ -1,8 +1,10 @@
 @using Microsoft.AspNetCore.Identity
 @using WebMvc.Services
 @using WebMvc.ViewModels
-@using WebMvc.Models.Orders
-@model  Order
+@using WebMvc.Models
+
+@model  WebMvc.ViewModels.Order.DetailViewModel
+
 @inject IIdentityService<ApplicationUser> UserManager
 
     @{

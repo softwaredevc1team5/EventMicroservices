@@ -54,9 +54,9 @@ namespace WebMvc.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(Dictionary<int, int> quantities, string action)
         {
-            if (action == " CHECKOUT ")
+            if (action == "CHECKOUT")
             {
-                return RedirectToAction("Create", "Orders");
+                return RedirectToAction("Create", "Order");
             }
 
 
