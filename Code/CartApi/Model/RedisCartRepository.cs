@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using EventMicroservices.Services.CartApi.Model;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using ShoesOnContainers.Services.CartApi.Model;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;

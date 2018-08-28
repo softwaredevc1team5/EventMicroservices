@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CartApi.Model;
+using EventMicroservices.Services.CartApi.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ShoesOnContainers.Services.CartApi.Infrastructure.Filters;
-using ShoesOnContainers.Services.CartApi.Model;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Swagger;
 

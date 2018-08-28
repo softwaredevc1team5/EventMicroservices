@@ -22,5 +22,6 @@ namespace WebMvc.Models.Orders
         public string ImageUrl { get; set; }
 
         public Order Order { get; set; }
+
     }
 }

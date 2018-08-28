@@ -1,4 +1,4 @@
-﻿@model WebMvc.Models.OrderModels.Order
+﻿@model WebMvc.Models.Orders.Order
 
 
 <section class="esh-orders_new-section">
@@ -6,28 +6,28 @@
         <section class="esh-orders_new-title col-xs-12">Order details</section>
     </article>
 
-    @for (int i = 0; i < Model.OrderItems.Count; i++)
+    @for (int i = 0; i < Model.OrderTicket.Count; i++)
     {
-        var item = Model.OrderItems[i];
+        var item = Model.OrderTicket[i];
 
         <article class="esh-orders_new-items esh-orders_new-items--border row">
             <section class="esh-orders_new-item col-md-4 hidden-md-down">
-                <img class="esh-basket-image" src="@item.PictureUrl">
-                <input type="hidden" value="@item.PictureUrl" name=@("orderitems[" + i + "].PictureUrl") />
+                <img class="esh-basket-image" src="@item.ImageUrl">
+                <input type="hidden" value="@item.ImageUrl" name=@("orderitems[" + i + "].ImageUrl") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-4">
-                @item.ProductName
-                <input type="hidden" value="@item.ProductName" name=@("orderitems[" + i + "].ProductName") />
+                @item.Order.EventTitle
+                <input type="hidden" value="@item.Order.EventTitle" name=@("orderitems[" + i + "].EventTitle") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
-                $ @item.UnitPrice
-                <input type="hidden" value="@item.UnitPrice" name=@("orderitems[" + i + "].UnitPrice") />
+                $ @item.Price
+                <input type="hidden" value="@item.Price" name=@("orderitems[" + i + "].Price") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
-                @item.Units
-                <input type="hidden" value="@item.Units" name=@("orderitems[" + i + "].Units") />
+                @item.Quantity
+                <input type="hidden" value="@item.Quantity" name=@("orderitems[" + i + "].Quantity") />
             </section>
-            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-2">$ @Math.Round(item.Units * item.UnitPrice, 2)</section>
+            <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-2">$ @Math.Round(item.Quantity * item.Price, 2)</section>
         </article>
     }
 </section>

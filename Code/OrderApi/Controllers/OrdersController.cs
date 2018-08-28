@@ -60,7 +60,7 @@ namespace OrderApi.Controllers
 
 
             _ordersContext.Orders.Add(order);
-            _ordersContext.OrderTicket.AddRange(order.OrderItems);
+            _ordersContext.OrderTicket.AddRange(order.OrderTicket);
 
             //_logger.LogInformation(" Order added to context");
             //_logger.LogInformation(" Saving........");
@@ -78,7 +78,7 @@ namespace OrderApi.Controllers
         {
 
             var item = await _ordersContext.Orders
-                .Include(x => x.OrderItems)
+                .Include(x => x.OrderTicket)
                 .SingleOrDefaultAsync(ci => ci.OrderId == id);
             if (item != null)
             {

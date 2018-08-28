@@ -47,16 +47,16 @@ namespace WebMvc.Services
                     Items = new List<CartItem>()
                 };
             }
-            var basketItem = cart.Items
+            var cartbasketItem = cart.Items
                 .Where(p => p.OrderId == product.OrderId)
                 .FirstOrDefault();
-            if (basketItem == null)
+            if (cartbasketItem == null)
             {
                 cart.Items.Add(product);
             }
             else
             {
-                basketItem.Quantity += 1;
+                cartbasketItem.Quantity += 1;
             }
 
 
@@ -66,21 +66,21 @@ namespace WebMvc.Services
         public async Task ClearCart(ApplicationUser user)
         {
             var token = await GetUserTokenAsync();
-            var cleanBasketUri = ApiPaths.Basket.CleanBasket(_remoteServiceBaseUrl, user.Id);
-            _logger.LogDebug("Clean Basket uri : " + cleanBasketUri);
-            var response = await _apiClient.DeleteAsync(cleanBasketUri);
-            _logger.LogDebug("Basket cleaned");
+            var cleancartBasketUri = ApiPaths.CartBasket.CleanBasket(_remoteServiceBaseUrl, user.Id);
+            _logger.LogDebug("Clean Basket uri : " + cleancartBasketUri);
+            var response = await _apiClient.DeleteAsync(cleancartBasketUri);
+            _logger.LogDebug("CartBasket cleaned");
         }
 
         public async Task<Cart> GetCart(ApplicationUser user)
         {
             var token = await GetUserTokenAsync();
-            _logger.LogInformation(" We are in get basket and user id " + user.Id);
+            _logger.LogInformation(" We are in get cartbasket and user id " + user.Id);
             _logger.LogInformation(_remoteServiceBaseUrl);
 
-            var getBasketUri = ApiPaths.Basket.GetBasket(_remoteServiceBaseUrl, user.Id);
-            _logger.LogInformation(getBasketUri);
-            var dataString = await _apiClient.GetStringAsync(getBasketUri, token);
+            var getcartBasketUri = ApiPaths.CartBasket.GetBasket(_remoteServiceBaseUrl, user.Id);
+            _logger.LogInformation(getcartBasketUri);
+            var dataString = await _apiClient.GetStringAsync(getcartBasketUri, token);
             _logger.LogInformation(dataString);
 
             var response = JsonConvert.DeserializeObject<Cart>(dataString.ToString()) ??
@@ -94,7 +94,6 @@ namespace WebMvc.Services
         public Order MapCartToOrder(Cart cart)
         {
             var order = new Order();
-            order.OrderTotal = 0;
 
             cart.Items.ForEach(x =>
             {
@@ -102,8 +101,8 @@ namespace WebMvc.Services
                 {
                     OrderId = x.OrderId,
 
-                    TicketTypeId = x.TicketTypeId,
-                    TypeName = x.TypeName,
+                    TicketTypeId = x.TicketType,
+                    TypeName = x.Title,
                     Quantity = x.Quantity,
                     Price = x.Price
                 });
@@ -116,9 +115,9 @@ namespace WebMvc.Services
 
         public async Task<Cart> SetQuantities(ApplicationUser user, Dictionary<int, int> quantities)
         {
-            var basket = await GetCart(user);
+            var cartbasket = await GetCart(user);
 
-            basket.Items.ForEach(x =>
+            cartbasket.Items.ForEach(x =>
             {
                 // Simplify this logic by using the
                 // new out variable initializer.
@@ -128,7 +127,7 @@ namespace WebMvc.Services
                 }
             });
 
-            return basket;
+            return cartbasket;
         }
 
         public async Task<Cart> UpdateCart(Cart cart)
@@ -136,9 +135,9 @@ namespace WebMvc.Services
 
               var token = await GetUserTokenAsync();
             _logger.LogDebug("Service url: " + _remoteServiceBaseUrl);
-            var updateBasketUri = ApiPaths.Basket.UpdateBasket(_remoteServiceBaseUrl);
-            _logger.LogDebug("Update Basket url: " + updateBasketUri);
-            var response = await _apiClient.PostAsync(updateBasketUri, cart,token); 
+            var updatecartBasketUri = ApiPaths.CartBasket.UpdateBasket(_remoteServiceBaseUrl);
+            _logger.LogDebug("Update Basket url: " + updatecartBasketUri);
+            var response = await _apiClient.PostAsync(updatecartBasketUri, cart,token); 
             response.EnsureSuccessStatusCode();
 
             return cart;

@@ -38,6 +38,7 @@ namespace WebMvc.Models.Orders
 
         public OrderStatus OrderStatus { get; set; }
         
+
         //EventProperties
         public int EventId { get; set; }
 

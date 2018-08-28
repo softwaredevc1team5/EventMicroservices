@@ -25,6 +25,24 @@ namespace WebMvc.Infrastructure
             }
         }
 
+        public static class CartBasket
+        {
+            public static string GetBasket(string baseUri, string cartbasketId)
+            {
+                return $"{baseUri}/{cartbasketId}";
+            }
+
+            public static string UpdateBasket(string baseUri)
+            {
+                return baseUri;
+            }
+
+            public static string CleanBasket(string baseUri, string cartbasketId)
+            {
+                return $"{baseUri}/{cartbasketId}";
+            }
+        }
+
         public static class EventCatalog
 
         {

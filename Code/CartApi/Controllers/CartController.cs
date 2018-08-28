@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ShoesOnContainers.Services.CartApi.Model;
 using Microsoft.Extensions.Logging;
 using System.Net;
+using EventMicroservices.Services.CartApi.Model;
 
 namespace ShoesOnContainers.Services.CartApi.Controllers
 {

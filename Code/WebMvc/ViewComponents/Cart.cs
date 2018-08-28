@@ -32,11 +32,13 @@ namespace WebMvc.ViewComponents
             catch(BrokenCircuitException)
             {
                 // Catch error when CartApi is in open circuit mode
-                ViewBag.IsBasketInoperative = true;
+                ViewBag.IsCartBasketInoperative = true;
             }
             
             return View(vm);
         }
+
+        
 
     }
 }

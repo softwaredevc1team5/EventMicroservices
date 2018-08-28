@@ -5,21 +5,21 @@
 }
 
 <div class="container">
-    @if (TempData.ContainsKey("BasketInoperativeMsg"))
+    @if (TempData.ContainsKey("CartBasketInoperativeMsg"))
     {
         <br />
         <div class="alert alert-warning" role="alert">
-            &nbsp;@TempData["BasketInoperativeMsg"]
+            &nbsp;@TempData["CartBasketInoperativeMsg"]
         </div>
     }
     else
     {
         <article class="esh-basket-titles row">
             <br />
-            @if (TempData.ContainsKey("BasketInoperativeMsg"))
+            @if (TempData.ContainsKey("CartBasketInoperativeMsg"))
             {
                 <div class="alert alert-warning" role="alert">
-                    &nbsp;@TempData["BasketInoperativeMsg"]
+                    &nbsp;@TempData["CartBasketInoperativeMsg"]
                 </div>
             }
 
@@ -37,15 +37,15 @@
             <article class="esh-basket-items  row">
                 <div>
                     <section class="esh-basket-item esh-basket-item--middle col-lg-3 hidden-lg-down">
-                        <img class="esh-basket-image" src="@item.PictureUrl" />
+                        <img class="esh-basket-image" src="@item.ImageUrl" />
                     </section>
-                    <section class="esh-basket-item esh-basket-item--middle col-xs-3">@item.ProductName</section>
-                    <section class="esh-basket-item esh-basket-item--middle col-xs-2">$ @item.UnitPrice.ToString("N2")</section>
+                    <section class="esh-basket-item esh-basket-item--middle col-xs-3">@item.Title</section>
+                    <section class="esh-basket-item esh-basket-item--middle col-xs-2">$ @item.Price.ToString("N2")</section>
                     <section class="esh-basket-item esh-basket-item--middle col-xs-2">
-                        <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.Id" />
+                        <input type="hidden" name="@("quantities[" + i +"].Key")" value="@item.EventId" />
                         <input type="number" class="esh-basket-input" min="1" name="@("quantities[" + i +"].Value")" value="@item.Quantity" />
                     </section>
-                    <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-xs-2">$ @Math.Round(item.Quantity * item.UnitPrice, 2).ToString("N2")</section>
+                    <section class="esh-basket-item esh-basket-item--middle esh-basket-item--mark col-xs-2">$ @Math.Round(item.Quantity * item.Price, 2).ToString("N2")</section>
                 </div>
                 <div class="row">
 
@@ -53,10 +53,10 @@
             </article>
 
             <div class="esh-basket-items--border row">
-                @if (item.OldUnitPrice != 0)
+                @*@if (item.OldUnitPrice != 0)
                 {
                     <div class="alert alert-warning esh-basket-margin12" role="alert">&nbsp;Note that the price of this article changed in our Catalog. The old price when you originally added it to the basket was $ @item.OldUnitPrice </div>
-                }
+                }*@
             </div>
             <br />
         }
@@ -75,13 +75,14 @@
             <article class="esh-basket-items row">
                 <section class="esh-basket-item col-xs-7"></section>
                 <section class="esh-basket-item col-xs-2">
-                    <button class="btn esh-basket-checkout" name="name" value="" type="submit">[ Update ]</button>
+                    <button class="btn esh-basket-checkout" name="name" value="" type="submit"> Update </button>
                 </section>
                 <section class="esh-basket-item col-xs-3">
                     <input type="submit"
                            class="btn esh-basket-checkout"
-                           value="[ Checkout ]" name="action" />
+                           value=" CHECKOUT " name="action" />
                 </section>
+                
             </article>
         </div>
     }

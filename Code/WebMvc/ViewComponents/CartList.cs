@@ -30,8 +30,8 @@ namespace WebMvc.ViewComponents
             catch (BrokenCircuitException)
             {
                 // Catch error when CartApi is in open circuit mode
-                ViewBag.IsBasketInoperative = true;
-                TempData["BasketInoperativeMsg"] = "Basket Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
+                ViewBag.IsCartBasketInoperative = true;
+                TempData["CartBasketInoperativeMsg"] = "CartBasket Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
             }
 
             return View(vm);

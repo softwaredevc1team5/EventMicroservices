@@ -23,7 +23,7 @@ namespace WebMvc.Services
         public WishlistService(IOptionsSnapshot<AppSettings> settings, IHttpContextAccessor httpContextAccesor, IHttpClient httpClient, ILoggerFactory logger)
         {
             _settings = settings;
-            _remoteServiceBaseUrl = $"{_settings.Value.WishlistUrl}/api/v1/whislist";
+            _remoteServiceBaseUrl = $"{_settings.Value.WishlistUrl}/api/v1/wishlist";
             _httpContextAccesor = httpContextAccesor;
             _apiClient = httpClient;
             _logger = logger.CreateLogger<WishlistService>();

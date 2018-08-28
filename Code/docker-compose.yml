@@ -54,9 +54,9 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://172.20.60.161:5020
+         IdentityUrl: http://172.18.13.97:5020
          CartUrl: http://cart
-         OrderUrl: http://order        
+         OrderUrl: http://orders        
          WishlistUrl: http://wishlist
       container_name: webevents
       ports:
@@ -80,6 +80,7 @@ services:
          MvcClient: http://localhost:5200
          BasketApiClient: http://localhost:5050
          OrderApiClient: http://localhost:5600
+         CartApiClient: http://localhost:5051
       container_name: tokenserviceapi
       ports:
          - "5020:80"

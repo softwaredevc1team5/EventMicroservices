@@ -61,7 +61,7 @@ namespace OrderApi.Data
                 builder.Property(c => c.EventStartDate)
                     .IsRequired();
                 builder.Property(c => c.EventEndDate)
-                    .IsRequired();
+                    .IsRequired(false);
                 builder.Property(c => c.PictureUrl)
                     .IsRequired();
                 builder.Property(c => c.PaymentAuthCode)

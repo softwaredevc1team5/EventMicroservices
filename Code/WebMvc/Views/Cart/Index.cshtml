@@ -10,8 +10,8 @@
 
 <form method="post" id="cartForm">
     <div class="esh-basket">
-        @Html.Partial("_Header", new List<Header>() {
-            new Header() { Controller = "Catalog", Text = "Back to catalog" } })
+        @Html.Partial("Header", new List<Header>() {
+            new Header() { Controller = "EventCatalog", Text = "Back to catalog" } })
 
         @await Component.InvokeAsync("CartList", new { user = identityService.Get(User) })
     </div>

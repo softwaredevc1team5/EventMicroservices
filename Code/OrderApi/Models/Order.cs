@@ -36,11 +36,11 @@ namespace OrderApi.Models
         public DateTime EventEndDate { get; set; }
 
         public string PictureUrl { get; set; }
-        public IEnumerable<OrderTicket> OrderItems { get; set; }
+        public List<OrderTicket> OrderTicket { get; } = new List<OrderTicket>();
 
         protected Order()
         {
-            OrderItems = new List<OrderTicket>();
+            OrderTicket = new List<OrderTicket>();
         }
 
         

@@ -46,25 +46,25 @@ namespace WebMvc.Controllers
             //{
             //    // Catch error when CartApi is in circuit-opened mode                 
             //    HandleBrokenCircuitException();
-            //}
+            //    //}
 
-            return View();
+                return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(Dictionary<int, int> quantities, string action)
         {
-            if (action == "[ Register ]")
+            if (action == " CHECKOUT ")
             {
-                return RedirectToAction("Create", "Order");
+                return RedirectToAction("Create", "Orders");
             }
 
 
             try
             {
                 var user = _identityService.Get(HttpContext.User);
-                var basket = await _cartService.SetQuantities(user, quantities);
-                var vm = await _cartService.UpdateCart(basket);
+                var cartbasket = await _cartService.SetQuantities(user, quantities);
+                var vm = await _cartService.UpdateCart(cartbasket);
 
             }
             catch (BrokenCircuitException)
@@ -88,14 +88,27 @@ namespace WebMvc.Controllers
                     {
                         OrderId = (int)DateTime.Now.Ticks,
                         Quantity = 1,
-                        TicketTypeId = 1,
                         ImageUrl = productDetails.ImageUrl,
                         Price = productDetails.Price,
-                        EventId = productDetails.Id
+                        EventId = productDetails.Id,
+                        Title = productDetails.Title,
+                        Address = productDetails.Address,
+                        City = productDetails.City,
+                        State = productDetails.State,
+                        Zipcode = productDetails.Zipcode,
+                        StartDate = productDetails.StartDate,
+                        EventCategory = productDetails.EventCategory,
+                        EventCategoryId = productDetails.EventCategoryId,
+                        EventType = productDetails.EventType,
+                        EventDescription = productDetails.EventDescription,
+                        OrganizerId = productDetails.OrganizerId,
+                        OrganizerName = productDetails.OrganizerName
+
                     };
                     await _cartService.AddItemToCart(user, product);
+                    //await _cartService.ClearCart(user);
                 }
-                return RedirectToAction("Index", "Catalog");
+                return RedirectToAction("Index", "EventCatalog");
             }
             catch (BrokenCircuitException)
             {
@@ -103,7 +116,7 @@ namespace WebMvc.Controllers
                 HandleBrokenCircuitException();
             }
 
-            return RedirectToAction("Index", "Catalog");
+            return RedirectToAction("Index", "EventCatalog");
 
         }
         //public async Task WriteOutIdentityInfo()
@@ -121,7 +134,7 @@ namespace WebMvc.Controllers
 
         private void HandleBrokenCircuitException()
         {
-            TempData["BasketInoperativeMsg"] = "cart Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
+            TempData["CartBasketInoperativeMsg"] = "cart Service is inoperative, please try later on. (Business Msg Due to Circuit-Breaker)";
         }
 
     }
