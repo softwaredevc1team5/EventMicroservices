@@ -1,7 +1,7 @@
 ﻿@model WebMvc.Models.WishlistModels.WishlistItem
 <form asp-controller="EventDetail" asp-action="EventDetail">
 
-    <input class="img-fluid img-thumbnail" type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:180px" />
+    <input class="esh-event-item " type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:180px" />
 
     <input type="hidden" asp-for="@Model.productId" name="id" />
     <div class="esh-event-title">
