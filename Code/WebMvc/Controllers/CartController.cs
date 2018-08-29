@@ -77,7 +77,7 @@ namespace WebMvc.Controllers
 
         }
 
-            public async Task<IActionResult> AddToCart(Event productDetails)
+            public async Task<IActionResult> AddToCart(EventDetail productDetails)
         {
             try
             {
@@ -97,6 +97,9 @@ namespace WebMvc.Controllers
                         State = productDetails.State,
                         Zipcode = productDetails.Zipcode,
                         StartDate = productDetails.StartDate,
+                        EndDate = productDetails.EndDate,
+                        StartTime = productDetails.StartTime,
+                        EndTime = productDetails.EndTime,
                         EventCategory = productDetails.EventCategory,
                         EventCategoryId = productDetails.EventCategoryId,
                         EventType = productDetails.EventType,
@@ -108,7 +111,7 @@ namespace WebMvc.Controllers
                     await _cartService.AddItemToCart(user, product);
                     //await _cartService.ClearCart(user);
                 }
-                return RedirectToAction("Index", "EventCatalog");
+                return RedirectToAction("Index", "Cart");
             }
             catch (BrokenCircuitException)
             {

@@ -3,7 +3,7 @@
 @using WebMvc.ViewModels
 @using WebMvc.Models
 
-@model  WebMvc.ViewModels.Order.DetailViewModel
+@model  WebMvc.Models.Order.Order
 
 @inject IIdentityService<ApplicationUser> UserManager
 
@@ -55,7 +55,7 @@
             </div>
         </section>
 
-        @await Html.PartialAsync("_OrderItems")
+        @await Html.PartialAsync("_OrderTicket")
 
         <section class="esh-orders_new-section esh-orders_new-section--right">
             <div class="form-group">

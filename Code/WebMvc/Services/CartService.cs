@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 using WebMvc;
 using WebMvc.Infrastructure;
 
-using WebMvc.Models.Orders;
+using WebMvc.Models.Order;
 
 namespace WebMvc.Services
 {
@@ -59,8 +59,10 @@ namespace WebMvc.Services
                 cartbasketItem.Quantity += 1;
             }
 
-
+            
             await UpdateCart(cart);
+            
+            //ClearCart(user).Wait();
         }
 
         public async Task ClearCart(ApplicationUser user)
@@ -113,7 +115,7 @@ namespace WebMvc.Services
                 });
                 order.OrderTotal += (x.Quantity * x.Price);
             });
-
+            
             return order;
         }
 
@@ -145,6 +147,7 @@ namespace WebMvc.Services
             var response = await _apiClient.PostAsync(updatecartBasketUri, cart,token); 
             response.EnsureSuccessStatusCode();
 
+            
             return cart;
         }
 

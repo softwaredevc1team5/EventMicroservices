@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using EventMicroservices.Services.CartApi.Model;
 
-namespace ShoesOnContainers.Services.CartApi.Controllers
+namespace EventMicroservices.Services.CartApi.Controllers
 {
     [Route("api/v1/[controller]")]
 

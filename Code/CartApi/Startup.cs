@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using ShoesOnContainers.Services.CartApi.Infrastructure.Filters;
+using EventMicroservices.Services.CartApi.Infrastructure.Filters;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Swagger;
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Models;
 
-namespace WebMvc.Models.Orders
+namespace WebMvc.Models.Order
 {
     public class Order
     {     

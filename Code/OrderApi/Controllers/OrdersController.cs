@@ -1,32 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using EventMicroservices.Services.OrderApi.Data;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using OrderApi.Data;
 using OrderApi.Models;
 
 namespace OrderApi.Controllers
-{   
+{
     [Route("api/v1/[controller]")]
     [Authorize]
 
     public class OrdersController : Controller
     {
 
-        private readonly OrderDbContext _ordersContext;
+        private readonly OrdersContext _ordersContext;
         private readonly IOptionsSnapshot<OrderSettings> _settings;
 
 
         private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(OrderDbContext ordersContext, ILogger<OrdersController> logger, IOptionsSnapshot<OrderSettings> settings)
+        public OrdersController(OrdersContext ordersContext, ILogger<OrdersController> logger, IOptionsSnapshot<OrderSettings> settings)
         {
             _settings = settings;
             // _ordersContext = ordersContext;
@@ -60,7 +57,7 @@ namespace OrderApi.Controllers
 
 
             _ordersContext.Orders.Add(order);
-            _ordersContext.OrderTicket.AddRange(order.OrderTicket);
+            _ordersContext.OrderTickets.AddRange(order.OrderTicket);
 
             //_logger.LogInformation(" Order added to context");
             //_logger.LogInformation(" Saving........");

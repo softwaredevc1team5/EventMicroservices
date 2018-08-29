@@ -146,10 +146,9 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          IdentityUrl: http://tokenserver
-         DatabaseServer: mssqlserver
-         DatabaseName: OrdersDb
-         DatabaseUser: sa
-         DatabaseUserPassword: ProductApi(!)
+         SQLSERVER_HOST: mssqlcontainer
+         SA_PASSWORD: ProductApi(!)
+         DATABASE: OrdersDb
       container_name: orderapi
       ports:
          - "5600:80"

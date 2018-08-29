@@ -10,7 +10,7 @@ using Microsoft.Extensions.Options;
 using Stripe;
 using Polly.CircuitBreaker;
 using Microsoft.AspNetCore.Authorization;
-using WebMvc.Models.Orders;
+using WebMvc.Models.Order;
 
 namespace WebMvc.Controllers
 {

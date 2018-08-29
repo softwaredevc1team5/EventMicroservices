@@ -10,7 +10,7 @@ using WebMvc.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WebMvc.Models.Orders;
+using WebMvc.Models.Order;
 
 namespace WebMvc.Services
 {
