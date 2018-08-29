@@ -20,20 +20,20 @@ namespace WebMvc.Controllers
 
         public EventCreateController(IEventCatalogService ecatalogSvc) =>
                         _ecatalogSvc = ecatalogSvc;
-        public IActionResult Index(EventDetailViewModel model)
+        public IActionResult Index(EventCreate model)
         {
-            if (ModelState.IsValid)
-            {
-
-            }
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> EventCreateAsync(Event model)
-        {
-            var citycatalog = await _ecatalogSvc.CreateEvent(model);
+            
             return View(model);
         }
-
+        //  [HttpPost]
+        public IActionResult EventCreate(EventCreate model)
+        {
+            var vm = new EventCreateViewModel()
+            {
+                Event = model
+            };
+            // var citycatalog = await _ecatalogSvc.CreateEvent(model);
+            return View(vm);
         }
+    }
 }
