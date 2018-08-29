@@ -9,7 +9,7 @@ namespace WebMvc.Models
     public class EventCreate
     {
         public int Id { get; set; }
-       // [Required]
+        [Required]
         public string Title { get; set; }
         public string Address { get; set; }
       //  [Required]
