@@ -173,5 +173,30 @@ namespace WebMvc.Infrastructure
 
 
         }
+        #region EventTicket
+        //All the URL's needed to uset EventTicketService on the WevMvc Project
+
+        public class EventTicket {
+
+            public static string GetTicketById(string baseUri, int id){
+                return $"{baseUri}tickets/{id}";
+            }
+
+            public static string GetTicketsByEventId(string baseUri, int eventId){
+                return $"{baseUri}tickets/eventid/{eventId}";
+            }
+
+            public static string GetTicketsByEventTitle(string baseUri, string title)
+            {
+                return $"{baseUri}getticketsbyeventtitle/withtitle/{title}";
+            }
+
+            public static string GetAllTicketTypes(string baseUri)
+            {
+                return $"{baseUri}ticketstype";
+            }           
+
+        }
+        #endregion
     }
 }

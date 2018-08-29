@@ -17,6 +17,7 @@ namespace WebMvc.Controllers
         public EventCatalogController(IEventCatalogService ecatalogSvc) =>
              
             _ecatalogSvc = ecatalogSvc;
+
         // starting Index of app
         public async Task<IActionResult> Index(
 
