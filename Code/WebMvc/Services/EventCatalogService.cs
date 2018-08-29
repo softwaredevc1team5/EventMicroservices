@@ -39,35 +39,20 @@ namespace WebMvc.Services
         {
             
             var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategories(_remoteServiceBaseUrl);
-
             var dataString = await _apiClient.GetStringAsync(getEventCategoriesUri);
-
-
-
             var items = new List<SelectListItem>
-
             {
-
                 new SelectListItem() { Value = null, Text = "All", Selected = true }
-
-            };
+             };
 
             var categories = JArray.Parse(dataString);
-
             foreach (var category in categories.Children<JObject>())
-
             {
-
                 items.Add(new SelectListItem()
-
                 {
-
                     Value = category.Value<string>("id"),
-
                     Text = category.Value<string>("name")
-
                 });
-
             }
             return items;
         }
@@ -75,9 +60,7 @@ namespace WebMvc.Services
         public async Task<EventCategoryCatalog> GetEventCategoriesWithImage(int page, int take)
         {
             var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategoriesForImage(_remoteServiceBaseUrl, page, take);
-
             var dataString = await _apiClient.GetStringAsync(getEventCategoriesUri);          
-
             var response = JsonConvert.DeserializeObject<EventCategoryCatalog>(dataString);
 
             return response;
@@ -85,105 +68,73 @@ namespace WebMvc.Services
 
 
         public async Task<EventCatalog> GetEvents(int page, int take, int? category, int? type)
-
         {
 
             var alleventsUri = ApiPaths.EventCatalog.GetAllEvents(_remoteServiceBaseUrl, page, take, category, type);
-
             var dataString = await _apiClient.GetStringAsync(alleventsUri);
-
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
 
             return response;
-
         }
 
         public async Task<EventCatalog> GetEventsWithTitle(string title, int page, int take)
-
         {
-
             var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitle(_remoteServiceBaseUrl,title,page, take);
-
-
-
             var dataString = await _apiClient.GetStringAsync(eventswithtitleUri);
-
-
-
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
-
-
-
             return response;
-
         }
 
         public async Task<EventCatalog> GetEventsWithTitleCityDate(string title, string city, string date, int page, int take)
-
         {
 
             var eventswithtitleUri = ApiPaths.EventCatalog.GetEventsWithTitleCityDate(_remoteServiceBaseUrl, title, city, date, page, take);
-
-
-
             var dataString = await _apiClient.GetStringAsync(eventswithtitleUri);
-
-
-
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
 
-
-
             return response;
-
         }
 
         public async Task<Event> GetEventItem(int EventId)
         {
             var getEventDetailUri = ApiPaths.EventCatalog.GetEvent(_remoteServiceBaseUrl, EventId);
-
             var dataString = await _apiClient.GetStringAsync(getEventDetailUri);
-
             var item = JsonConvert.DeserializeObject<Event>(dataString);
 
             return item;
         }
 
         public async Task<IEnumerable<SelectListItem>> GetEventTypes()
-
         {
-
             var getEventTypesUri = ApiPaths.EventCatalog.GetAllEventTypes(_remoteServiceBaseUrl);
-
             var dataString = await _apiClient.GetStringAsync(getEventTypesUri);
-
             var items = new List<SelectListItem>
             {
                    new SelectListItem() { Value = null, Text = "All", Selected = true }
-
             };
-
             var types = JArray.Parse(dataString);
-
             foreach (var type in types.Children<JObject>())
-
             {
-
                 items.Add(new SelectListItem()
-
                 {
-
                     Value = type.Value<string>("id"),
-
                     Text = type.Value<string>("type")
-
                 });
-
             }
             return items;
         }
 
-        //EventCity Services
+        //post Event services start- bhuvana
+        public async Task<string> CreateEvent(Event newEvent)
+        {
+            var getEventDetailUri = ApiPaths.EventCatalog.PostEvent(_remoteServiceBaseUrl);
+            var dataString = await _apiClient.PostStringAsync(getEventDetailUri);
+            var Content = "";
+            var poststring = await _apiClient.PostAsync(getEventDetailUri,Content);
+
+            return "";
+        }
+        //EventCity Services 
         public async Task<EventCityCatalog> GetCityInfo( string city)
         {
             var allEventsCityUri = ApiPaths.EventCatalog.GetCityDescription(_remoteServiceBaseUrl, city);
@@ -199,25 +150,7 @@ namespace WebMvc.Services
             var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
             return response;
-
         }
-        public async Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city, int page, int take)
-        {
-            var allEventsCityUri = ApiPaths.EventCatalog.GetCityDescription(_remoteServiceBaseUrl,cityFilterApplied,city,page,take);
-            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
-            var response = JsonConvert.DeserializeObject<EventCityCatalog>(dataString);
-            return response;
-        }
-        
-        public async Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take)
-        {
-            var allEventsCityUri = ApiPaths.EventCatalog.GetEventsWithCityId(_remoteServiceBaseUrl, cityFilterApplied,city, page, take);
-            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
-            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
-            return response;
-        }
-
-        //bhuvana
         public async Task<IEnumerable<SelectListItem>> GetCities()
         {
             var getCitiesUri = ApiPaths.EventCatalog.GetAllEventCities(_remoteServiceBaseUrl);
@@ -237,49 +170,42 @@ namespace WebMvc.Services
             }
             return items;
         }
-
-
-      
-
-       public async Task<EventCatalog> GetEventsByAllFilters(int page, int take, int? category, int? type, String date, String city)
+        /*
+        public async Task<EventCityCatalog> GetCityWithId(int? cityFilterApplied,string city, int page, int take)
+        {
+            var allEventsCityUri = ApiPaths.EventCatalog.GetCityDescription(_remoteServiceBaseUrl,cityFilterApplied,city,page,take);
+            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
+            var response = JsonConvert.DeserializeObject<EventCityCatalog>(dataString);
+            return response;
+        }
+        public async Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take)
+        {
+            var allEventsCityUri = ApiPaths.EventCatalog.GetEventsWithCityId(_remoteServiceBaseUrl, cityFilterApplied,city, page, take);
+            var dataString = await _apiClient.GetStringAsync(allEventsCityUri);
+            var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
+            return response;
+        }*/
+        // end - bhuvana
+        public async Task<EventCatalog> GetEventsByAllFilters(int page, int take, int? category, int? type, String date, String city)
         {
             var alleventsUri = ApiPaths.EventCatalog.GetEventsByAllFilters(_remoteServiceBaseUrl,  page, take,  category,  type, date, city);
-
-
             var dataString = await _apiClient.GetStringAsync(alleventsUri);
-
-
-
-
             var response = JsonConvert.DeserializeObject<EventCatalog>(dataString);
-
-
-
             return response;
         }
         //chitra
         public async Task<IEnumerable<SelectListItem>> GetAllCities()
         {
-
             var getAllCitiesUri = ApiPaths.EventCatalog.GetAllCities(_remoteServiceBaseUrl);
-
-
             var dataString = await _apiClient.GetStringAsync(getAllCitiesUri);
-
-
-
             var items = new List<SelectListItem>
-
             {
-
                 new SelectListItem() { Value = null, Text = "All", Selected = true }
-
             };
             var cities = JsonConvert.DeserializeObject<List<string>>(dataString);
             //var cities = JArray.Parse(dataString);
             foreach (var city in cities)
             {
-                
                 items.Add(new SelectListItem()
                 {
                     Text = city,

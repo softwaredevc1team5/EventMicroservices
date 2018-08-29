@@ -89,6 +89,13 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}eventTypes";
 
             }
+        
+            // Post Event ApiPaths
+           public static string PostEvent(string baseUri)
+            {
+                return $"{ baseUri}/events";
+            }
+
             //EventCity ApiPaths
             public static string GetCatalogEventsInCity(string baseUri, string city)
             {
@@ -96,9 +103,13 @@ namespace WebMvc.Infrastructure
             }
             public static string GetCityDescription(string baseUri, string city)
             {
-
                 return $"{baseUri}City/withcityname/{city}?pageSize=6&pageIndex=0";
             }
+            public static string GetAllEventCities(string baseUri)
+            {
+                return $"{baseUri}EventCities";
+            }
+
 
             //Get city with cityId or cityName
             public static string GetCityDescription(string baseUri,int? cityFilterApplied,string city,int page,int take)
@@ -117,20 +128,11 @@ namespace WebMvc.Infrastructure
 
                 }
                 return $"{baseUri}{filterQs}?pageSize={take}&pageIndex={page}";
-               // return $"{baseUri}City/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
+             // return $"{baseUri}City/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
             }
             //Get cityEvents with cityId or cityName
-            //[action]/withId/{cityId:int}/cityname/{cityName}
-            public static string GetEventsWithCityId(string baseUri, int? cityFilterApplied,string city, int page, int take)
-            {
-                return $"{baseUri}CityEvents/withId/{cityFilterApplied}/cityname/{city}?pageSize={take}&pageIndex={page}";
-            }
+           
             
-            public static string GetAllEventCities(string baseUri)
-            {
-                return $"{baseUri}EventCities";
-
-            }
 
             //chitra
             public static string GetAllCities(string baseUri)

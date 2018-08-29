@@ -39,6 +39,15 @@ namespace WebMvc.Infrastructure
 
         }
 
+        public async Task<string> PostStringAsync(string uri)
+        {
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri);
+            var response = await _client.SendAsync(requestMessage);
+            var responseMessage = await _client.PostAsync(uri, response.Content);
+
+            return await response.Content.ReadAsStringAsync();
+        }
+
 
         public async Task<HttpResponseMessage> PostAsync<T>(string uri, T item)
         {
@@ -47,8 +56,8 @@ namespace WebMvc.Infrastructure
         }
 
 
-        public async Task<HttpResponseMessage> PutAsync<T>(string uri, T item)
-        {
+        public async Task<HttpResponseMessage> PutAsync<T>(string uri, T item) { 
+        
             return await DoPostPutAsync(HttpMethod.Put, uri, item);
         }
 

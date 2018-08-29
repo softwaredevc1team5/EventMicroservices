@@ -12,6 +12,8 @@ namespace WebMvc.Infrastructure
 
         Task<string> GetStringAsync(string uri);
 
+        Task<string> PostStringAsync(string uri);
+
         Task<HttpResponseMessage> PostAsync<T>(string uri, T item);
 
         Task<HttpResponseMessage> DeleteAsync(string uri);

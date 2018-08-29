@@ -1,4 +1,4 @@
-﻿@model WebMvc.ViewModels.EventDetailViewModel
+﻿@model WebMvc.Models.Event
 
 @{
     ViewData["Title"] = "EventCreate";
@@ -10,17 +10,17 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Index">
+        <form asp-action="EventCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Event Title</label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <input asp-for="@Model.Title" class="form-control" />
+                <span asp-validation-for="@Model.Title" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Address" class="control-label">Location</label>
-                <input asp-for="Address" class="form-control" placeholder="Search for a venue or address" />
+                <input asp-for="@Model.Address" class="form-control" placeholder="Search for a venue or address" />
                 <span asp-validation-for="Address" class="text-danger"></span><br />
                 <input asp-for="City" class="form-control" placeholder="City" />
                 <span asp-validation-for="City" class="text-danger"></span><br />
@@ -42,7 +42,7 @@
 
             <div class="form-group">
                 <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
+                @* <input asp-for="ImageUrl" class="form-control" />*@
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,16 +51,6 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="EventTypeId" class="control-label"></label>
-                <input asp-for="EventTypeId" class="form-control" />
-                <span asp-validation-for="EventTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EventCategoryId" class="control-label"></label>
-                <input asp-for="EventCategoryId" class="form-control" />
-                <span asp-validation-for="EventCategoryId" class="text-danger"></span>
-            </div>
             <div class="form-group">
                 <label asp-for="EventType" class="control-label"></label>
                 <input asp-for="EventType" class="form-control" />
@@ -71,24 +61,28 @@
                 <input asp-for="EventCategory" class="form-control" />
                 <span asp-validation-for="EventCategory" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="OrganizerId" class="control-label"></label>
-                <input asp-for="OrganizerId" class="form-control" />
-                <span asp-validation-for="OrganizerId" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="OrganizerName" class="control-label"></label>
                 <input asp-for="OrganizerName" class="form-control" />
                 <span asp-validation-for="OrganizerName" class="text-danger"></span>
             </div>
-                  <div class="form-group">
+            <div class="form-group">
                 <label asp-for="EventDescription" class="control-label"></label>
-                <input asp-for="EventDescription" class="form-control" />
+                <textarea class="form-control"
+                          id="EventDescription"
+                          name="EventDescription"
+                          rows="5"
+                          cols="20"></textarea>
                 <span asp-validation-for="EventDescription" class="text-danger"></span>
-           </div>
+            </div>
             <div class="form-group">
                 <label asp-for="OrganizerDescription" class="control-label"></label>
-                <input asp-for="OrganizerDescription" class="form-control" />
+                <textarea class="form-control"
+                          id="OrganizerDescription"
+                          name="OrganizerDescription"
+                          rows="5"
+                          cols="20"></textarea>
                 <span asp-validation-for="OrganizerDescription" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -101,7 +95,18 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+@*  <div class="container-fluid">
+      <div class="row">
+          <h2 class="demo-text">A demo of jQuery / Bootstrap based editor</h2>
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12 nopadding">
+                      <textarea id="demo-editor-bootstrap"></textarea>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
