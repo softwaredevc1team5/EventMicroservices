@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
+﻿
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
+
 using WebMvc.Models;
 using WebMvc.Services;
-using WebMvc.ViewModels;
+
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,9 +16,16 @@ namespace WebMvc.Controllers
         // GET: /<controller>/
 
         private IEventCatalogService _ecatalogSvc;
+       // private IBus _bus;
 
-        public EventCreationController(IEventCatalogService ecatalogSvc) =>
-                        _ecatalogSvc = ecatalogSvc;
+        public EventCreationController(IEventCatalogService ecatalogSvc)
+        {
+            _ecatalogSvc = ecatalogSvc;
+           
+
+        }
+       
+                        
 
 
         public IActionResult Index(EventForCreation model)
@@ -28,6 +34,7 @@ namespace WebMvc.Controllers
             return View(model);
         }
 
+        //Direct Called to EventApi
         [HttpPost]
         public async Task<IActionResult> Create(EventForCreation frmEvent)
         {
@@ -48,6 +55,11 @@ namespace WebMvc.Controllers
             }
         }
 
+
+    
+        
+
+
         public IActionResult EventCreate()
         {
             return View();
@@ -55,9 +67,7 @@ namespace WebMvc.Controllers
         }
 
         public IActionResult EventSaved(int id, string userName)
-        {
-
-           // _logger.LogInformation("User {userName} completed checkout on order {orderId}.", userName, id);
+        {         
             return View(id);
 
         }
