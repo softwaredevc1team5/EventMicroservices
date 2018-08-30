@@ -1,7 +1,7 @@
 ![Eventhub](https://github.com/softwaredevc1team5/EventMicroservices/blob/LastAssignment3b/Code/WebMvc/wwwroot/images/EventHubLogo2.png)
 
 
-Is an event manager website that allows users to create, browse and promote events. It was built using microservices architecture, Docker Linux containers, Swagger, Redis, RabbitMQ, IdentityServer4, ASP.NET Core and C#.
+	Is an event manager website that allows users to create, browse and promote events. It was built using Microservices architecture, Docker Linux containers, Swagger, Redis, RabbitMQ, IdentityServer4, ASP.NET Core and C#.
 
  - All the project is Dockerized using 8 containers:
 	- EventcatalogApi
