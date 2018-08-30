@@ -6,9 +6,9 @@ using WebMvc.Models;
 
 namespace WebMvc.ViewModels
 {
-    public class EventCreateViewModel
+    public class EventCreationViewModel
     {
-        public EventCreate Event { get; set; }
+        public EventForCreation Event { get; set; }
         public PaginationInfo PaginationInfo { get; set; }
     }
 }

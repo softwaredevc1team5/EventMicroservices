@@ -1,7 +1,7 @@
-﻿@model WebMvc.Models.EventCreate
+﻿@model WebMvc.Models.EventForCreation
 
 @{
-    ViewData["Title"] = "EventCreate";
+    ViewData["Title"] = "EventCreation";
 }
 
 <h2>Event Create</h2>
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EventCreate"asp-controller="EventCreate" >
+        <form asp-action="Create" asp-controller="EventCreation" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Event Title</label>
@@ -51,7 +51,7 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="EventType" class="control-label"></label>
                 <input asp-for="EventType" class="form-control" />
                 <span asp-validation-for="EventType" class="text-danger"></span>
@@ -60,7 +60,7 @@
                 <label asp-for="EventCategory" class="control-label"></label>
                 <input asp-for="EventCategory" class="form-control" />
                 <span asp-validation-for="EventCategory" class="text-danger"></span>
-            </div>
+            </div>*@
 
             <div class="form-group">
                 <label asp-for="OrganizerName" class="control-label"></label>

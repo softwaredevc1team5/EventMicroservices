@@ -93,7 +93,7 @@ namespace WebMvc.Infrastructure
             // Post Event ApiPaths
            public static string PostEvent(string baseUri)
             {
-                return $"{ baseUri}/events";
+                return $"{ baseUri}new";
             }
 
             //EventCity ApiPaths
