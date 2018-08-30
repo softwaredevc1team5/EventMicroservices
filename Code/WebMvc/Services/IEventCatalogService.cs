@@ -36,6 +36,6 @@ namespace WebMvc.Services
         //Task<EventCatalog> GetEventsWithCityId(int? cityFilterApplied,string city, int page, int take);
         Task<IEnumerable<SelectListItem>> GetCities();
 
-        Task<string> CreateEvent(Event newEvent);
+        Task<int> CreateEvent(EventForCreation newEvent);
     }
 }

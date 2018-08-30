@@ -20,6 +20,8 @@ namespace WebMvc.Services
 
         private readonly string _remoteServiceBaseUrl;
 
+      
+
 
         public EventCatalogService(IOptionsSnapshot<AppSettings> settings,
 
@@ -124,16 +126,16 @@ namespace WebMvc.Services
             return items;
         }
 
-        //post Event services start- bhuvana
-        public async Task<string> CreateEvent(Event newEvent)
-        {
-            var getEventDetailUri = ApiPaths.EventCatalog.PostEvent(_remoteServiceBaseUrl);
-            var dataString = await _apiClient.PostStringAsync(getEventDetailUri);
-            var Content = "";
-            var poststring = await _apiClient.PostAsync(getEventDetailUri,Content);
+        ////post Event services start- bhuvana
+        //public async Task<string> CreateEvent(Event newEvent)
+        //{
+        //    var getEventDetailUri = ApiPaths.EventCatalog.PostEvent(_remoteServiceBaseUrl);
+        //    var dataString = await _apiClient.PostStringAsync(getEventDetailUri);
+        //    var Content = "";
+        //    var poststring = await _apiClient.PostAsync(getEventDetailUri,Content);
 
-            return "";
-        }
+        //    return "";
+        //}
         //EventCity Services 
         public async Task<EventCityCatalog> GetCityInfo( string city)
         {
@@ -233,6 +235,33 @@ namespace WebMvc.Services
             }
             return items;
         }
+
+        public async Task<int> CreateEvent(EventForCreation eve)
+        {
+           // var token = await GetUserTokenAsync();
+
+            var addNewEventUri = ApiPaths.EventCatalog.PostEvent(_remoteServiceBaseUrl);
+         //   _logger.LogDebug(" OrderUri " + addNewOrderUri);
+
+
+            var response = await _apiClient.PostAsync(addNewEventUri, eve);
+            if (response.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+            {
+                throw new Exception("Error creating Event, try later.");
+            }
+
+            // response.EnsureSuccessStatusCode();
+            var jsonString = response.Content.ReadAsStringAsync();
+
+            jsonString.Wait();
+          //  _logger.LogDebug("response " + jsonString);
+            dynamic data = JObject.Parse(jsonString.Result);
+            string value = data.orderId;
+            return Convert.ToInt32(value);
+        }
+
+
+      
 
     }
 }
