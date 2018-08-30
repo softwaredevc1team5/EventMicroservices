@@ -20,7 +20,15 @@
                 <input type="hidden" value="@item.EventTitle" name=@("orderitems[" + i + "].EventTitle") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">
-                $ @item.Price
+                @if (item.Price == 0)
+                {
+                    <span class="esh-event-price-free">FREE</span>
+                }
+                else
+                {
+                    <span class="esh-event-price">@item.Price.ToString("N2")</span>
+
+                }
                 <input type="hidden" value="@item.Price" name=@("orderitems[" + i + "].Price") />
             </section>
             <section class="esh-orders_new-item esh-orders_new-item--middle col-xs-1">

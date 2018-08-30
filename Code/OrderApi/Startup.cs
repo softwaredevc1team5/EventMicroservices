@@ -88,8 +88,8 @@ namespace OrderApi
                 //Check Client vs. Server evaluation: https://docs.microsoft.com/en-us/ef/core/querying/client-eval
             });
 
-            ////for iis
-            //services.AddDbContext<OrderDbContext>(
+            //for iis
+            //services.AddDbContext<OrdersContext>(
             //    options => options.UseSqlServer(Configuration["ConnectionString"]));
 
 

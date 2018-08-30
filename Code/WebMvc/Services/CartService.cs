@@ -48,7 +48,7 @@ namespace WebMvc.Services
                 };
             }
             var cartbasketItem = cart.Items
-                .Where(p => p.OrderId == product.OrderId)
+                .Where(p => p.EventId == product.EventId)
                 .FirstOrDefault();
             if (cartbasketItem == null)
             {
@@ -128,7 +128,7 @@ namespace WebMvc.Services
             {
                 // Simplify this logic by using the
                 // new out variable initializer.
-                if (quantities.TryGetValue(x.OrderId, out var quantity))
+                if (quantities.TryGetValue(x.EventId, out var quantity))
                 {
                     x.Quantity = quantity;
                 }
@@ -158,5 +158,7 @@ namespace WebMvc.Services
             return await context.GetTokenAsync("access_token");
           
         }
+
+       
     }
 }

@@ -54,7 +54,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://172.18.13.97:5020
+         IdentityUrl: http://192.168.86.36:5020
          CartUrl: http://cart
          OrderUrl: http://order       
          WishlistUrl: http://wishlist
@@ -146,7 +146,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          IdentityUrl: http://tokenserver
-         SQLSERVER_HOST: mssqlcontainer
+         SQLSERVER_HOST: mssqlserver
          SA_PASSWORD: ProductApi(!)
          DATABASE: OrdersDb
       container_name: orderapi

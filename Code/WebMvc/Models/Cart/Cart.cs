@@ -9,6 +9,7 @@ namespace WebMvc.Models.CartModels
     {
         public List<CartItem> Items { get; set; } = new List<CartItem>();
         public string BuyerId { get; set; }
+        //int Quantity { get; set; }
 
         public decimal Total()
         {

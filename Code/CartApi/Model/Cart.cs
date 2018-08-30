@@ -9,7 +9,7 @@ namespace EventMicroservices.Services.CartApi.Model
     {
         public string BuyerId { get;  set; }
         public List<CartItem> Items { get; set; }
-        
+        //int Quantity { get; set; }
 
         public Cart(string cartId)
         {

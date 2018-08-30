@@ -3,15 +3,15 @@
 @using WebMvc.ViewModels
 @using WebMvc.Models
 
-@model  WebMvc.Models.Order.Order
+@model WebMvc.Models.Order.Order
 
 @inject IIdentityService<ApplicationUser> UserManager
 
-    @{
+@{
     ViewData["Title"] = "New Order";
-    }
-    @Html.Partial("Header", new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } })
-   <div class="container">
+}
+@Html.Partial("Header", new List<Header>() { new Header() { Controller = "Cart", Text = "Back to cart" } })
+<div class="container">
     <form method="post" asp-controller="Order" asp-action="Create" id="payment-form">
         <section class="esh-orders_new-section">
             <div class="row">
@@ -57,75 +57,111 @@
 
         @await Html.PartialAsync("_OrderTicket")
 
-        <section class="esh-orders_new-section esh-orders_new-section--right">
-            <div class="form-group">
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-8">
-                    <div id="payment-form-container" class="col-md-8 well" style="width:480px;margin:20px auto;">
-                        <div class="form-group">
-                            <label class="control-label">Accepted</label>
-                            <div class="row">
-                                <div class="col-md-10 card-images">
-                                    <img src="~/images/creditcards/visa.png" alt="visa" />
-                                    <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
-                                    <img src="~/images/creditcards/amex.png" alt="amex" />
-                                    <img src="~/images/creditcards/discover.png" alt="discover" />
+        <div>
+            @if (Model.OrderTotal != 0)
+            {
+                <section class="esh-orders_new-section esh-orders_new-section--right">
+                    <div class="form-group">
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-8">
+                            <div id="payment-form-container" class="col-md-8 well" style="width:480px;margin:20px auto;">
+                                <div class="form-group">
+                                    <label class="control-label">Accepted</label>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-3 card-images row text-center">
+                                            <span><img src="~/images/creditcards/visa.png" alt="visa" /></span>
+                                        </div>
+                                        <div class="col-sm-3 card-images row text-center">
+                                            <span><img src="~/images/creditcards/mastercard.png" alt="mastercard" /></span>
+                                        </div>
+                                        <div class="col-sm-3 card-images row text-center">
+                                            <span><img src="~/images/creditcards/amex.png" alt="amex" /></span>
+                                        </div>
+                                        <div class="col-sm-3 card-images row text-center">
+                                            <span><img src="~/images/creditcards/discover.png" alt="discover" /></span>
+                                        </div>
+
+
+                                        @*<div class="col-md-3 card-images row text-center">
+                                            <img src="~/images/creditcards/visa.png" alt="visa" />
+                                            <img src="~/images/creditcards/mastercard.png" alt="mastercard" />
+                                            <img src="~/images/creditcards/amex.png" alt="amex" />
+                                            <img src="~/images/creditcards/discover.png" alt="discover" />
+                                        </div>*@
+                                    </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="card-element">Credit or debit card</label>
+                                    <div id="card-element" class="field">
+
+                                        <!-- a stripe Element will be inserted here. --->
+                                    </div>
+
+                                </div>
+
+                                <div id="card-errors" role="alert"></div>
+
+                                <h3 class="validation"></h3>
+                                <p class="alert alert-danger payment-errors" style="display:none; "></p>
+
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="card-element">Credit or debit card</label>
-                            <div id="card-element" class="field">
-
-                                <!-- a stripe Element will be inserted here. --->
-                            </div>
-
-                        </div>
-
-                        <div id="card-errors" role="alert"></div>
-
-                        <h3 class="validation"></h3>
-                        <p class="alert alert-danger payment-errors" style="display:none; "></p>
-
                     </div>
-                </div>
-            </div>
-        </section>
+                </section>
+            }
+        </div>
+        
+
+        <div>
+            @if (Model.OrderTotal != 0)
+            {
+                <section class="esh-orders_new-section">
+                    <div class="form-group">
+                        <div class="col-md-9">
+                            <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
+                        </div>
+                        <div class="col-md-2">
+                            <input id="pay-button" type="submit" value="[ Pay And Place Order ]" name="action" class="btn esh-orders_new-placeOrder" />
+                        </div>
+                    </div>
+                </section>
+
+                @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
+            <input asp-for="OrderGuid" type="hidden" />
+            <input asp-for="Buyer" type="hidden" />*@
 
 
-        <section class="esh-orders_new-section">
-            <div class="form-group">
-                <div class="col-md-9">
-                    <input asp-for="@Model.OrderTotal" name="OrderTotal" type="hidden" />
-                </div>
+            }
+            else
+            {
+
                 <div class="col-md-2">
                     <input id="pay-button" type="submit" value="[ Pay And Place Order ]" name="action" class="btn esh-orders_new-placeOrder" />
                 </div>
-            </div>
-        </section>
+            }
+        </div>
 
-        @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
-    <input asp-for="OrderGuid" type="hidden" />
-    <input asp-for="Buyer" type="hidden" />*@
-          
-    </form>
+
+</form>
 
 </div>
 
-@section Scripts {
+
+    @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script src="https://js.stripe.com/v3/"></script>
+        <script src="https://js.stripe.com/v3/"></script>
 
 
-<script type="text/javascript">
+        <script type="text/javascript">
 
         jQuery(function ($) {
 
              var stripe = Stripe('@ViewBag.StripePublishableKey');
-        
+
             var elements = stripe.elements();
             var card = elements.create('card', {
                 iconStyle: 'solid',
@@ -202,6 +238,6 @@
 
         });
 
-  
-    </script>
+
+        </script>
     }
