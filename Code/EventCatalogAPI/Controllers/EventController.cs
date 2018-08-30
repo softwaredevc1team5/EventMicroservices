@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace EventCatalogAPI.Controllers
@@ -316,7 +317,9 @@ namespace EventCatalogAPI.Controllers
 
 
         [HttpPost]
-        [Route("events")]
+        [Route("new")]
+        [ProducesResponseType((int)HttpStatusCode.Accepted)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
         {
 
@@ -386,11 +389,11 @@ namespace EventCatalogAPI.Controllers
             return NoContent();
         }
 
-       //chitra
-      [HttpGet]
+        //chitra
+        [HttpGet]
         [Route("[action]/type/{eventTypeId}/category/{eventCategoryId}/date/{eventDate}/city/{eventCity}")]
 
-        public async Task<IActionResult> EventsByFilters(int? eventTypeId, int? eventCategoryId, String eventDate, String eventCity, [FromQuery] int pageSize = 6,[FromQuery] int pageIndex = 0)
+        public async Task<IActionResult> EventsByFilters(int? eventTypeId, int? eventCategoryId, String eventDate, String eventCity, [FromQuery] int pageSize = 6, [FromQuery] int pageIndex = 0)
         {
             var root = (IQueryable<Event>)_eventCatalogContext.Events;
             if (eventTypeId.HasValue)
@@ -403,22 +406,22 @@ namespace EventCatalogAPI.Controllers
             }
             if (eventCity != "null" && eventCity != "All")
             {
-               // var citystr = eventCity.Split(',')[0];
+                // var citystr = eventCity.Split(',')[0];
                 //var statestr = eventCity.Split(',')[1];
-                root = root.Where(c => c.City.ToLower() == eventCity.ToLower() );
+                root = root.Where(c => c.City.ToLower() == eventCity.ToLower());
                 //root = root.Where(c => c.City == citystr && c.State == statestr);
             }
-           /*** if(eventTitle != "null")
-            {
-                StringComparison comp = StringComparison.OrdinalIgnoreCase;
+            /*** if(eventTitle != "null")
+             {
+                 StringComparison comp = StringComparison.OrdinalIgnoreCase;
 
-                root = root.Where(c => c.Title.Contains(eventTitle, comp) == true)
-            }
-            ***/
+                 root = root.Where(c => c.Title.Contains(eventTitle, comp) == true)
+             }
+             ***/
             if (eventDate != "null" && eventDate != "All Days")
 
             {
-                root = FindingEventsByDate(root, eventDate);
+                // root = FindingEventsByDate(root, eventDate); // This line was comment because the FindingEventsByDate is breaking Swagger
 
             }
 
@@ -438,7 +441,7 @@ namespace EventCatalogAPI.Controllers
         [Route("[action]")]
         public async Task<IActionResult> AllEventsCities()
         {
-            //IList<String> totalItems;
+          //  IList<String> totalItems;
             List<String> cities = new List<string>();
             var totalItems = await _eventCatalogContext.Events.ToListAsync();
             foreach (var item in totalItems)
@@ -510,6 +513,6 @@ namespace EventCatalogAPI.Controllers
             return root;
         }
 
-    
+
     }
 }
