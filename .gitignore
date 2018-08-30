@@ -259,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Code/WebMvc/ViewModels/Order/OrderTicketViewModel.cs

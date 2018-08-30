@@ -27,7 +27,7 @@ namespace TokenServiceAPI
             {
                  new ApiResource("basket", "Shopping Cart Api"),
                  new ApiResource("order", "Ordering Api"),
-                  new ApiResource("cartbasket", "Ordering Api"),
+                  new ApiResource("cartbasket", "Cart Api"),
             };
         }
 
