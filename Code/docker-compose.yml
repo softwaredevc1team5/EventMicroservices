@@ -54,7 +54,7 @@ services:
       environment: 
          ASPNETCORE_ENVIRONMENT: Development 
          EventCatalogUrl: http://eventcatalog
-         IdentityUrl: http://192.168.3.144:5020
+         IdentityUrl: http://172.20.60.161:5020
          CartUrl: http://cart
          OrderUrl: http://order       
          WishlistUrl: http://wishlist
