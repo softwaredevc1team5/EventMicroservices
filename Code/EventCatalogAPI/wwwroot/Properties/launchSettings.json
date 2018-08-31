@@ -11,6 +11,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
+      "launchUrl": "/swagger/index.html",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -18,14 +19,11 @@
     "EventCatalogAPI": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "api/events",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "Docker": {
-        "commandName": "Docker",
-        "launchBrowser": true,
-        "launchUrl": "{Scheme}://localhost:{ServicePort}"
-      }
+      "applicationUrl": "http://localhost:55399/"
     }
   }
 }

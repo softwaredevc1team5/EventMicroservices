@@ -1,0 +1,35 @@
+﻿@model WebMvc.Models.WishlistModels.WishlistItem
+<form asp-controller="EventDetail" asp-action="EventDetail">
+
+    <input class="esh-event-item " type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:180px" />
+
+    <input type="hidden" asp-for="@Model.productId" name="id" />
+    <div class="esh-event-title">
+        <span>@Model.EventTitle</span>
+    </div>
+    <div class="esh-event-city">
+        <span>@Model.City</span>
+    </div>
+    @if (Model.TicketPrice == 0)
+    {
+        <span class="esh-event-price-free">FREE</span>
+    }
+    else
+    {
+
+        <span class="esh-event-price">@Model.TicketPrice.ToString("N2")</span>
+
+    }
+
+    <input type="hidden" asp-for="@Model.City" name="eventAddress" />
+
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+
+    <input type="hidden" asp-for="@Model.EventTitle" name="title" />
+
+    <input type="hidden" asp-for="@Model.ImageUrl" name="imageUrl" />
+
+    <input type="hidden" asp-for="@Model.TicketPrice" name="price" />
+
+
+</form>

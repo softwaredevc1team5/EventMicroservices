@@ -10,18 +10,11 @@
 
 </form>
 
-<form asp-controller="Cart" asp-action="AddToCart">
-
-    <input class="esh-event-button" type="submit" value="[ ADD TO WISHLIST ]" />
-
+<form asp-controller="Wishlist" asp-action="AddToWishlist">
+    <input class="esh-event-button" type="image" name="clickeventdetails" src="~/images/wish.png" border="0" alt="EventWishListImage" style="width:50px;height:50px" />
+  
     <div class="esh-event-title">
-        <a href="@Url.Action("EventDetail", "EventDetail", new { id = @Model.Id })" class="esh-event-title"><span>@Model.Title</span></a>
-    </div>
-
-    <div class="esh-event-address">
-
-        <span>@Model.Address</span>
-
+        <span>@Model.Title</span>
     </div>
 
     <div class="esh-event-date">
@@ -40,10 +33,6 @@
 
     }
 
-        <div class="esh-event-category">
-            <a href="@Url.Action("About", "Home", new { id = @Model.EventCategoryId, name = @Model.EventCategory })"><span>@Model.EventCategory</span></a>
-        </div>
-
     <input type="hidden" asp-for="@Model.EventCategory" name="eventcategory" />
 
     <input type="hidden" asp-for="@Model.EventCategoryId" name="eventcategoryId" />
@@ -52,11 +41,15 @@
 
     <input type="hidden" asp-for="@Model.EventTypeId" name="eventtypeId" />
 
+    <input type="hidden" asp-for="@Model.Address" name="eventAddress" />
+
+    <input type="hidden" asp-for="@Model.City" name="eventCity" />
+
     <input type="hidden" asp-for="@Model.Id" name="id" />
 
     <input type="hidden" asp-for="@Model.Title" name="title" />
 
-    <input type="hidden" asp-for="@Model.ImageUrl" name="imageUri" />
+    <input type="hidden" asp-for="@Model.ImageUrl" name="imageUrl" />
 
     <input type="hidden" asp-for="@Model.Price" name="price" />
 

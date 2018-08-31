@@ -1,0 +1,54 @@
+﻿@model WebMvc.Models.WishlistModels.Wishlist
+
+@{
+    ViewData["Title"] = "My Wishlist";
+   
+}
+
+<div class="container">
+    @if (TempData.ContainsKey("BasketInoperativeMsg"))
+    {
+        <br />
+        <div class="alert alert-warning" role="alert">
+            &nbsp;@TempData["BasketInoperativeMsg"]
+        </div>
+    }
+    else
+    {
+        <article class="esh-basket-titles row">
+            <br />
+            @if (TempData.ContainsKey("BasketInoperativeMsg"))
+            {
+                <div class="alert alert-warning" role="alert">
+                    &nbsp;@TempData["BasketInoperativeMsg"]
+                </div>
+            }
+
+            <div class="esh-basket-title row1">SavedEvents</div>
+        </article>
+        {
+        
+            <div class="row text-center text-lg-left">
+
+                @for (int i = 0; i < Model.Items.Count; i++)
+                {
+                    var item = Model.Items[i];
+                    {
+
+                        <div class="esh-event-item col-md-1">
+
+                            @Html.Partial("_wishlist", item)
+
+                        </div>
+
+                    }
+                }
+
+            </div>
+            }
+
+            }
+
+            <br />
+
+        </div>

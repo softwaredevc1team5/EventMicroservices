@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebMvc.Models;
 using WebMvc.Services;
 using WebMvc.ViewModels;
 
@@ -16,9 +17,10 @@ namespace WebMvc.Controllers
 
             _ecatalogSvc = ecatalogSvc;
 
-        public async Task<IActionResult> EventDetail(int id)
+        public async Task<IActionResult> EventDetail(Event eventDetailtemp)
         {
-           
+            int id = 0;
+            Int32.TryParse(eventDetailtemp.Id, out id);
             var eventDetail = await _ecatalogSvc.GetEventItem(id);           
 
             //pass event into view model to return back to httpclient

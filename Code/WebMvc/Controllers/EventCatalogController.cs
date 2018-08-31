@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -151,6 +152,14 @@ namespace WebMvc.Controllers
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
             //RedirectToAction("Index", "Catalog");
             return View(vm);
+        }
+        [Authorize]
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+
+
+            return View();
         }
 
 

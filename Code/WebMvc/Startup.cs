@@ -44,6 +44,7 @@ namespace WebMvc
             services.AddTransient<IEventCatalogService, EventCatalogService>();
             services.AddTransient<IOrderService, MockOrderService>();// Lisa Change this when you finish the OrderService
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+            services.AddTransient<IWishlistService, WishlistService>();
             //services.AddTransient<ICartService, CartService>();
 
 
