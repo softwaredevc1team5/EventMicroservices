@@ -79,16 +79,6 @@ namespace WebMvc.Controllers
             };
 
             //update the categoryname of allevents in vm
-            /*   foreach (var category in vm.EventCategoriesWithImage) {
-                   foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
-                   {
-                       eventitem.EventCategory = category.Name;
-                   }
-               }
-               */
-
-
-
             foreach (var category in ecategoriesforhashtag)
             {
                 foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
@@ -98,6 +88,8 @@ namespace WebMvc.Controllers
                 }
             }
 
+          
+           
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
 
