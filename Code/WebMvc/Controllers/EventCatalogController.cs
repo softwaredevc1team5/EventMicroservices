@@ -148,6 +148,9 @@ namespace WebMvc.Controllers
 
             int itemsPage = 9;
             var ecatalog = await _ecatalogSvc.GetEventsByAllFilters(page ?? 0, itemsPage, EventCategoryFilterApplied, EventTypeFilterApplied, EventDateFilterApplied, EventCityFilterApplied);
+           
+            //get alleventcategories for hashtag
+            List<EventCategory> ecategoriesforhashtag = await _ecatalogSvc.GetEventCategoriesForHashTag();
 
             var vm = new EventFiltersCatalogViewModel()
             {
@@ -179,6 +182,16 @@ namespace WebMvc.Controllers
                 }
 
             };
+           
+            //update the categoryname of allevents in vm
+            foreach (var category in ecategoriesforhashtag)
+            {
+                foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
+                {
+                    eventitem.EventCategory = category.Name;
+                    vm.Events.Where(w => w.EventCategoryId == category.Id).First().EventCategory = category.Name;
+                }
+            }
 
 
 
