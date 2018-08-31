@@ -59,6 +59,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(model);
         }
 
+
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> Events([FromQuery] int pageSize =6,

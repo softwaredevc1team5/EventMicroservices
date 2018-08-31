@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Infrastructure;
+using WebMvc.Models;
 using WebMvc.Services;
 using WebMvc.ViewModels;
 
@@ -42,6 +43,9 @@ namespace WebMvc.Controllers
             //get eventcategories from service, then from apipath who gets it from EventCatalog api to get  categories from EventCategoryDB
             var ecategories = await _ecatalogSvc.GetEventCategoriesWithImage(page ?? 0, itemsPage);
 
+            //get alleventcategories for hashtag
+            List<EventCategory> ecategoriesforhashtag = await _ecatalogSvc.GetEventCategoriesForHashTag();
+
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
             {
@@ -53,6 +57,8 @@ namespace WebMvc.Controllers
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
 
                 EventCategoriesWithImage = ecategories.Data,
+
+               
 
                 EventTypes = await _ecatalogSvc.GetEventTypes(),
 
@@ -73,10 +79,22 @@ namespace WebMvc.Controllers
             };
 
             //update the categoryname of allevents in vm
-            foreach (var category in vm.EventCategoriesWithImage) {
+            /*   foreach (var category in vm.EventCategoriesWithImage) {
+                   foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
+                   {
+                       eventitem.EventCategory = category.Name;
+                   }
+               }
+               */
+
+
+
+            foreach (var category in ecategoriesforhashtag)
+            {
                 foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
                 {
                     eventitem.EventCategory = category.Name;
+                    vm.Events.Where(w => w.EventCategoryId == category.Id).First().EventCategory = category.Name;
                 }
             }
 
