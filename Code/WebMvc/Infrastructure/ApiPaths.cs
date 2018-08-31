@@ -24,6 +24,25 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}/{basketId}";
             }
         }
+
+        public static class CartBasket
+        {
+            public static string GetBasket(string baseUri, string cartbasketId)
+            {
+                return $"{baseUri}/{cartbasketId}";
+            }
+
+            public static string UpdateBasket(string baseUri)
+            {
+                return baseUri;
+            }
+
+            public static string CleanBasket(string baseUri, string cartbasketId)
+            {
+                return $"{baseUri}/{cartbasketId}";
+            }
+        }
+
         public static class EventCatalog
 
         {
@@ -190,6 +209,7 @@ namespace WebMvc.Infrastructure
 
 
         }
+
         #region EventTicket
         //All the URL's needed to uset EventTicketService on the WevMvc Project
 
@@ -215,5 +235,30 @@ namespace WebMvc.Infrastructure
 
         }
         #endregion
+
+        public static class Order
+        {
+            public static string GetOrder(string baseUri, string orderId)
+            {
+                return $"{baseUri}/{orderId}";
+            }
+
+            //public static string GetOrdersByUser(string baseUri, string userName)
+            //{
+            //    return $"{baseUri}/userOrders?userName={userName}";
+            //}
+            public static string GetOrders(string baseUri)
+            {
+                return baseUri;
+            }
+            public static string AddNewOrder(string baseUri)
+            {
+                return $"{baseUri}/new";
+            }
+        }
     }
-}
+       
+        
+    }
+    
+

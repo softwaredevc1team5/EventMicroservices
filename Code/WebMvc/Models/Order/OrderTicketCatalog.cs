@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebMvc.Models.Orders
+namespace WebMvc.Models.Order
 {
     public class OrderTicketCatalog
     {

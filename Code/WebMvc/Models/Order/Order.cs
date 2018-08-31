@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using WebMvc.Models;
 
-namespace WebMvc.Models.Orders
+namespace WebMvc.Models.Order
 {
     public class Order
     {     
@@ -52,7 +53,9 @@ namespace WebMvc.Models.Orders
 
         public string PictureUrl { get; set; }
 
+        public string PaymentAuthCode { get; set; }
 
+        public List<OrderTicket> OrderTicket { get; } = new List<OrderTicket>();
     }
 
     public enum OrderStatus

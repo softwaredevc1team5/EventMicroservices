@@ -2,28 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMvc.Models.Orders;
+using WebMvc.Models.Order;
+
 
 namespace WebMvc.ViewModels.Orders
 {
     public class OrderTicketViewModel
     {
-        IEnumerable<Order> _allOrders;
-        IEnumerable<Order> _upcomingOrders;
-        IEnumerable<Order> _pastOrders;
-        IEnumerable<Order> _canceledOrders;
+        IEnumerable<WebMvc.Models.Order.Order> _allOrders;
+        IEnumerable<WebMvc.Models.Order.Order> _upcomingOrders;
+        IEnumerable<WebMvc.Models.Order.Order> _pastOrders;
+        IEnumerable<WebMvc.Models.Order.Order> _canceledOrders;
 
-        public IEnumerable<Order> Orders { get; set; }
+        public IEnumerable<WebMvc.Models.Order.Order> Orders { get; set; }
         public IEnumerable<OrderTicket> OrdersTickets { get; set; }
 
-        public IEnumerable<Order> UpcomingOrders() {
+        public IEnumerable<WebMvc.Models.Order.Order> UpcomingOrders() {
             if (_upcomingOrders == null) {
                 _upcomingOrders= Orders.Where(c=> c.EventStartDate > DateTime.Today);
             }
             return _upcomingOrders;
         }
 
-        public IEnumerable<Order> PastOrders()
+        public IEnumerable<WebMvc.Models.Order.Order> PastOrders()
         {
             if (_pastOrders == null)
             {
@@ -32,7 +33,7 @@ namespace WebMvc.ViewModels.Orders
             return _pastOrders;
         }
 
-        public IEnumerable<Order> CanceledOrders()
+        public IEnumerable<WebMvc.Models.Order.Order> CanceledOrders()
         {
             if (_canceledOrders == null)
             {

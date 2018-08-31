@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebMvc.Models.Orders;
+using WebMvc.Models.Order;
 
 namespace WebMvc.Services.Orders
 {

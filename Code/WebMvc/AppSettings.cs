@@ -13,6 +13,8 @@ namespace WebMvc
         public string WishlistUrl { get; set; }
         public string EventTicketUrl { get; set; }
         public Logging Logging { get; set; }
+        public string OrderUrl { get; set; }
+        public string CartUrl { get; set; }
     }
 
 

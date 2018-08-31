@@ -14,7 +14,7 @@ using Newtonsoft.Json.Serialization;
 using WebMvc.Infrastructure;
 using WebMvc.Models;
 using WebMvc.Services;
-using WebMvc.Services.Orders;
+
 
 namespace WebMvc
 {
@@ -40,12 +40,14 @@ namespace WebMvc
 
             services.Configure<AppSettings>(Configuration);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.Configure<PaymentSettings>(Configuration);
             services.AddSingleton<IHttpClient, CustomHttpClient>();
             services.AddTransient<IEventCatalogService, EventCatalogService>();
-            services.AddTransient<IOrderService, MockOrderService>();// Lisa Change this when you finish the OrderService
+           // services.AddTransient<IOrderService, MockOrderService>();// Lisa Change this when you finish the OrderService
             services.AddTransient<IIdentityService<ApplicationUser>, IdentityService>();
+            services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IWishlistService, WishlistService>();
-            //services.AddTransient<ICartService, CartService>();
+            services.AddTransient<ICartService, CartService>();
 
 
 
@@ -73,7 +75,8 @@ namespace WebMvc
                 options.Scope.Add("profile");
                 options.Scope.Add("offline_access");
                 options.Scope.Add("basket");
-
+                options.Scope.Add("order");
+                options.Scope.Add("cartbasket");
 
             });
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebMvc.Models.Orders
+namespace WebMvc.Models.Order
 {
     public class OrderTicket
     {
@@ -16,5 +16,13 @@ namespace WebMvc.Models.Orders
         public int Quantity { get; set; }
 
         public decimal Price { get; set; }
+
+        public int EventId { get; set; }
+
+        public string EventTitle { get; set; }
+
+        public string ImageUrl { get; set; }
+
+
     }
 }
