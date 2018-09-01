@@ -25,6 +25,8 @@ namespace WebMvc.Services
 
        Task<EventCategoryCatalog> GetEventCategoriesWithImage(int page, int take);
 
+        Task<List<EventCategory>> GetEventCategoriesForHashTag();
+
        Task<IEnumerable<SelectListItem>> GetEventTypes();
         
         Task<Event> GetEventItem(int EventId);

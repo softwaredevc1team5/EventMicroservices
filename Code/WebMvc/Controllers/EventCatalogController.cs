@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMvc.Infrastructure;
+using WebMvc.Models;
 using WebMvc.Services;
 using WebMvc.ViewModels;
 
@@ -28,7 +29,10 @@ namespace WebMvc.Controllers
             var ecatalog = await _ecatalogSvc.GetEvents(page ?? 0, itemsPage, EventCategoryFilterApplied,EventTypeFilterApplied);
             //get eventcategories from service, then from apipath who gets it from EventCatalog api to get  categories from EventCategoryDB
             var ecategories = await _ecatalogSvc.GetEventCategoriesWithImage(page ?? 0, itemsPage);
-         
+
+            //get alleventcategories for hashtag
+            List<EventCategory> ecategoriesforhashtag = await _ecatalogSvc.GetEventCategoriesForHashTag();
+
             //pass events, event and type in various ways  into view model to return back to httpclient
             var vm = new EventCatalogIndexViewModel()
             {
@@ -37,6 +41,9 @@ namespace WebMvc.Controllers
                 EventDateFilterApplied = EventDateFilterApplied,
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
                 EventCategoriesWithImage = ecategories.Data,
+
+               
+
                 EventTypes = await _ecatalogSvc.GetEventTypes(),
                 EventCategoryFilterApplied = EventCategoryFilterApplied ?? 0,
                 EventTypeFilterApplied = EventTypeFilterApplied ?? 0,
@@ -50,13 +57,17 @@ namespace WebMvc.Controllers
             };
 
             //update the categoryname of allevents in vm
-            foreach (var category in vm.EventCategoriesWithImage) {
+            foreach (var category in ecategoriesforhashtag)
+            {
                 foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
                 {
                     eventitem.EventCategory = category.Name;
+                    vm.Events.Where(w => w.EventCategoryId == category.Id).First().EventCategory = category.Name;
                 }
             }
 
+          
+           
             vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : "";
             vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
             return View(vm);
@@ -113,6 +124,9 @@ namespace WebMvc.Controllers
 
             int itemsPage = 9;
             var ecatalog = await _ecatalogSvc.GetEventsByAllFilters(page ?? 0, itemsPage, EventCategoryFilterApplied, EventTypeFilterApplied, EventDateFilterApplied, EventCityFilterApplied);
+           
+            //get alleventcategories for hashtag
+            List<EventCategory> ecategoriesforhashtag = await _ecatalogSvc.GetEventCategoriesForHashTag();
 
             var vm = new EventFiltersCatalogViewModel()
             {
@@ -144,6 +158,16 @@ namespace WebMvc.Controllers
                 }
 
             };
+           
+            //update the categoryname of allevents in vm
+            foreach (var category in ecategoriesforhashtag)
+            {
+                foreach (var eventitem in vm.Events.Where(w => w.EventCategoryId == category.Id))
+                {
+                    eventitem.EventCategory = category.Name;
+                    vm.Events.Where(w => w.EventCategoryId == category.Id).First().EventCategory = category.Name;
+                }
+            }
 
 
 

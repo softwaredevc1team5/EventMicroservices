@@ -33,6 +33,10 @@
 
     }
 
+        <div class="esh-event-category">
+            <a href="@Url.Action("EventSearchByCategory", "EventCatalog", new { EventCategoryFilterApplied = @Model.EventCategoryId})"><span>@Model.EventCategory</span></a>
+        </div>
+
     <input type="hidden" asp-for="@Model.EventCategory" name="eventcategory" />
 
     <input type="hidden" asp-for="@Model.EventCategoryId" name="eventcategoryId" />

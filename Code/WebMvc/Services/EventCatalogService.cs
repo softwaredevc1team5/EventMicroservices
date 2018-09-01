@@ -68,6 +68,20 @@ namespace WebMvc.Services
             return response;
         }
 
+        public async Task<List<EventCategory>> GetEventCategoriesForHashTag()
+        {
+            var getEventCategoriesUri = ApiPaths.EventCatalog.GetAllEventCategories(_remoteServiceBaseUrl);
+
+            var dataString = await _apiClient.GetStringAsync(getEventCategoriesUri);
+
+            //  var categories = JArray.Parse(dataString);
+            var categories = JsonConvert.DeserializeObject<List<EventCategory>>(dataString);
+
+           // var response = JsonConvert.DeserializeObject<EventCategoryCatalog>(dataString);
+
+            return categories;
+        }
+
 
         public async Task<EventCatalog> GetEvents(int page, int take, int? category, int? type)
         {

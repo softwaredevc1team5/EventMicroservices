@@ -15,6 +15,8 @@ namespace WebMvc.ViewModels
 
         public IEnumerable<EventCategory> EventCategoriesWithImage { get; set; }
 
+       // public IEnumerable<EventCategory> EventCategoriesForHashTag { get; set; }
+
         public IEnumerable<SelectListItem> EventTypes { get; set; }
         public IEnumerable<SelectListItem> EventDates { get; set; }
         public String EventDateFilterApplied { get; set; }
