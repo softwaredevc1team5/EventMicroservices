@@ -28,7 +28,8 @@ namespace OrderApi.Migrations
                     EventTitle = table.Column<string>(nullable: true),
                     EventStartDate = table.Column<DateTime>(nullable: false),
                     EventEndDate = table.Column<DateTime>(nullable: false),
-                    PictureUrl = table.Column<string>(nullable: true)
+                    PictureUrl = table.Column<string>(nullable: true),
+                    NumTotalTickets = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -45,6 +45,8 @@ namespace OrderApi.Migrations
 
                     b.Property<string>("OrderStatus");
 
+                    b.Property<int>("NumTotalTickets");
+
                     b.Property<decimal>("OrderTotal");
 
                     b.Property<string>("PaymentAuthCode");

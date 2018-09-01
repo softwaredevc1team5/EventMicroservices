@@ -38,6 +38,7 @@ namespace OrderApi.Models
         public string PictureUrl { get; set; }
         public List<OrderTicket> OrderTicket { get; } = new List<OrderTicket>();
 
+        public int NumTotalTickets { get; set; }
         protected Order()
         {
             OrderTicket = new List<OrderTicket>();
@@ -49,7 +50,8 @@ namespace OrderApi.Models
     {
         Preparing = 1,
         Shipped = 2,
-        Delivered = 3
+        Delivered = 3,
+        Canceled = 4
     }
 
 }

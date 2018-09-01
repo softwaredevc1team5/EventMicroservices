@@ -114,6 +114,7 @@ namespace WebMvc.Services
                     Price = x.Price
                 });
                 order.OrderTotal += (x.Quantity * x.Price);
+                order.NumTotalTickets += x.Quantity;
             });
             
             return order;
