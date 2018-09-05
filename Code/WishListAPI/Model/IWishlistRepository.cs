@@ -11,5 +11,8 @@ namespace WishListAPI.Model
         IEnumerable<string> GetUsers();
         Task<Wishlist> UpdateWishlistAsync(Wishlist basket);
         Task<bool> DeleteWishlistAsync(string id);
+        void SetEventIdFromMessaging(int id, String buyerId);
+        int GetEventIdFromMessaging();
+
     }
 }

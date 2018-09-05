@@ -15,6 +15,7 @@ namespace WishListAPI.Controllers
     {
         private IWishlistRepository _repository;
         private ILogger _logger;
+        
         public WishlistController(IWishlistRepository repository, ILoggerFactory factory)
         {
             _repository = repository;
@@ -49,6 +50,18 @@ namespace WishListAPI.Controllers
             _repository.DeleteWishlistAsync(id);
 
 
+        }
+
+        /// <summary>
+        /// Messaging
+        /// </summary>
+        /// <param name="id"></param>  
+        /// 
+        [HttpGet]
+        public int GetEventIdFromMessage()
+        {
+            var id = _repository.GetEventIdFromMessaging();
+            return id;
         }
 
     }
