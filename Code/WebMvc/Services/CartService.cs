@@ -61,8 +61,6 @@ namespace WebMvc.Services
 
             
             await UpdateCart(cart);
-            
-            //ClearCart(user).Wait();
         }
 
         public async Task ClearCart(ApplicationUser user)

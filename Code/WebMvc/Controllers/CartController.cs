@@ -109,7 +109,7 @@ namespace WebMvc.Controllers
 
                     };
                     await _cartService.AddItemToCart(user, product);
-                    //await _cartService.ClearCart(user);
+                    await _cartService.ClearCart(user);
                 }
                 return RedirectToAction("Index", "Cart");
             }
