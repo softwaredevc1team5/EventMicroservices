@@ -16,6 +16,6 @@ namespace WebMvc.Services
        // Task<Wishlist> SetQuantities(ApplicationUser user, Dictionary<string, int> quantities);
         //Order MapCartToOrder(Wishlist Wishlist);
         Task ClearWishlist(ApplicationUser user);
-        Task<int> GetEventIdFromMessaging();
+        
     }
 }

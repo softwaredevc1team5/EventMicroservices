@@ -100,13 +100,6 @@ namespace WebMvc.Services
 
             return await context.GetTokenAsync("access_token");
         }
-
-        public async Task<int> GetEventIdFromMessaging()
-        {
-            var getEventId = ApiPaths.Basket.GetEventIdFromMessaging(_remoteServiceBaseUrl);
-            var response = await _apiClient.GetStringAsync(getEventId);
-            var id = JsonConvert.DeserializeObject<int>(response);
-            return id;
-        }
+       
     }
 }

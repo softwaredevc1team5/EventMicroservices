@@ -10,9 +10,9 @@
     <div class="esh-event-city">
         <span>@Model.City</span>
     </div>
-    @if(Model.productId == ViewBag.EventIdFromMessaging)
+    @if(Model.IsRegistered)
     {
-        <span> Registered</span>
+       <div> <span> Registered</span></div>
 
     }
     @if (Model.TicketPrice == 0)

@@ -23,10 +23,7 @@ namespace WebMvc.Infrastructure
             {
                 return $"{baseUri}/{basketId}";
             }
-            public static String GetEventIdFromMessaging(string baseUri)
-            {
-                return baseUri;
-            }
+            
         }
 
         public static class CartBasket

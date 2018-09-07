@@ -92,6 +92,7 @@ namespace WebMvc.Controllers
                         TicketPrice = eventDetails.Price,
                         City = eventDetails.City,
                         productId=eventDetails.Id,
+                       
                     };
                     await _wishlistService.AddItemToWishlist(user, product);
                 }

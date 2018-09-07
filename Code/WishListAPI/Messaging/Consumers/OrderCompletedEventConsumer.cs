@@ -23,8 +23,9 @@ namespace WishListApi.Messaging.Consumers
         {
             _logger.LogWarning("We are in consume method now...");
             _logger.LogWarning("BuyerId:" +context.Message.EventId);
-            
-             _repository.SetEventIdFromMessaging(context.Message.EventId, context.Message.BuyerId);
+
+            // _repository.SetEventIdFromMessaging(context.Message.EventId, context.Message.BuyerId);
+            _repository.SetEventIdFromMessaging(7, context.Message.BuyerId);
             return Task.FromResult(context.Message);
              
         }

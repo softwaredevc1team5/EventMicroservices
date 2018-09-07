@@ -65,27 +65,30 @@ namespace WishListAPI.Model
              return _redis.GetServer(endpoint.First());
          }
 
-        public void SetEventIdFromMessaging(int eventId, string buyerId )
+        public async void SetEventIdFromMessaging(int eventId, string buyerId )
         {
-           /***
             var data = await GetWishlistAsync(buyerId);
-
+            //var response = JsonConvert.DeserializeObject<Wishlist>(data.ToString());
+            
+            
             foreach(var item in data.Items)
             {
                 if(item.productId == eventId.ToString())
                 {
-                    return item;
+                    item.IsRegistered = true;
+                   
+                    
                 }
-
-            }****/
-
-            
-            this.EventId = eventId;
+            }
+            await _database.StringSetAsync(buyerId, JsonConvert.SerializeObject(data));            
         }
 
-        public int GetEventIdFromMessaging()
+        public async Task<string> GetEventIdFromMessaging(string eventKey)
         {
-            return EventId;
+            
+            var data = await _database.StringGetAsync(eventKey);
+            
+            return data;
         }
      }
 }

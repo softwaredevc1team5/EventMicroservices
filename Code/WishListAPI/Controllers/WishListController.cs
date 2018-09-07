@@ -52,17 +52,6 @@ namespace WishListAPI.Controllers
 
         }
 
-        /// <summary>
-        /// Messaging
-        /// </summary>
-        /// <param name="id"></param>  
-        /// 
-        [HttpGet]
-        public int GetEventIdFromMessage()
-        {
-            var id = _repository.GetEventIdFromMessaging();
-            return id;
-        }
-
+       
     }
 }

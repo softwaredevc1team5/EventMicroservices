@@ -12,7 +12,7 @@ namespace WishListAPI.Model
         Task<Wishlist> UpdateWishlistAsync(Wishlist basket);
         Task<bool> DeleteWishlistAsync(string id);
         void SetEventIdFromMessaging(int id, String buyerId);
-        int GetEventIdFromMessaging();
+        Task<string> GetEventIdFromMessaging(string eventKey);
 
     }
 }
