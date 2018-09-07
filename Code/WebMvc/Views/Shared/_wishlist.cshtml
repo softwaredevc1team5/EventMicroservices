@@ -2,7 +2,18 @@
 <form asp-controller="EventDetail" asp-action="EventDetail">
 
     <input class="esh-event-item " type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:180px" />
-    
+    @if (Model.IsRegistered)
+    {
+    <div class=" esh-event-thumbnail">
+        <p>
+
+            <h2><B>Registered</B> </h2>
+
+        </p>
+    </div>
+
+    }
+
     <input type="hidden" asp-for="@Model.productId" name="id" />
     <div class="esh-event-title">
         <span>@Model.EventTitle</span>
@@ -10,11 +21,7 @@
     <div class="esh-event-city">
         <span>@Model.City</span>
     </div>
-    @if(Model.IsRegistered)
-    {
-       <div> <span> Registered</span></div>
 
-    }
     @if (Model.TicketPrice == 0)
     {
         <span class="esh-event-price-free">FREE</span>
