@@ -1,112 +1,110 @@
-﻿@model WebMvc.Models.EventForCreation
-
-@{
+﻿@{
     ViewData["Title"] = "EventCreation";
+    @model WebMvc.ViewModels.EventCreationViewModel
 }
-
 <h2>Event Create</h2>
-
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" asp-controller="EventCreation" >
+        <form asp-action="Create" asp-controller="EventCreation" asp-for="@Model" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Title" class="control-label">Event Title</label>
-                <input asp-for="@Model.Title" class="form-control" />
-                <span asp-validation-for="@Model.Title" class="text-danger"></span>
+                <label asp-for="@Model.Event.Title" class="control-label">Event Title</label>
+                <input asp-for="@Model.Event.Title" class="form-control" />
+                <span asp-validation-for="@Model.Event.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.Address" class="control-label">Location</label>
+                <input asp-for="@Model.Event.Address" class="form-control" placeholder="Search for a venue or address" />
+                <span asp-validation-for="@Model.Event.Address" class="text-danger"></span><br />
+                <input asp-for="@Model.Event.City" class="form-control" placeholder="City" />
+                <span asp-validation-for="@Model.Event.City" class="text-danger"></span><br />
+                <input asp-for="@Model.Event.State" class="form-control" placeholder="State" />
+                <span asp-validation-for="@Model.Event.State" class="text-danger"></span><br />
+                <input asp-for="@Model.Event.Zipcode" class="form-control" placeholder="Zip/Postal" />
+                <span asp-validation-for="@Model.Event.Zipcode" class="text-danger"></span><br />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.StartDate" class="control-label">STARTS</label>
+                <input asp-for="@Model.Event.StartDate" value=@DateTime.Now class="form-control" />
+                @* @{
+                        if (Model.Event.StartDate < DateTime.Now)
+                         {
+                                @Html.ValidationMessageFor(m => @Model.Event.StartDate)
+
+                          }
+
+                     }*@
+                <span asp-validation-for="@Model.Event.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.EndDate" class="control-label">ENDS</label>
+                <input asp-for="@Model.Event.EndDate" value=@DateTime.Now class="form-control" />
+                <span asp-validation-for="@Model.Event.EndDate" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Address" class="control-label">Location</label>
-                <input asp-for="@Model.Address" class="form-control" placeholder="Search for a venue or address" />
-                <span asp-validation-for="Address" class="text-danger"></span><br />
-                <input asp-for="City" class="form-control" placeholder="City" />
-                <span asp-validation-for="City" class="text-danger"></span><br />
-                <input asp-for="State" class="form-control" placeholder="State" />
-                <span asp-validation-for="State" class="text-danger"></span><br />
-                <input asp-for="Zipcode" class="form-control" placeholder="Zip/Postal" />
-                <span asp-validation-for="Zipcode" class="text-danger"></span><br />
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label">STARTS</label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label">ENDS</label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
+                <label asp-for="@Model.EventTypeFilterApplied" class="control-label">EventType</label><br/>
+                @Html.DropDownListFor(m => m.EventTypeFilterApplied, Model.EventTypes)
+                <span asp-validation-for="@Model.EventTypeFilterApplied" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="@Model.EventCategoryFilterApplied" class="control-label">EventCategory</label><br />
+                @Html.DropDownListFor(m => m.EventCategoryFilterApplied, @Model.EventCategories)
+                <span asp-validation-for="@Model.EventCategoryFilterApplied" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+                @*{
+                        ViewBag.Title = "Upload the file and display the uploaded image";
+                    }
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div>
+                            Select Image
+                            <input type="file" accept="Pictures/*" src="../pictures" name="file" multiple directory webkit />&nbsp;&nbsp;&nbsp;
+                            <input type="submit" value="ShowImage" name="Command" /><br />
+                            <img src="~/City/City-1.png" style="width:200px; height:200px;" />
+                        </div>
+                    }*@
+                <label asp-for="@Model.Event.ImageUrl" class="control-label"></label>
+                <input asp-for="@Model.Event.ImageUrl" value="http://localhost:55399/api/pic/79" class="form-control" />
+                <span asp-validation-for="@Model.Event.ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.Price" class="control-label"></label>
+                <input asp-for="@Model.Event.Price" class="form-control" />
+                <span asp-validation-for="@Model.Event.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.OrganizerName" class="control-label"></label>
+                <input asp-for="@Model.Event.OrganizerName" class="form-control" />
+                <span asp-validation-for="@Model.Event.OrganizerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.EventDescription" class="control-label"></label>
+                @Html.TextAreaFor(model => model.Event.EventDescription, new { @rows = 4, @cols = 20, @class = "form-control" })
+                <span asp-validation-for="@Model.Event.EventDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Event.OrganizerDescription" class="control-label"></label>
+                @Html.TextAreaFor(model => model.Event.OrganizerDescription, new { @rows = 4, @cols = 20, @class = "form-control" })
+                <span asp-validation-for="@Model.Event.OrganizerDescription" class="text-danger"></span>
             </div>
 
-            @*<div class="form-group">
-                <label asp-for="EventType" class="control-label"></label>
-                <input asp-for="EventType" class="form-control" />
-                <span asp-validation-for="EventType" class="text-danger"></span>
-            </div>
             <div class="form-group">
-                <label asp-for="EventCategory" class="control-label"></label>
-                <input asp-for="EventCategory" class="form-control" />
-                <span asp-validation-for="EventCategory" class="text-danger"></span>
-            </div>*@
+                <input type="hidden" asp-for="@Model.EventCategories" name="eventcategories" />
+                <input type="hidden" asp-for="@Model.EventTypes" name="eventTypes" />
+                <input class="esh-event-send" style="height: 50px; width:200px" value="Create Event" type="submit" />
+            </div>
 
-            <div class="form-group">
-                <label asp-for="OrganizerName" class="control-label"></label>
-                <input asp-for="OrganizerName" class="form-control" />
-                <span asp-validation-for="OrganizerName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EventDescription" class="control-label"></label>
-                <textarea class="form-control"
-                          id="EventDescription"
-                          name="EventDescription"
-                          rows="5"
-                          cols="20"></textarea>
-                <span asp-validation-for="EventDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OrganizerDescription" class="control-label"></label>
-                <textarea class="form-control"
-                          id="OrganizerDescription"
-                          name="OrganizerDescription"
-                          rows="5"
-                          cols="20"></textarea>
-                <span asp-validation-for="OrganizerDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
         </form>
     </div>
 </div>
-
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-@*  <div class="container-fluid">
-      <div class="row">
-          <h2 class="demo-text">A demo of jQuery / Bootstrap based editor</h2>
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-12 nopadding">
-                      <textarea id="demo-editor-bootstrap"></textarea>
-                  </div>
-              </div>
-          </div>
-      </div>
-    </div>*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
