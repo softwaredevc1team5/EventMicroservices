@@ -1,6 +1,41 @@
-﻿@model int
+﻿@model WebMvc.Models.EventForCreation
 
-@{
-    ViewBag.Title = "Event Created";
-}
-<h2>And Event have been created</h2>
+<h2>Event Created </h2>
+<form asp-controller="EventDetail" asp-action="EventDetail">
+    <input class="img-fluid img-thumbnail" type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:150px" />
+
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+</form>
+<form asp-controller="Wishlist" asp-action="AddToWishlist">
+    <input class="esh-event-button" type="image" name="clickeventdetails" src="~/images/wish.png" border="0" alt="EventWishListImage" style="width:50px;height:50px" />
+
+    <div class="esh-event-title">
+        <span>@Model.Title</span>
+    </div>
+    <div class="esh-event-date">
+        <span>@Model.StartDate.ToShortDateString()</span>
+    </div>
+    @if (Model.Price == 0)
+    {
+        <span class="esh-event-price-free">FREE</span>
+    }
+    else
+    {
+
+        <span class="esh-event-price">@Model.Price.ToString("N2")</span>
+
+    }
+    <div class="esh-event-category">
+        <a href="@Url.Action("EventSearchByCategory", "EventCatalog", new { EventCategoryFilterApplied = @Model.EventCategoryId})"><span>@Model.EventCategory</span></a>
+    </div>
+    <input type="hidden" asp-for="@Model.EventCategory" name="eventcategory" />
+    <input type="hidden" asp-for="@Model.EventCategoryId" name="eventcategoryId" />
+    <input type="hidden" asp-for="@Model.EventType" name="eventtype" />
+    <input type="hidden" asp-for="@Model.EventTypeId" name="eventtypeId" />
+    <input type="hidden" asp-for="@Model.Address" name="eventAddress" />
+    <input type="hidden" asp-for="@Model.City" name="eventCity" />
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+    <input type="hidden" asp-for="@Model.Title" name="title" />
+    <input type="hidden" asp-for="@Model.ImageUrl" name="imageUrl" />
+    <input type="hidden" asp-for="@Model.Price" name="price" />
+</form>

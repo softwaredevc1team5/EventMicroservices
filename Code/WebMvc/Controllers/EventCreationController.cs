@@ -1,16 +1,18 @@
 ﻿
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using WebMvc.Models;
 using WebMvc.Services;
+using WebMvc.ViewModels;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebMvc.Controllers
 {
+    [Authorize]
     public class EventCreationController : Controller
     {
         // GET: /<controller>/
@@ -24,40 +26,53 @@ namespace WebMvc.Controllers
            
 
         }
-       
-                        
 
-
-        public IActionResult Index(EventForCreation model)
+        public async Task<IActionResult> Index(int? EventCategoryFilterApplied, int? EventTypeFilterApplied)
         {
-            
-            return View(model);
-        }
+            var vm = new EventCreationViewModel()
+            {
+                Event = new EventForCreation(),
+                // Event = new Event(),
+                EventTypeFilterApplied = EventTypeFilterApplied ?? 0,
+                EventTypes = await _ecatalogSvc.GetEventTypes(),
 
+                EventCategoryFilterApplied = EventCategoryFilterApplied ?? 0,
+                EventCategories = await _ecatalogSvc.GetEventCategories()
+            };
+            return View(vm);
+        }
         //Direct Called to EventApi
         [HttpPost]
-        public async Task<IActionResult> Create(EventForCreation frmEvent)
+        public async Task<IActionResult> Create(EventCreationViewModel frmEvent)
         {
             if (ModelState.IsValid)
             {
-                //  var user = _identitySvc.Get(HttpContext.User);
-                EventForCreation eve = frmEvent;
-                eve.EventCategoryId = 1; //Change so you get the data fron the Interface
-                eve.EventTypeId =1;//Change so you get the data fron the Interface
-                eve.OrganizerId = 2; 
-                var eventId = await _ecatalogSvc.CreateEvent(eve);
+                frmEvent.Event.EventTypeId = frmEvent.EventTypeFilterApplied ?? 0;
+                frmEvent.Event.EventCategoryId = frmEvent.EventCategoryFilterApplied ?? 0;
+                var eventId = await _ecatalogSvc.CreateEvent(frmEvent.Event);
+           
+                frmEvent.Event.Id = eventId;
+                var vm = new EventCreationViewModel()
+                {
+                    Event = frmEvent.Event,
+                    EventTypeFilterApplied = frmEvent.EventTypeFilterApplied,
+                    EventTypes = await _ecatalogSvc.GetEventTypes()
+                };
 
-                return RedirectToAction("EventSaved", new { id = eventId, userName = "UserName" });
+              //  var eventType = frmEvent.EventTypes.GetType();
+                //return View(vm);
+                // return RedirectToAction("EventSaved", new { id = eventId, userName = "UserName" });
+
+                return RedirectToAction("EventSaved", frmEvent.Event);
+                
             }
-            else
-            {
-                return View(frmEvent);
-            }
+            return View(frmEvent);
+
         }
 
 
-    
-        
+
+
 
 
         public IActionResult EventCreate()
@@ -66,9 +81,9 @@ namespace WebMvc.Controllers
 
         }
 
-        public IActionResult EventSaved(int id, string userName)
-        {         
-            return View(id);
+        public IActionResult EventSaved(EventForCreation eventForCreation)
+        {
+            return View(eventForCreation);
 
         }
 
