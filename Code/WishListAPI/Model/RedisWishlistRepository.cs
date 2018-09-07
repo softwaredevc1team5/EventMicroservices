@@ -14,6 +14,8 @@ namespace WishListAPI.Model
 
          private readonly ConnectionMultiplexer _redis;
          private readonly IDatabase _database;
+        private int EventId;
+
          public RedisWishlistRepository(ILoggerFactory loggerFactory, ConnectionMultiplexer redis)
          {
              _logger = loggerFactory.CreateLogger<RedisWishlistRepository>();
@@ -62,5 +64,31 @@ namespace WishListAPI.Model
              var endpoint = _redis.GetEndPoints();
              return _redis.GetServer(endpoint.First());
          }
+
+        public async void SetEventIdFromMessaging(int eventId, string buyerId )
+        {
+            var data = await GetWishlistAsync(buyerId);
+            //var response = JsonConvert.DeserializeObject<Wishlist>(data.ToString());
+            
+            
+            foreach(var item in data.Items)
+            {
+                if(item.productId == eventId.ToString())
+                {
+                    item.IsRegistered = true;
+                   
+                    
+                }
+            }
+            await _database.StringSetAsync(buyerId, JsonConvert.SerializeObject(data));            
+        }
+
+        public async Task<string> GetEventIdFromMessaging(string eventKey)
+        {
+            
+            var data = await _database.StringGetAsync(eventKey);
+            
+            return data;
+        }
      }
 }

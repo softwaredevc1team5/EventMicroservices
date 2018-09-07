@@ -15,7 +15,7 @@ namespace WebMvc.ViewComponents
         private readonly IWishlistService _wishlistsvc;
         public WishlistList(IWishlistService wishlistsvc) => _wishlistsvc = wishlistsvc;
         public async Task<IViewComponentResult> InvokeAsync(ApplicationUser user)
-        {
+        {                        
             var vm = new Models.WishlistModels.Wishlist();
             
                 try
