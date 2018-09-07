@@ -46,14 +46,32 @@
                     </div>
                 </div>
                 @*<div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="Country" class="esh-orders_new-title">Country</label>
-                            <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
-                            <span asp-validation-for="Country" class="alert alert-danger" />
-                        </div>
-                    </div>*@
+                    <div class="form-group">
+                        <label asp-for="Country" class="esh-orders_new-title">Country</label>
+                        <input asp-for="Country" class="form-control form-input" type="text" placeholder="Country" />
+                        <span asp-validation-for="Country" class="alert alert-danger" />
+                    </div>
+                </div>*@
             </div>
         </section>
+        <input type="hidden" asp-for="@Model.EventId" name="eventId" />
+        <input type="hidden" asp-for="@Model.EventStartDate" name="eventStartDate" />
+        <input type="hidden" asp-for="@Model.EventTitle" name="eventTitle" />
+        <input type="hidden" asp-for="@Model.EventEndDate" name="eventEndDate" />
+        <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
+        <input type="hidden" asp-for="@Model.OrderId" name="orderId" />
+        <input type="hidden" asp-for="@Model.OrderDate" name="orderDate" />
+        <input type="hidden" asp-for="@Model.NumTotalTickets" name="numTotalTickets" />
+
+        <input type="hidden" asp-for="@Model.OrderTicket[0].EventId" name="eventId" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].OrderId" name="orderId" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].EventTitle" name="eventTitle" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].ImageUrl" name="imageUrl" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].Price" name="price" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].Quantity" name="quantity" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].TicketTypeId" name="ticketTypeId" />
+        <input type="hidden" asp-for="@Model.OrderTicket[0].TypeName" name="typeName" />
+        
 
         @await Html.PartialAsync("_OrderTicket")
 
@@ -68,7 +86,7 @@
                             <div id="payment-form-container" class="col-md-8 well" style="width:480px;margin:20px auto;">
                                 <div class="form-group">
                                     <label class="control-label">Accepted</label>
-                                    
+
                                     <div class="row">
                                         <div class="col-sm-3 card-images row text-center">
                                             <span><img src="~/images/creditcards/visa.png" alt="visa" /></span>
@@ -113,7 +131,7 @@
                 </section>
             }
         </div>
-        
+
 
         <div>
             @if (Model.OrderTotal != 0)
@@ -130,8 +148,8 @@
                 </section>
 
                 @*     <input asp-for="RequestId" type="hidden" value="@Guid.NewGuid().ToString()" />
-            <input asp-for="OrderGuid" type="hidden" />
-            <input asp-for="Buyer" type="hidden" />*@
+                <input asp-for="OrderGuid" type="hidden" />
+                <input asp-for="Buyer" type="hidden" />*@
 
 
             }
@@ -145,7 +163,7 @@
         </div>
 
 
-</form>
+    </form>
 
 </div>
 

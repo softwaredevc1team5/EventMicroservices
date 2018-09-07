@@ -98,12 +98,21 @@ namespace WebMvc.Services
             var order = new Order();
 
             order.BuyerId = cart.BuyerId;
-            order.OrderId = DateTime.Now.Millisecond;
+            order.EventId = cart.Items[0].EventId;
+            order.EventStartDate = cart.Items[0].StartDate;
+            order.Address = cart.Items[0].Address;
+            order.EventTitle = cart.Items[0].Title;
+            order.NumTotalTickets = cart.Items[0].Quantity;
+            order.OrderDate = DateTime.Now;
+            order.EventEndDate = cart.Items[0].EndDate;
+            order.PictureUrl = cart.Items[0].ImageUrl;
+
+            //order.OrderId = DateTime.Now.Millisecond;
             cart.Items.ForEach(x =>
             {
                 order.OrderTicket.Add(new OrderTicket()
                 {
-                    OrderId = order.OrderId,
+                    //OrderId = order.OrderId,
                     EventId = x.EventId,
                     EventTitle = x.Title,
                     ImageUrl = x.ImageUrl,
