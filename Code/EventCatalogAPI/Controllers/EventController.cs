@@ -225,7 +225,6 @@ namespace EventCatalogAPI.Controllers
           [FromQuery] int pageIndex = 0)
         {
 
-
             //need to address city and state
             string State = null;
             if (city.Contains(","))
@@ -234,7 +233,6 @@ namespace EventCatalogAPI.Controllers
                 city = cityState[0];
                 State = cityState[1];
             }
-
 
             var root = (IQueryable<Event>)_eventCatalogContext.Events;
 

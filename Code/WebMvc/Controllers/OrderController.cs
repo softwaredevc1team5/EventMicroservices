@@ -166,5 +166,8 @@ namespace WebMvc.Controllers
             return orderTicket.Select(p => p.Price * p.Quantity).Sum();
 
         }
+
+
+
     }
 }

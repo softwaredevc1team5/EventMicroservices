@@ -20,6 +20,6 @@ namespace WebMvc.Services
         //Needed for Displaying Orders
         Task<Order> GetOrderByIdAsync(int orderId);
         Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take);
-        Task<List<Order>> GetOrdersByUserNameAsync(string buyerId, int page, int take);
+     
     }
 }

@@ -243,14 +243,17 @@ namespace WebMvc.Infrastructure
                 return $"{baseUri}/{orderId}";
             }
 
-            //public static string GetOrdersByUser(string baseUri, string userName)
-            //{
-            //    return $"{baseUri}/userOrders?userName={userName}";
-            //}
+            public static string GetOrdersByBuyerId(string baseUri, string buyerId)
+            {
+                return $"{baseUri}/byBuyerId/{buyerId}";
+
+            }
+
             public static string GetOrders(string baseUri)
             {
                 return baseUri;
             }
+
             public static string AddNewOrder(string baseUri)
             {
                 return $"{baseUri}/new";

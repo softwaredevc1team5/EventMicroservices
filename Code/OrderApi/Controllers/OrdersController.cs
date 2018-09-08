@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using EventMicroservices.Services.OrderApi.Data;
@@ -101,6 +102,28 @@ namespace OrderApi.Controllers
         }
 
 
+        #region Display Orders
+        [HttpGet]
+        //   [HttpGet("{buyerid}", Name = "GetOrderByBuyerId")]
+        [Route("byBuyerId/{buyerid}")]
+        [ProducesResponseType((int)HttpStatusCode.Accepted)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetOrderByUserId(string buyerid)
+        {
+            var root = (IQueryable<Order>)_ordersContext.Orders;         
+            var itemsOnPage = await root.Where(ci => ci.BuyerId == buyerid).ToListAsync();
+           
+
+            if (itemsOnPage != null)
+            {
+                return Ok(itemsOnPage);
+            }
+
+            return NotFound();
+
+        }
+
+        #endregion
 
 
     }

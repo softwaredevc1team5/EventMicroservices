@@ -28,8 +28,8 @@ namespace WebMvc.Controllers
         {
 
             var user = _identityService.Get(HttpContext.User);
-            //  var orders = await _orderService.GetOrdersByBuyerAsync(user.Id,1,1); When Lisa finish we have uncomment this line
-            var orders = await _orderService.GetOrdersByUserNameAsync(user.Email,1,1);
+             var orders = await _orderService.GetOrdersByBuyerAsync(user.Id,1,1); //When Lisa finish we have uncomment this line to stop using mock service
+          //  var orders = await _orderService.GetOrdersByUserNameAsync(user.Email,1,1);
             var vm = new OrderTicketViewModel
             {
                 Orders = orders

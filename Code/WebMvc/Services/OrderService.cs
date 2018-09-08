@@ -134,34 +134,17 @@ namespace WebMvc.Services
 
         public async Task<List<Order>> GetOrdersByBuyerAsync(string buyerId, int page, int take)
         {
-            await Task.Delay(10);
-            //  var token = await GetUserTokenAsync();
-            string token = "Temp"; // I dont wan't to test tokerService
-
-            if (!string.IsNullOrEmpty(token))
-            {
-
-                return MockOrders.Where(o => o.BuyerId == buyerId).ToList();
-            }
-            else
-                return new List<Order>();
+           
+            var token = await GetUserTokenAsync();         
+            var allOrdersUri = ApiPaths.Order.GetOrdersByBuyerId(_remoteServiceBaseUrl,buyerId);
+            var dataString = await _apiClient.GetStringAsync(allOrdersUri, token);
+            var response = JsonConvert.DeserializeObject<List<Order>>(dataString);
+            return response;
+           
         }
 
      
-        public async Task<List<Order>> GetOrdersByUserNameAsync(string userName, int page, int take)
-        {
-            await Task.Delay(10);
-            //  var token = await GetUserTokenAsync();
-            string token = "Temp"; // I dont wan't to test tokerService
-
-            if (!string.IsNullOrEmpty(token))
-            {
-
-                return MockOrders.Where(o => o.UserName == userName).ToList();
-            }
-            else
-                return new List<Order>();
-        }
+ 
         #endregion
     }
 }
