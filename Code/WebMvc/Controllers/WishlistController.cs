@@ -92,6 +92,7 @@ namespace WebMvc.Controllers
                         TicketPrice = eventDetails.Price,
                         City = eventDetails.City,
                         productId=eventDetails.Id,
+                       
                     };
                     await _wishlistService.AddItemToWishlist(user, product);
                 }
@@ -99,7 +100,8 @@ namespace WebMvc.Controllers
             }
             catch (BrokenCircuitException)
             {
-                // Catch error when CartApi is in circuit-opened mode                 
+                // Catch error when CartApi is in circuit-opened mode               
+  
                 HandleBrokenCircuitException();
             }
 

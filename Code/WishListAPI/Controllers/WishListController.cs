@@ -15,6 +15,7 @@ namespace WishListAPI.Controllers
     {
         private IWishlistRepository _repository;
         private ILogger _logger;
+        
         public WishlistController(IWishlistRepository repository, ILoggerFactory factory)
         {
             _repository = repository;
@@ -51,5 +52,6 @@ namespace WishListAPI.Controllers
 
         }
 
+       
     }
 }

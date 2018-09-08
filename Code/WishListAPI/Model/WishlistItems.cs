@@ -15,5 +15,7 @@ namespace WishListAPI.Model
         public string  City{ get; set; }
         public string TicketType { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsRegistered { get; set; }
+
     }
 }
