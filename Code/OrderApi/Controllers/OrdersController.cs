@@ -67,10 +67,10 @@ namespace OrderApi.Controllers
             //_logger.LogInformation(" Saving........");
 
             await _ordersContext.SaveChangesAsync();
-            //_bus.Publish(new OrderCompletedEvent(order.EventId, order.BuyerId))
+            _bus.Publish(new OrderCompletedEvent(order.EventId, order.BuyerId))
+               .Wait();
+            //_bus.Publish(new OrderCompletedEvent(5, order.BuyerId))
               //  .Wait();
-            _bus.Publish(new OrderCompletedEvent(5, order.BuyerId))
-                .Wait();
             return CreatedAtRoute("GetOrder", new { id = order.OrderId }, order);
 
         }
