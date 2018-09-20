@@ -69,18 +69,20 @@ namespace WishListAPI.Model
         {
             var data = await GetWishlistAsync(buyerId);
             //var response = JsonConvert.DeserializeObject<Wishlist>(data.ToString());
-            
-            
-            foreach(var item in data.Items)
+
+            if (data != null && data.Items.Count > 0)
             {
-                if(item.productId == eventId.ToString())
+                foreach (var item in data.Items)
                 {
-                    item.IsRegistered = true;
-                   
-                    
+                    if (item.productId == eventId.ToString())
+                    {
+                        item.IsRegistered = true;
+
+
+                    }
                 }
+                await _database.StringSetAsync(buyerId, JsonConvert.SerializeObject(data));
             }
-            await _database.StringSetAsync(buyerId, JsonConvert.SerializeObject(data));            
         }
 
         public async Task<string> GetEventIdFromMessaging(string eventKey)
