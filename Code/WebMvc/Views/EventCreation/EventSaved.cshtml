@@ -1,19 +1,26 @@
 ﻿@model WebMvc.Models.EventForCreation
 
 <h2>Event Created </h2>
-<form asp-controller="EventDetail" asp-action="EventDetail">
+<form asp-controller="" asp-action="">
     <input class="img-fluid img-thumbnail" type="image" name="clickeventdetails" src="@Model.ImageUrl" border="0" alt="EventImage" style="width:320px;height:150px" />
 
     <input type="hidden" asp-for="@Model.Id" name="id" />
 </form>
 <form asp-controller="Wishlist" asp-action="AddToWishlist">
-    <input class="esh-event-button" type="image" name="clickeventdetails" src="~/images/wish.png" border="0" alt="EventWishListImage" style="width:50px;height:50px" />
-
-    <div class="esh-event-title">
-        <span>@Model.Title</span>
+    @* <input class="esh-event-button" type="image" name="clickeventdetails" src="~/images/wish.png" border="0" alt="EventWishListImage" style="width:50px;height:50px" />
+    *@
+    @* <div class="esh-event-title" text-align ="left">
+            <span>@Model.Title</span>
+        </div>
+        <div class="esh-event-date" text-align ="left">
+            <span>@Model.StartDate.ToShortDateString()</span>
+        </div>
+    *@
+    <div class="esh-event-title" style="text-align:left" >
+        <span >@Model.Title</span>
     </div>
-    <div class="esh-event-date">
-        <span>@Model.StartDate.ToShortDateString()</span>
+    <div class="esh-event-date" style="text-align:left">
+        <span >@Model.StartDate.ToShortDateString()</span>
     </div>
     @if (Model.Price == 0)
     {
@@ -21,11 +28,9 @@
     }
     else
     {
-
         <span class="esh-event-price">@Model.Price.ToString("N2")</span>
-
     }
-    <div class="esh-event-category">
+    <div class="esh-event-category" style="text-align:left">
         <a href="@Url.Action("EventSearchByCategory", "EventCatalog", new { EventCategoryFilterApplied = @Model.EventCategoryId})"><span>@Model.EventCategory</span></a>
     </div>
     <input type="hidden" asp-for="@Model.EventCategory" name="eventcategory" />
