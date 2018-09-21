@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EventCatalogAPI.Controllers
 {
-
+    //chitra
     [Produces("application/json")]
     [Route("api/Event")]
     public class EventController : Controller
@@ -420,7 +420,7 @@ namespace EventCatalogAPI.Controllers
             if (eventDate != "null" && eventDate != "All Days")
 
             {
-                // root = FindingEventsByDate(root, eventDate); // This line was comment because the FindingEventsByDate is breaking Swagger
+                 root = FindingEventsByDate(root, eventDate); // This line was comment because the FindingEventsByDate is breaking Swagger
 
             }
 
@@ -452,7 +452,7 @@ namespace EventCatalogAPI.Controllers
             return Ok(cities);
         }
 
-        public IQueryable<Event> FindingEventsByDate(IQueryable<Event> root, String date)
+        private IQueryable<Event> FindingEventsByDate(IQueryable<Event> root, String date)
         {
             DateTime dateTime = DateTime.Now.Date;
 
