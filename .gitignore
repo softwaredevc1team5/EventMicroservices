@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /Code/WebMvc/ViewModels/Order/OrderTicketViewModel.cs
+/Code/OrderApi/Migrations/20180922062945_initialdb.cs
