@@ -105,21 +105,20 @@
 <section class="esh-search-filters">
     <div class="container">
         <form asp-action="Search" asp-controller="EventCatalog" method="post" style="height: 100px; padding :30px">
-            <p>
+            <p class="esh-event-filters">
                 @*  @Html.Action("EventSearchByCategory", "EventCatalog", new { EventDateFilterApplied = @Model.EventDateFilterApplied })*@
                 Title: <input type="text" name="SearchEventTitle" placeholder="Washington Jazz Fest">
                 City: <input type="text" name="SearchEventCity" placeholder="Redmond">
-                 Date: <input type="text" name="SearchEventDate" placeholder=" Today">
-        <input type="submit" value="Submit" />
-              @*  @using (Html.BeginForm("Index", "EventCatalog"))
-                {
-                    <label class="esh-event-label" data-title="eventdate">
+                 @*Date: <input type="text" name="SearchEventDate" placeholder=" Today">
+        <input type="submit" value="Submit" />*@
+              
+                    <label class="esh-event-label " data-title="eventsdate">
 
 
                         <select asp-for="@Model.EventDateFilterApplied" asp-items="@Model.EventDates" class="esh-event-filter"></select>
 
-                    </label>}
-                <input type="submit" value="Submit" />*@
+                    </label>
+                <input type="submit" value="Submit" />
             </p>
         </form>
     </div>

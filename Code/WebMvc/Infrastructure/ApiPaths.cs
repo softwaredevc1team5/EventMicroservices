@@ -199,8 +199,8 @@ namespace WebMvc.Infrastructure
                     var eventcategoryQs = (eventcategory.HasValue) ? eventcategory.Value.ToString() : "null";
 
                     var eventtypeQs = (eventtype.HasValue) ? eventtype.Value.ToString() : "null";
-                    var eventdateQs = date ?? "null";
-                    var eventcityQs = city ?? "null";
+                    var eventdateQs = date ?? "All Days";
+                    var eventcityQs = city ?? "All";
                     filterQs = $"/type/{eventtypeQs}/category/{eventcategoryQs}/date/{eventdateQs}/city/{eventcityQs}";
                 }
                 //filterQs = $"/date/{eventdateQs}/city/{eventcityQs}";

@@ -38,7 +38,7 @@ namespace WebMvc.Controllers
             {
                 Events = ecatalog.Data,
                 EventDates = _ecatalogSvc.GetEventDates(),
-                EventDateFilterApplied = EventDateFilterApplied,
+                EventDateFilterApplied = "All Days",
                 EventCategories = await _ecatalogSvc.GetEventCategories(),
                 EventCategoriesWithImage = ecategories.Data,
 
@@ -142,8 +142,8 @@ namespace WebMvc.Controllers
                 EventCategoryFilterApplied = EventCategoryFilterApplied ?? 0,
 
                 EventTypeFilterApplied = EventTypeFilterApplied ?? 0,
-                EventDateFilterApplied = EventDateFilterApplied ?? "null",
-                EventCityFilterApplied = EventCityFilterApplied ?? "null",
+                EventDateFilterApplied = EventDateFilterApplied ?? "All Days",
+                EventCityFilterApplied = EventCityFilterApplied ?? "All",
                 PaginationInfo = new PaginationInfo()
 
                 {

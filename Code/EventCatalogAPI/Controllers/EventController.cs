@@ -410,13 +410,13 @@ namespace EventCatalogAPI.Controllers
                 root = root.Where(c => c.City.ToLower() == eventCity.ToLower());
                 //root = root.Where(c => c.City == citystr && c.State == statestr);
             }
-            /*** if(eventTitle != "null")
+            /** if(eventTitle != "null")
              {
                  StringComparison comp = StringComparison.OrdinalIgnoreCase;
 
                  root = root.Where(c => c.Title.Contains(eventTitle, comp) == true)
-             }
-             ***/
+             }***/
+             
             if (eventDate != "null" && eventDate != "All Days")
 
             {
