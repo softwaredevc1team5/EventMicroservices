@@ -20,6 +20,7 @@
 Videos
 
 App: https://youtu.be/fbL0-igfIB0
+
 Messging: https://youtu.be/_fVFLzUW8mQ
 
 - Communication between services via messaging using RabbitMQ
