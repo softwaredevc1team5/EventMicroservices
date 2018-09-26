@@ -17,7 +17,7 @@
 # Asignments
 
 # Assignment 3c
-Video: Comming Soon!!!
+Video: https://youtu.be/fbL0-igfIB0
 
 - Communication between services via messaging using RabbitMQ
 - Microservice Wishlist was modified and now is using use as cache Redis to save the user's wishlist.
